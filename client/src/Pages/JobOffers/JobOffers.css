@@ -1,0 +1,287 @@
+.jo-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #18191a;
+  gap: 55px;
+}
+
+.jo-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 88%;
+  align-self: center;
+  margin-top: 1.5%;
+  height: 50px;
+}
+
+.jo-navbar h1 {
+  color: white;
+  font-family: "Syncopate", sans-serif;
+  font-size: 160%;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 1px white;
+}
+
+.jo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.jo-offers-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 700px;
+}
+
+.jo-offer {
+  width: 100%;
+  margin: 10px;
+}
+
+.jo-title {
+  color: white;
+  font-family: "Syncopate", sans-serif;
+  font-weight: bolder;
+  font-size: 200%;
+  text-shadow: 30px 0px 90px rgba(255, 255, 255, 0.5);
+  -webkit-text-stroke: 2px white;
+  letter-spacing: 3px;
+  backdrop-filter: blur(60px);
+}
+
+.o-container {
+  width: 100%;
+
+  border-radius: 10px;
+  background-color: #242526;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.o-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 15px 0;
+  width: 90%;
+  border-bottom: solid 1px #6a6a6a;
+}
+
+.o-title h6 {
+  width: 75%;
+  font-size: 100%;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+}
+
+.o-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid;
+  width: 15%;
+  padding: 1.5%;
+  background-color: #041b2a;
+  border-color: #36454f;
+  border-width: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.o-details p {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-size: 75%;
+}
+
+.o-arrow {
+  color: white;
+  animation: rotate0 0.2s ease forwards;
+}
+
+.o-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+  margin: 5% 0;
+}
+
+.o-hidden-desc {
+  display: none;
+}
+
+.o-description p {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+}
+
+.o-requirements p {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.o-requirements ul {
+  transform: translateX(8%);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+}
+
+.o-attachement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.o-bold {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.o-attachement input {
+  display: none;
+}
+
+.o-input-label {
+  border: solid;
+  display: flex;
+  justify-content: space-around;
+  width: 27%;
+  align-items: center;
+  height: 30px;
+  background-color: #041b2a;
+  border-color: #36454f;
+  border-width: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+}
+
+.o-pdf-icon {
+  font-size: 140%;
+}
+
+.o-file-name {
+  height: 15px;
+  font-size: 80%;
+}
+
+.o-apply {
+  width: 20%;
+  align-self: center;
+  background-color: #041b2a;
+  border-style: solid;
+  border-color: #36454f;
+  border-width: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  height: 40px;
+}
+
+.o-apply:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.o-shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.o-rotate {
+  animation: rotate180 0.2s ease forwards;
+}
+
+@keyframes rotate180 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate0 {
+  0% {
+    transform: rotate(180deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.jo-back {
+  height: 80%;
+  border: solid;
+  display: flex;
+  align-items: center;
+  width: 3%;
+  justify-content: center;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 0;
+  background: linear-gradient(to bottom, white, rgb(146, 146, 146));
+  cursor: pointer;
+  color: black;
+  font-size: larger;
+}
+
+.jo-back:hover .jo-back-icon {
+  animation: move 0.6s ease;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

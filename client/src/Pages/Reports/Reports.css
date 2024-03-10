@@ -1,0 +1,281 @@
+.r-container {
+  width: 90%;
+  height: fit-content;
+  gap: 45px;
+}
+
+.r-reports {
+  gap: 20px;
+}
+
+.r-field img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.r-info {
+  font-family: "Poppins", sans-serif;
+  color: #041b2a;
+  font-weight: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90%;
+}
+
+.r-date {
+  font-size: 60%;
+  color: #041b2a9c;
+}
+
+.r-fieldrow {
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: #041b2a;
+}
+
+.r-details {
+  background-color: #041b2a;
+  height: 30px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 80%;
+}
+
+.rd-photo {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.rd-container {
+  width: 90%;
+  height: fit-content;
+  gap: 30px;
+}
+
+.rd-report-content {
+  width: 90%;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rd-main-report {
+  gap: 20px;
+}
+
+.rd-top {
+  gap: 20px;
+}
+
+.rd-delete {
+  font-size: 35px;
+  color: #041b2a;
+}
+
+.rd-delete-icon {
+  cursor: pointer;
+}
+
+.rd-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 110%;
+  font-weight: 500;
+  padding-bottom: 10px;
+  border-bottom: solid 1px;
+  width: fit-content;
+}
+
+.rd-description {
+  font-size: 95%;
+  font-family: "Poppins", sans-serif;
+}
+
+.rd-date {
+  font-size: 65%;
+  color: #041b2a94;
+}
+
+.rd-target {
+  font-size: 85%;
+  font-family: "Poppins", sans-serif;
+}
+
+.rd-infos {
+  gap: 5px;
+}
+
+.rd-infos :first-child {
+  font-size: 100%;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+}
+
+.rd-infos :nth-child(2) {
+  font-size: 80%;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+}
+
+.rd-reply {
+  gap: 5px;
+  border-radius: 20px;
+  border: solid 1px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin-top: 10px;
+}
+
+.rd-reply:hover {
+  background-color: #c8c9cb;
+}
+
+.rd-reply :first-child {
+  font-size: 120%;
+}
+
+.rr-accordion {
+  background-color: transparent;
+  border: 0px;
+}
+
+.rd-replies-dec {
+  font-size: 150%;
+  font-family: "Poppins", sans-serif;
+  transform: translateY(15px);
+}
+
+.rd-replies {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.accordion {
+  --bs-accordion-btn-bg: #f0f2f5;
+  --bs-accordion-inner-border-radius: 0px;
+  --bs-accordion-btn-focus-box-shadow: rgba(255, 255, 255, 0);
+  --bs-accordion-active-bg: #f0f2f5;
+}
+
+.rr-photo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.rr-top {
+  gap: 10px;
+}
+
+.rr-infos {
+  gap: 15px;
+}
+
+.rr-sender-infos {
+  gap: 5px;
+}
+
+.rr-infos :first-child {
+  font-size: 100%;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.rr-infos :nth-child(2) {
+  font-size: 90%;
+  letter-spacing: 1px;
+}
+
+.rr-description {
+  font-size: 85%;
+  font-family: "Poppins", sans-serif;
+}
+
+.rr-report-content {
+  width: 90%;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rw-container {
+  width: 400px;
+  gap: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  border-radius: 10px;
+  z-index: 10;
+  position: absolute;
+  top: -100%;
+}
+
+.rw-active {
+  animation: showreport 0.8s ease forwards;
+}
+
+@keyframes showreport {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 25%;
+  }
+}
+
+.rw-title {
+  font-family: "Urbanist", sans-serif;
+  color: #070f2b;
+  font-weight: 300;
+  font-size: 25px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  width: 77%;
+  text-align: center;
+  padding: 0px 0px 10px 0;
+}
+
+.rw-form {
+  width: 90%;
+  gap: 20px;
+}
+
+.rw-form textarea {
+  height: 200px;
+  overflow-y: scroll;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  max-height: 400px;
+  border-radius: 7px;
+  background-color: #f0f2f5;
+}
+
+.rw-form button {
+  width: 40%;
+  align-self: end;
+  border-radius: 7px;
+  border: solid 1px;
+  background-color: #041b2a;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  height: 35px;
+}
+
+@media (max-width: 450px) {
+  .rw-container {
+    width: 95%;
+  }
+}
+
+.rw-close {
+  position: absolute;
+  right: 3%;
+  top: 15px;
+  cursor: pointer;
+  font-size: 120%;
+}
