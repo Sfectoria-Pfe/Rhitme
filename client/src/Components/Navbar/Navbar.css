@@ -1,0 +1,90 @@
+.n-container {
+  box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.n-profilepic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.n-row {
+  height: 50px;
+  background-color: white;
+  /* background: #42b1bc;
+  background: linear-gradient(to top, #42b1bc 0%, #757575 100%); */
+}
+
+.n-name {
+  color: #041b2a;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  padding-left: 7px;
+  font-weight: 500;
+}
+
+.n-logout {
+  height: 52%;
+  width: 70px;
+  background-color: #041b2a;
+  border-style: solid;
+  border-color: #36454f;
+  border-width: 1px;
+  border-radius: 6px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 11px;
+}
+
+.n-notification-icon {
+  color: #041b2a;
+  font-size: 170%;
+}
+
+.n-active {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  color: green;
+  transform: translate(-11px, 2px);
+}
+
+.n-messages {
+  color: #041b2a;
+  font-size: 140%;
+  transition: scale 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.n-messages:hover {
+  scale: 1.1;
+}
+
+.n-title {
+  background-image: linear-gradient(to right, #42b1bc, #757575);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Syncopate", sans-serif;
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  font-size: 120%;
+  letter-spacing: 1px;
+  align-self: center;
+}
+
+.nav-icon {
+  color: #041b2a;
+  font-size: 140%;
+  cursor: pointer;
+}
+
+@media (max-width: 630px) {
+  .n-title {
+    font-size: 70%;
+  }
+  .nav-icon {
+    font-size: 80%;
+  }
+}

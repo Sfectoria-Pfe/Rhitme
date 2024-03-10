@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+  scrollbar-width: none;
+}
+
+.blur {
+  filter: blur(3px);
+  transition: filter 0.7s;
+  user-select: none;
+  cursor: auto;
+}
+
+.outlet {
+  width: 100%;
+  overflow-y: auto;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f0f2f5;
+}
+
+.l-main {
+  min-height: 100vh;
+}
+
+/* .lp-moving-shape-11 {
+  filter: blur(1.5px);
+  z-index: 2;
+  position: absolute;
+  content: "";
+  top: 0%;
+  left: 80%;
+  width: 7%;
+  height: 14%;
+  background-image: url("./palestine.png");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+  will-change: border-radius, transform, opacity;
+  animation: sliderShape 5s linear infinite;
+  display: block;
+  -webkit-animation: sliderShape 5s linear infinite;
+} */

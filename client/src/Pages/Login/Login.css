@@ -1,0 +1,249 @@
+.l-g-container {
+  width: 120%;
+  background-image: radial-gradient(
+    circle,
+    #42b1bc,
+    #5da0b6,
+    #728fa5,
+    #7a808d,
+    #757575
+  );
+  height: 200%;
+  position: absolute;
+  border-radius: 50%;
+  background-color: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -78.5%);
+}
+
+.l-page-title {
+  color: #cfdee7;
+  font-family: "Syncopate", sans-serif;
+  font-size: 150%;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 1px white;
+  align-self: center;
+  z-index: 1;
+}
+
+.l-role {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 200px !important;
+  height: 35px;
+}
+
+.l-inchecked {
+  width: 80px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 20px;
+  border-width: 1px;
+  background-color: #24252600;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  transition: background-color 1s;
+  cursor: pointer;
+  font-size: 80%;
+}
+
+.l-checked {
+  width: 80px;
+  border-style: solid;
+  background-color: white;
+  border-radius: 20px;
+  border-color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  transition: background-color 1s;
+}
+
+.l-container {
+  position: absolute;
+  border: solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  border-radius: 10px;
+  border-width: thick;
+  border-color: #728fa5;
+  animation: slideDown 0.7s ease forwards;
+  backdrop-filter: blur(20px);
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+  75% {
+    transform: translate(-50%, -40%);
+  }
+  100% {
+    transform: translate(-50%, -45%);
+  }
+}
+
+.l-title {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 150%;
+  height: 70px;
+  background: #001e4b;
+  background: radial-gradient(
+    ellipse farthest-corner at center center,
+    #001e4b 0%,
+    #757575 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 28px;
+  font-weight: bold;
+}
+
+.l-form {
+  gap: 20px;
+}
+
+.l-mail label {
+  color: #000814;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.7px;
+  font-size: 65%;
+  margin-left: 10px;
+}
+
+.l-mail {
+  width: 80%;
+  gap: 5px;
+}
+
+.l-email-icon {
+  color: #00112a;
+  position: absolute;
+  transform: translate(10px, 30px);
+}
+
+.l-email {
+  outline: none;
+  height: 35px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: #00112a;
+  background-color: white;
+  padding-left: 40px;
+  border-style: solid;
+  color: #00112a;
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+}
+
+.l-pass {
+  width: 80%;
+  gap: 5px;
+}
+
+.l-pass label {
+  color: #000814;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.7px;
+  font-size: 65%;
+  margin-left: 10px;
+}
+
+.l-password {
+  outline: none;
+  height: 35px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: #00112a;
+  background-color: white;
+  padding-left: 40px;
+  border-style: solid;
+  color: #00112a;
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+}
+
+.l-password-icon {
+  color: #00112a;
+  position: absolute;
+  transform: translate(10px, 30px);
+}
+
+.see-password {
+  color: #00112a;
+  transform: translate(-7px, 30px);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.l-fpass {
+  margin-top: 3px;
+  text-align: right;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.7px;
+  font-size: 60%;
+  color: #00112a;
+  cursor: pointer;
+}
+
+.l-submit {
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  font-size: 100%;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  font-weight: 600;
+}
+
+.l-submit:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 400px) {
+  .l-container {
+    width: 75%;
+  }
+}
+
+@media (min-width: 400px) {
+  .l-container {
+    width: 60%;
+  }
+}
+
+@media (min-width: 550px) {
+  .l-container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 700px) {
+  .l-container {
+    width: 40%;
+  }
+}
+
+@media (min-width: 900px) {
+  .l-container {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .l-container {
+    width: 27%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .l-container {
+    width: 22%;
+  }
+}

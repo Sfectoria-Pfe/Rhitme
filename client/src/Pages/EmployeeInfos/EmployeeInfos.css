@@ -1,0 +1,168 @@
+.ei-container {
+  width: 90%;
+  gap: 30px;
+  align-items: center;
+}
+
+.ei-name {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  font-size: 200%;
+  font-weight: 500;
+  color: #041b2a;
+}
+
+.ei-functionalities button {
+  display: flex;
+  align-items: center;
+  gap: 7%;
+  justify-content: center;
+  min-height: 35px;
+  height: auto;
+  border-style: solid;
+  border-radius: 7px;
+  border-width: 1px;
+  background-color: #041b2a;
+}
+
+.ei-employees-password {
+  width: 38%;
+}
+
+.ei-delete-employee {
+  width: 22%;
+}
+
+.ei-edit-employee {
+  width: 20%;
+}
+
+.ei-func-name {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-size: 70%;
+}
+
+.ei-func-icon {
+  color: white;
+}
+
+@media (min-width: 768px) and (max-width: 1269px) {
+  .ei-name {
+    font-size: 130%;
+  }
+}
+
+@media (max-width: 400px) {
+  .ei-func-name {
+    font-size: 50%;
+  }
+}
+.ei-photo-container {
+  height: 300px;
+}
+
+.ei-photo {
+  height: 100%;
+  width: 300px;
+  border-radius: 20px;
+}
+
+.ei-rank {
+  display: flex;
+  flex-direction: column;
+}
+
+.ei-rank h1 {
+  font-size: 70px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: bold;
+}
+
+.ei-rank p {
+  transform: translate(-30px, 26px);
+  font-family: "Urbanist", sans-serif;
+
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.ei-employee-infos {
+  gap: 8px;
+}
+
+/*
+.ei-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+
+
+
+
+
+
+
+
+
+
+.ei-infos-container {
+  display: flex;
+  width: 96%;
+  align-items: center;
+  gap: 5%;
+}
+
+
+
+
+
+.ei-employee-infos p {
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+
+@media (max-width: 480px){
+  .ei-top{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .ei-functionalities{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ei-employees-password,.ei-delete-employee,.ei-edit-employee {
+    width:120%;
+    white-space: nowrap;  
+  }
+  .ei-infos-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0vh !important;
+  }
+  .ei-infos-container img {
+    position: relative;
+    left: -20%;
+  }
+  .ei-rank{
+    position: absolute;
+    right: 5%;
+    top: 15%;
+  }
+  .ei-employee-infos{
+    position: relative;
+    left: 23%;
+    width: 100%;
+  }
+} */
