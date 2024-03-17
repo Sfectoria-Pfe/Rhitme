@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Employees, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { ApiBadRequestResponse, ApiBody, ApiInternalServerErrorResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -16,7 +15,7 @@ export class AuthService {
     @ApiOkResponse({ description: 'User logged in successfully', type: AuthDto })
     @ApiBadRequestResponse({ description: 'Invalid email or password' })
     @ApiInternalServerErrorResponse({ description: 'Internal server error' })
-    async login(credentials: { email: string, password: string }): Promise<{ role: Role ,user: Employees, token: string }> {
+    async login(credentials: { email: string, password: string }): Promise<{ token: string }> {
         const { email, password } = credentials;
 
         const user = await this.prisma.employees.findFirst({
@@ -34,8 +33,8 @@ export class AuthService {
             throw new UnauthorizedException("Invalid email or password");
         }
 
-        const token = jwt.sign({ userId: user.user_id , role:user.role}, '7XKEMX3YN4E4H', { expiresIn: '3h' });
+        const token = jwt.sign({ user : user }, '7XKEMX3YN4E4H', { expiresIn: '3h' });
 
-        return { user, token,role };
+        return {token};
     }
 }
