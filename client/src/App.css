@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .blur {
@@ -14,6 +15,7 @@
 .outlet {
   width: 100%;
   overflow-y: auto;
+
   min-height: 100vh;
   height: 100%;
   display: flex;

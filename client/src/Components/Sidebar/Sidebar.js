@@ -38,7 +38,8 @@ function Sidebar() {
       >
         <NavLink
           className="s-link d-flex align-items-center justify-content-start"
-          to="home"
+          to=""
+          end
         >
           <IoHome className="s-icon" />
           <div className="s-link-text ">Home</div>

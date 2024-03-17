@@ -1,6 +1,6 @@
 .n-container {
   box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.3);
-  z-index: 2;
+  z-index: 3;
 }
 
 .n-profilepic {
@@ -10,7 +10,7 @@
 }
 
 .n-row {
-  height: 50px;
+  height: 7.192vh;
   background-color: white;
   /* background: #42b1bc;
   background: linear-gradient(to top, #42b1bc 0%, #757575 100%); */
@@ -87,4 +87,44 @@
   .nav-icon {
     font-size: 80%;
   }
+}
+
+.hamburger {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 2em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: #041b2a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  /* Define the transition for transforming the Stroke */
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
 }

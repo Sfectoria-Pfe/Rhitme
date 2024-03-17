@@ -1,27 +1,33 @@
 .de-container {
   position: absolute;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
   z-index: 10;
   top: -50%;
-  border-style: solid;
+  border: solid 0px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  width: 35%;
+  width: 450px;
   align-items: center;
   padding: 20px 0;
   border-radius: 7px;
-  background-color: #111111;
-  border-color: #111111;
+  background-color: white;
+}
+
+@media (max-width: 450px) {
+  .de-container {
+    width: 400px;
+  }
 }
 
 .de-title {
   font-family: "Urbanist", sans-serif;
-  color: white;
+  color: #070f2b;
   font-weight: 300;
   font-size: 25px;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  width: 77%;
+  width: 80%;
   text-align: center;
   padding: 0px 0px 10px 0;
 }
@@ -29,15 +35,15 @@
 .de-password {
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  width: 60%;
+  gap: 8px;
+  width: 75%;
 }
 
 .de-password label {
-  color: white;
+  color: #070f2b;
   font-family: "Urbanist", sans-serif;
   letter-spacing: 0.7px;
-  font-size: 12px;
+  font-size: 80%;
   padding-left: 10px;
 }
 
@@ -46,23 +52,23 @@
   width: 95%;
   border-radius: 20px;
   border-width: 1px;
-  border-color: #797979;
-  background-color: #1e1e1e;
+  border-color: #070f2b;
+  background-color: transparent;
   padding-left: 18px;
   border-style: solid;
-  color: white;
+  color: #070f2b;
   font-family: "Urbanist", sans-serif;
 }
 
 .de-check {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .de-check p {
   align-self: flex-start;
-  color: white;
+  color: #070f2b;
   font-family: "Urbanist", sans-serif;
   font-size: 90%;
   letter-spacing: 1px;
