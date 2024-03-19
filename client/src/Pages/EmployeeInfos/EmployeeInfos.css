@@ -1,4 +1,97 @@
-.ei-container {
+.ei-buttons {
+  gap: 20px;
+}
+
+.ei-buttons button {
+  height: 35px;
+  padding: 0px 15px;
+  border: solid 1px;
+  border-radius: 7px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 85%;
+  background-color: #041b2a;
+  gap: 10px;
+}
+
+.ei-employee-infos {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.ei-rendement {
+  gap: 20px;
+}
+
+.ei-rendement select {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transform: translateY(-2.5px);
+  /* font-family: "Poppins", sans-serif;
+  font-size: 90%; */
+}
+
+.ei-delete-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 1%;
+  top: 5px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: absolute;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.ei-delete-button:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: transparent;
+  border: solid 1px white;
+  align-items: center;
+}
+
+.ei-delete-button:hover .svgIcon {
+  width: 50px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+}
+
+.ei-delete-button::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.ei-delete-button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: 0.3s;
+}
+/* .ei-container {
   width: 90%;
   gap: 30px;
   align-items: center;
@@ -87,82 +180,4 @@
   letter-spacing: 1px;
 }
 
-.ei-employee-infos {
-  gap: 8px;
-}
-
-/*
-.ei-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  align-self: stretch;
-}
-
-
-
-
-
-
-
-
-
-
-
-.ei-infos-container {
-  display: flex;
-  width: 96%;
-  align-items: center;
-  gap: 5%;
-}
-
-
-
-
-
-.ei-employee-infos p {
-  font-family: "Urbanist", sans-serif;
-  color: white;
-  letter-spacing: 0.5px;
-}
-
-
-@media (max-width: 480px){
-  .ei-top{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .ei-functionalities{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .ei-employees-password,.ei-delete-employee,.ei-edit-employee {
-    width:120%;
-    white-space: nowrap;  
-  }
-  .ei-infos-container{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 0vh !important;
-  }
-  .ei-infos-container img {
-    position: relative;
-    left: -20%;
-  }
-  .ei-rank{
-    position: absolute;
-    right: 5%;
-    top: 15%;
-  }
-  .ei-employee-infos{
-    position: relative;
-    left: 23%;
-    width: 100%;
-  }
-} */
+ */

@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Reports {
+  report_id   String    @id @default(uuid())
+  user        Employees @relation(fields: [user_id], references: [user_id])
+  user_id     String
+  created_at  DateTime
+  title       String
+  description String
+  type        String
+  receiver    String?
+}
+
+model Badgeuse {
+  badgeuse_id String    @id @default(uuid())
+  employee    Employees @relation(fields: [employee_id], references: [user_id])
+  employee_id String
+  created_at  DateTime
+  start_time  DateTime
+  end_start   DateTime
+}
+
+model Media {
+  media_id  String @id @default(uuid())
+  extension String
+  path      String
+  file_name String
+  // employee    Employees? @relation(fields: [employee_id], references: [user_id])
+  // employee_id String?    @unique
+}
+
+model Events {
+  event_id    String              @id @default(uuid())
+  coordinator String
+  title       String
+  description String
+  budget      Float
+  event       EventParticipants[]
+}
+
+model EventParticipants {
+  user     Employees @relation(fields: [user_id], references: [user_id])
+  user_id  String
+  event    Events    @relation(fields: [event_id], references: [event_id])
+  event_id String
+
+  @@id([user_id, event_id])
+}
+
+model Employees {
+  user_id          String              @id @default(uuid())
+  department       Departments         @relation(fields: [department_id], references: [department_id])
+  department_id    String
+  last_name        String
+  first_name       String
+  phone            String
+  birthday         DateTime            @db.Date
+  gender           String
+  CIN              String              @unique
+  address          String
+  email            String              @unique
+  password         String
+  job              String
+  created_at       DateTime
+  points           Int
+  status           String
+  // photo            Media?         
+  nb_absence       Int
+  eventarticipants EventParticipants[]
+  role             Role[]
+  participants     Participants[]
+  messages         Messages[]
+  leaves           Leaves[]
+  tasks            Tasks[]
+  badgeuse         Badgeuse[]
+  report           Reports[]
+}
+
+model Departments {
+  department_id   String      @id @default(uuid())
+  department_name String
+  employees       Employees[]
+}
+
+model Role {
+  role_id    String    @id @default(uuid())
+  user       Employees @relation(fields: [user_id], references: [user_id])
+  user_id    String
+  role       String
+  permission Json
+}
+
+model Participants {
+  conversation    Conversations @relation(fields: [conversation_id], references: [conversation_id])
+  conversation_id String
+  user            Employees     @relation(fields: [user_id], references: [user_id])
+  user_id         String
+
+  @@id([conversation_id, user_id])
+}
+
+model Conversations {
+  conversation_id String         @id @default(uuid())
+  name            String
+  type            String
+  participants    Participants[]
+  messages        Messages[]
+}
+
+model Messages {
+  message_id      String        @id @default(uuid())
+  conversation    Conversations @relation(fields: [conversation_id], references: [conversation_id])
+  conversation_id String
+  user            Employees     @relation(fields: [user_id], references: [user_id])
+  user_id         String
+  content         String
+  sent_at         DateTime
+}
+
+model Offers {
+  offer_id     String   @id @default(uuid())
+  position     String
+  description  String
+  requirements String[]
+  posts        Posts[]
+}
+
+model Candidates {
+  candidate_id String  @id @default(uuid())
+  cv           String
+  accuracy     Int
+  posts        Posts[]
+}
+
+model Posts {
+  offer        Offers     @relation(fields: [offer_id], references: [offer_id])
+  offer_id     String
+  candidate    Candidates @relation(fields: [candidate_id], references: [candidate_id])
+  candidate_id String
+  created_at   DateTime
+
+  @@id([offer_id, candidate_id])
+}
+
+model Leaves {
+  leave_id String    @id @default(uuid())
+  user     Employees @relation(fields: [user_id], references: [user_id])
+  user_id  String
+  start    DateTime
+  end      DateTime
+}
+
+model Projects {
+  project_id  String   @id @default(uuid())
+  title       String
+  description String
+  starting    DateTime
+  ending      DateTime
+  tasks       Tasks[]
+}
+
+model Tasks {
+  task_id     String    @id @default(uuid())
+  project     Projects  @relation(fields: [project_id], references: [project_id])
+  project_id  String
+  user        Employees @relation(fields: [user_id], references: [user_id])
+  user_id     String
+  title       String
+  description String
+  starting    DateTime
+  ending      DateTime
+  points      Int
+}

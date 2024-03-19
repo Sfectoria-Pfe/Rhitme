@@ -5,6 +5,8 @@ import { MdOutlineEmail, MdOutlinePassword } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Lottie from "lottie-react";
+import loginAnimation from "./Animation - 1710104365414.json";
 
 function Login() {
   const [admin, setAdmin] = useState(true);
@@ -52,8 +54,13 @@ function Login() {
           </div>
         </div>
       </div>
-
+      ;
       <div className="l-container mt-4 mt-sm-0 border">
+        <Lottie
+          animationData={loginAnimation}
+          loop={true}
+          className="l-animation"
+        />
         <h1 className="l-title ">Welcome back !</h1>
         <form className="l-form d-flex flex-column align-items-center">
           <div className="l-mail d-flex flex-column">

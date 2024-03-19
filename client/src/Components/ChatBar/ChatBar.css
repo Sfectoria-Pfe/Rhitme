@@ -1,0 +1,123 @@
+.cb-container {
+  width: 570px;
+  padding-top: 10px;
+  height: 92.808vh;
+  background-color: white;
+  overflow: hidden;
+  z-index: 1;
+  right: 252px;
+}
+
+.sender-container {
+  gap: 10px;
+  align-self: end;
+  width: 50%;
+}
+
+.rec-container {
+  gap: 10px;
+  width: 50%;
+}
+
+.mes-pic {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  align-self: end;
+}
+
+.sen-message {
+  border-radius: 7px 0px 7px 7px;
+  padding: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  background-color: white;
+  color: #041b2a;
+  background-color: #e2e2e2;
+}
+
+.rec-message {
+  border-radius: 0px 7px 7px 7px;
+  padding: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  background-color: white;
+  color: #041b2a;
+  background-color: #e2e2e2;
+}
+
+.cb-chat-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.cb-receiver-infos {
+  gap: 10px;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.3);
+}
+
+.cb-receiver-name {
+  font-family: "Poppins", sans-serif;
+  color: #041b2a;
+  font-weight: 500;
+  font-size: 90%;
+}
+
+.cb-receiver-status {
+  font-family: "Poppins", sans-serif;
+  color: #041b2a9e;
+  font-size: 65%;
+}
+
+.cb-send {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+  height: auto;
+}
+
+.cb-send textarea {
+  width: 92%;
+  padding-left: 10px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  max-height: 100px;
+  min-height: 30px;
+  resize: none;
+  padding-top: 2px;
+  background-color: #e2e2e2;
+  outline: none;
+}
+
+.cb-send button {
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  font-size: 150%;
+  color: #041b2a;
+}
+
+.cb-messages {
+  overflow-y: scroll;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+}
+
+.cb-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 10px;
+  height: 90%;
+}

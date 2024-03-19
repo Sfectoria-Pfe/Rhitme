@@ -86,7 +86,7 @@ function Employees() {
     },
   ];
 
-  const add = useSelector((state) => state.add.add);
+  const add = useSelector((state) => state.add.value);
   const dispatch = useDispatch();
   // const [isLoading, setIsLoading] = useState(true);
   // const [employees, setEmployees] = useState([]);
@@ -152,7 +152,7 @@ function Employees() {
       <AddEmployee />
       <div
         className={`e-container d-flex flex-column align-items-center ${
-          add ? "blur" : ""
+          add ? "blur unselactable" : ""
         } d-flex flex-column mb-5`}
         onClick={() => {
           if (add) dispatch(hideAddWindow());
@@ -189,7 +189,7 @@ function Employees() {
           <IoIosAdd className="e-add-icon" />
           <div className="e-add-text">Add Employee</div>
         </button>
-        <div className="e-sorting d-flex align-items-center">
+        <div className="e-sorting d-flex align-items-center align-self-end">
           <label hmtlfor="sort">SORT BY : </label>
           <select id="sort" value={sortedby} onChange={handleSorting}>
             <option value="name">Name</option>

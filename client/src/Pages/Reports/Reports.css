@@ -254,16 +254,75 @@
   background-color: #f0f2f5;
 }
 
-.rw-form button {
-  width: 40%;
-  align-self: end;
-  border-radius: 7px;
+/* button {
+  
+ 
+ 
   border: solid 1px;
-  background-color: #041b2a;
+  
   color: white;
+ 
+  
+ 
+} */
+
+.rw-form button {
   font-family: "Poppins", sans-serif;
   font-size: 90%;
+  background-color: #041b2a;
+  color: white;
+  /* padding: 0.7em 1em;
+  padding-left: 0.9em; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  border-radius: 7px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 35%;
+  align-self: end;
   height: 35px;
+}
+
+.rw-form button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.rw-form button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.rw-form button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.rw-form button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.rw-form button:hover span {
+  transform: translateX(5em);
+}
+
+.rw-form button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
 }
 
 @media (max-width: 450px) {

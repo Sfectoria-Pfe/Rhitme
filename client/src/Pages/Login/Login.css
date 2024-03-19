@@ -247,3 +247,11 @@
     width: 22%;
   }
 }
+
+.l-animation {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 80%;
+  left: 80%;
+}

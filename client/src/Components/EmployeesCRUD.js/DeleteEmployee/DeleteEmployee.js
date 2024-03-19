@@ -18,7 +18,7 @@ function DeleteEmployee({ name, adminPassword }) {
   }, [deletee]);
   return (
     <div
-      className={`de-container ${deletee ? "de-active" : ""}`}
+      className={`de-container ${deletee ? "de-active" : ""} `}
       style={{ zIndex: "100000" }}
     >
       <h1 className="de-title">Delete {name}</h1>

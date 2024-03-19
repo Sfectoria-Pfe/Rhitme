@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import mainImage from "./employees.png";
 import repImage from "./report.png";
 import "./LandingPage.css";
@@ -17,6 +17,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function LandingPage() {
   const slides = [
@@ -51,6 +53,10 @@ function LandingPage() {
       description: "Integrated Pomodoro Timer",
     },
   ];
+
+  useEffect(() => {
+    AOS.init();
+  });
   var settings = {
     dots: false,
     infinite: true,
@@ -81,7 +87,13 @@ function LandingPage() {
         </div>
         <div className="lp-content container h-100 align-items-center my-5">
           <div className="row justify-content-evenly align-items-center h-100">
-            <div className="lp-writen-content col-lg-6 d-flex flex-column ">
+            <div
+              className="lp-writen-content col-lg-6 d-flex flex-column "
+              data-aos="fade-up-right"
+              data-aos-duration="500"
+              data-aos-easing="ease-in-out"
+              data-aos-mirror="true"
+            >
               <h1 className="text-center text-lg-start">
                 EXCLUSIVE JOB OPPORTUNITIES AWAIT
               </h1>
@@ -97,7 +109,13 @@ function LandingPage() {
                 Browse Job Offers
               </Link>
             </div>
-            <div className="lp-images col-9 col-lg-5 my-2 my-4 my-lg-2 ">
+            <div
+              className="lp-images col-9 col-lg-5 my-2 my-4 my-lg-2 "
+              data-aos="fade-down-left"
+              data-aos-duration="500"
+              data-aos-easing="ease-in-out"
+              data-aos-mirror="true"
+            >
               <img src={mainImage} alt="first" className="lp-main-img w-100" />
             </div>
           </div>
@@ -105,8 +123,19 @@ function LandingPage() {
       </div>
       <div className="lp-second-container d-flex flex-column min-vh-100 justify-content-around overflow-x-hidden mt-5 ">
         <div className="lp-glorification d-flex flex-column align-items-center mt-4">
-          <h1 className="fs-2">Unlock the Power of Modern HR Management</h1>
-          <p>
+          <h1
+            className="fs-2"
+            data-aos="fade-down"
+            data-aos-duration="500"
+            data-aos-easing="ease-in-out"
+          >
+            Unlock the Power of Modern HR Management
+          </h1>
+          <p
+            data-aos="fade-up"
+            data-aos-duration="500"
+            data-aos-easing="ease-in-out"
+          >
             Revolutionize the way you manage your workforce, empower your HR
             team and elevate your organization with our advanced HR management
             system.
