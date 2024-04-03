@@ -8,14 +8,18 @@
 .blur {
   filter: blur(3px);
   transition: filter 0.7s;
+}
+.blur * {
+  pointer-events: none;
+}
+
+.unselectable {
   user-select: none;
-  cursor: auto;
 }
 
 .outlet {
   width: 100%;
   overflow-y: auto;
-
   min-height: 100vh;
   height: 100%;
   display: flex;

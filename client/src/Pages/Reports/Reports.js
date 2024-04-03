@@ -59,9 +59,14 @@ function Reports() {
     />,
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected;
+    setCurrentPage(selectedPage);
+  };
+
+  const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 5;
-  const lastPostIndex = currentPage * postsPerPage;
+  const lastPostIndex = (currentPage + 1) * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentReports = report.slice(firstPostIndex, lastPostIndex);
   return (
@@ -79,21 +84,23 @@ function Reports() {
       </div>
       <div className="r-reports d-flex flex-column">{currentReports}</div>
       <ReactPaginate
+        onPageChange={handlePageClick}
         className={report.length <= postsPerPage ? "" : ""}
         activeClassName={"e-item e-current "}
         breakClassName={"e-item e-break-me "}
         breakLabel={"..."}
-        containerClassName={"e-pagination d-flex align-self-center"}
+        containerClassName={"e-pagination d-flex align-self-center mb-5"}
         disabledClassName={"e-disabled-page"}
         marginPagesDisplayed={1}
         nextClassName={"e-item e-next "}
         nextLabel={
           <MdNavigateNext
             onClick={() =>
-              currentPage < Math.ceil(report.length / postsPerPage)
+              currentPage < Math.ceil(report.length / postsPerPage) - 1
                 ? setCurrentPage(currentPage + 1)
                 : setCurrentPage(currentPage)
             }
+            style={{ color: "#041b2a" }}
           />
         }
         pageCount={Math.ceil(report.length / postsPerPage)}
@@ -103,10 +110,11 @@ function Reports() {
         previousLabel={
           <MdNavigateBefore
             onClick={() =>
-              currentPage !== 1
+              currentPage !== 0
                 ? setCurrentPage(currentPage - 1)
                 : setCurrentPage(currentPage)
             }
+            style={{ color: "#041b2a" }}
           />
         }
       />

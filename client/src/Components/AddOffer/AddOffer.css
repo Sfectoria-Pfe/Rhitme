@@ -1,0 +1,212 @@
+.ao-container {
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+  gap: 30px;
+  width: 460px;
+  max-height: 90vh;
+  background-color: white;
+  overflow-y: auto;
+  border-radius: 10px;
+  z-index: 1;
+  top: -100%;
+}
+
+@media (max-width: 460px) {
+  .ao-container {
+    width: 100%;
+  }
+}
+
+.ao-form {
+  width: 80%;
+  gap: 10px;
+}
+
+.ao-form label {
+  color: #070f2b;
+  font-family: "Urbanist", sans-serif;
+  letter-spacing: 0.7px;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.ao-form input {
+  height: 30px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: solid 1px #070f2b;
+  background-color: transparent;
+  color: #070f2b;
+  font-family: "Urbanist", sans-serif;
+  font-size: 90%;
+}
+
+.ao-form textarea {
+  padding: 2px 10px;
+  border-radius: 10px;
+  border: solid 1px #070f2b;
+  background-color: transparent;
+  color: #070f2b;
+  font-family: "Urbanist", sans-serif;
+  font-size: 90%;
+  resize: none;
+}
+
+.ao-dynamic-summ {
+  gap: 10px;
+}
+
+.ao-dynamic-skill {
+  gap: 10px;
+}
+
+.ao-dynamic-skill .row {
+  gap: 10px;
+}
+
+.ao-dynamic-summ button {
+  align-self: flex-end;
+  padding: 2px 5px;
+  font-family: "Urbanist", sans-serif;
+  border: none;
+  background-color: #070f2b;
+  color: white;
+  border-radius: 10px;
+  width: 32%;
+  font-size: 90%;
+}
+
+.ao-dynamic-skill button {
+  align-self: flex-end;
+  padding: 2px 5px;
+  font-family: "Urbanist", sans-serif;
+  border: none;
+  background-color: #070f2b;
+  color: white;
+  border-radius: 10px;
+  width: 32%;
+  font-size: 90%;
+}
+
+.ao-shared {
+  width: 45%;
+}
+
+.ao-form span {
+  font-family: "Urbanist", sans-serif;
+  font-size: 90%;
+}
+
+.ao-form-submit {
+  width: 40%;
+  align-self: center;
+  border-radius: 7px;
+  border: solid 1px;
+  height: 35px;
+  background-color: #070f2b;
+  color: white;
+  font-family: "Urbanist", sans-serif;
+  letter-spacing: 1px;
+}
+
+.toggler {
+  width: 72px;
+}
+
+.toggler input {
+  display: none;
+}
+
+.toggler label {
+  display: block;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  border: 1px solid #070f2b;
+  border-radius: 36px;
+  background: #e4e8e8;
+  cursor: pointer;
+}
+
+.toggler label::after {
+  display: block;
+  border-radius: 100%;
+  background-color: #d7062a;
+  content: "";
+  animation-name: toggler-size;
+  animation-duration: 0.15s;
+  animation-timing-function: ease-out;
+  animation-direction: forwards;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+}
+
+.toggler label::after,
+.toggler label .toggler-on,
+.toggler label .toggler-off {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 26px;
+  height: 26px;
+  transform: translateY(-50%) translateX(-50%);
+  transition: left 0.15s ease-in-out, background-color 0.2s ease-out,
+    width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+.toggler input:checked + label::after,
+.toggler input:checked + label .toggler-on,
+.toggler input:checked + label .toggler-off {
+  left: 75%;
+}
+
+.toggler input:checked + label::after {
+  background-color: #50ac5d;
+  animation-name: toggler-size2;
+}
+
+.toggler .toggler-on,
+.toggler .toggler-off {
+  opacity: 1;
+  z-index: 2;
+}
+
+.toggler input:checked + label .toggler-off,
+.toggler input:not(:checked) + label .toggler-on {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.toggler .path {
+  fill: none;
+  stroke: #fefefe;
+  stroke-width: 7px;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+}
+
+@keyframes toggler-size {
+  0%,
+  100% {
+    width: 26px;
+    height: 26px;
+  }
+
+  50% {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@keyframes toggler-size2 {
+  0%,
+  100% {
+    width: 26px;
+    height: 26px;
+  }
+
+  50% {
+    width: 20px;
+    height: 20px;
+  }
+}

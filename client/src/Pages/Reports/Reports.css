@@ -2,6 +2,7 @@
   width: 90%;
   height: fit-content;
   gap: 45px;
+  min-height: 90vh;
 }
 
 .r-reports {

@@ -12,6 +12,7 @@ function Pomodoro() {
   const [workDuration, setWorkDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showTitmer, setShowTimer] = useState(true);
 
   const bellsound = new Audio(bell);
   const audiosound = new Audio(audio);
@@ -49,8 +50,12 @@ function Pomodoro() {
   };
 
   return (
-    <div className="p-container">
-      <div className="p-timer">
+    <div className="p-container ">
+      <div className={`p-timer ${showTitmer ? "d-flex" : "d-none"}`}>
+        <div className="p-phase">
+          <div className={phase === "work" ? "p-active" : ""}>Work</div>
+          <div className={phase === "break" ? "p-active" : ""}>Break</div>
+        </div>
         <CountdownCircleTimer
           key={phase}
           isPlaying={isPlaying}
@@ -89,13 +94,10 @@ function Pomodoro() {
       </div>
 
       <div className="p-config">
-        <div className="p-phase">
-          <p className={phase === "work" ? "p-active" : ""}>Work</p>
-          <p className={phase === "break" ? "p-active" : ""}>Break</p>
-        </div>
-
-        <div className="p-setwork">
-          <label htmlFor="work">Work duration</label>
+        <div className="p-setwork ">
+          <label htmlFor="work" className="unselectable">
+            Work duration
+          </label>
           <input
             id="work"
             type="number"
@@ -106,7 +108,9 @@ function Pomodoro() {
           />
         </div>
         <div className="p-setbreak">
-          <label htmlFor="break">Break duration</label>
+          <label htmlFor="break" className="unselectable">
+            Break duration
+          </label>
           <input
             id="break"
             type="number"
@@ -115,6 +119,14 @@ function Pomodoro() {
             value={breakDuration}
             min="0"
           />
+        </div>
+        <div className="p-timer-state-container">
+          <button
+            className="p-timer-state d-flex justify-content-center align-items-center"
+            onClick={() => setShowTimer(!showTitmer)}
+          >
+            {showTitmer ? "Hide Timer" : "Show Timer"}
+          </button>
         </div>
       </div>
     </div>

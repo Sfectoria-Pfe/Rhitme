@@ -5,12 +5,47 @@
   background-color: white;
   overflow: hidden;
   z-index: 1;
-  right: 252px;
+  right: -600px;
+  position: fixed;
+  box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.3);
+}
+
+@media (max-width: 824px) {
+  .cb-container {
+    width: 100%;
+    right: -850px;
+  }
+
+  @keyframes showupchat {
+    0% {
+      right: -850px;
+    }
+    100% {
+      right: 0px;
+    }
+  }
+  .cb-active {
+    animation: showupchat 1s ease forwards;
+  }
+}
+
+.cb-active {
+  display: block;
+  animation: showupchat 1s ease forwards;
+}
+
+@keyframes showupchat {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-850px);
+  }
 }
 
 .sender-container {
   gap: 10px;
-  align-self: end;
+  align-self: flex-end;
   width: 50%;
 }
 
@@ -23,7 +58,7 @@
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  align-self: end;
+  align-self: flex-end;
 }
 
 .sen-message {
@@ -117,7 +152,19 @@
 .cb-content {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 10px;
   height: 90%;
+}
+
+.cb-close {
+  font-size: 150%;
+  position: absolute;
+  right: 3%;
+  cursor: pointer;
+  transition: scale 0.5s ease;
+}
+
+.cb-close:hover {
+  scale: 1.1;
 }

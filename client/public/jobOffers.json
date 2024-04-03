@@ -1,0 +1,71 @@
+[
+    {
+      "id": 1,
+      "title": "Video Game Design Instructor Children's Academy",
+      "summary": [
+        "Part time : Part-Time(Summer only); july 8-august2024",
+        "Part time : Part-Time(Summer only); july 8-august2024"
+      ],
+      "skills": [
+        "javascript",
+        "PHP",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript",
+        "javascript"
+      ],
+      "experience": "1",
+      "pay": "1500",
+      "job_type": "Full time",
+      "workdays": "Monday to Friday",
+      "description": "A fun, loving family of four in Brooklyn looking for a part time OR full-time teacher for a wonderful 15-year-old boy with non-speaking autism who communicates through typing and a letterboard (pointing to different letters to spell out words). Join a dynamic, collaborative team of teachers, family, and therapists to make a real difference in the life of an incredible young man while learning multiple best-in-class techniques and strategies.He attends school in the mornings, supported by another teacher, so looking for a teacher to support him at home during the afternoons. The job is Monday-Friday from 1:30-8:30 PM or 1:30-9:30 PM.\n\n (Or can be part time - your choice for 20-40 hours/week.) Pay is $40-50/hour based on experience. If working 40 hours a week - would be 43 weeks a year (between vacations and his summer camp, there are about 9 vacation weeks off a year), this would total $69,000 to $86,000 a year. While you would be paid for the entirety of the 1:30-8:30 (or 9:30) time, this time includes a mix of time directly working with him and prepping for the next class or time with him. (his parents will support him during some of the afternoon time.) Located in Ditmas Park near the B/Q stop at Newkirk Plaza.Responsibilities including the following: Teaching one academic subject (aligned to your skill/interest) a day 1-on-1 .Supporting him to finish homework from school.\n\nTaking him to and from therapy sessions (with OT, PT, speech), supporting his communication during these sessions and ensuring continuity  of these practices throughout the week.",
+      "urgent": true
+    },
+    {
+      "id": 2,
+      "title": "Product Associate, Personal Financial Management & Insights",
+      "summary": [
+        "Part time : Part-Time(Summer only); july 8-august2024"
+      ],
+      "skills": [
+        "javascript",
+        "Laravel"
+      ],
+      "experience": "2",
+      "pay": "1700",
+      "job_type": "Part time",
+      "workdays": "Monday to Wednesday",
+      "description": "A fun, loving family of four in Brooklyn looking for a part time OR full-time teacher for a wonderful 15-year-old boy with non-speaking autism who communicates through typing and a letterboard (pointing to different letters to spell out words). Join a dynamic, collaborative team of teachers, family, and therapists to make a real difference in the life of an incredible young man while learning multiple best-in-class techniques and strategies.He attends school in the mornings, supported by another teacher, so looking for a teacher to support him at home during the afternoons. The job is Monday-Friday from 1:30-8:30 PM or 1:30-9:30 PM. (Or can be part time - your choice for 20-40 hours/week.) Pay is $40-50/hour based on experience. If working 40 hours a week - would be 43 weeks a year (between vacations and his summer camp, there are about 9 vacation weeks off a year), this would total $69,000 to $86,000 a year. While you would be paid for the entirety of the 1:30-8:30 (or 9:30) time, this time includes a mix of time directly working with him and prepping for the next class or time with him. (his parents will support him during some of the afternoon time.) Located in Ditmas Park near the B/Q stop at Newkirk Plaza.Responsibilities including the following: Teaching one academic subject (aligned to your skill/interest) a day 1-on-1 .Supporting him to finish homework from school.\n\nTaking him to and from therapy sessions (with OT, PT, speech), supporting his communication during these sessions and ensuring continuity  of these practices throughout the week.",
+      "urgent": false
+    },
+    {
+      "id": 3,
+      "title": "Front-End Developer",
+      "summary": ["Full time : Full-Time; immediate start"],
+      "skills": ["HTML", "CSS", "JavaScript", "React"],
+      "experience": "3",
+      "pay": "2000",
+      "job_type": "Full time",
+      "workdays": "Monday to Friday",
+      "description": "We are looking for a talented Front-End Developer to join our team. You will be responsible for building responsive websites and web applications. The ideal candidate will have a strong understanding of front-end technologies, including HTML, CSS, JavaScript, and React. Experience with responsive design and cross-browser compatibility is a plus. This is a full-time position with an immediate start.",
+      "urgent": true
+    },
+    {
+      "id": 4,
+      "title": "Marketing Specialist",
+      "summary": ["Full time : Full-Time; immediate start"],
+      "skills": ["Marketing", "Social Media", "Content Creation"],
+      "experience": "2",
+      "pay": "1800",
+      "job_type": "Full time",
+      "workdays": "Monday to Friday",
+      "description": "We are seeking a Marketing Specialist to join our team. The ideal candidate will have experience in marketing, social media management, and content creation. You will be responsible for developing and implementing marketing strategies to increase brand awareness and drive sales. This is a full-time position with an immediate start.",
+      "urgent": false
+    }
+  ]
+  

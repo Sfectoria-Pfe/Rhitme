@@ -1,0 +1,563 @@
+[
+  {
+    "user_id": "1",
+    "department_id": "1",
+    "last_name": "Doe",
+    "first_name": "John",
+    "phone": "123456789",
+    "birthday": "1990-01-01",
+    "gender": "Male",
+    "CIN": "123456",
+    "address": {
+      "street": "123 Main St",
+      "city": "City",
+      "state": "State",
+      "zip": "12345",
+      "country": "Country"
+    },
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "job": "Developer",
+    "created_at": "2021-09-20T12:00:00Z",
+    "monthly_points": {
+      "January": 10,
+      "February": 20,
+      "March": 30,
+      "April": 40,
+      "May": 50,
+      "June": 60,
+      "July": 70,
+      "August": 80,
+      "September": 90,
+      "October": 100,
+      "November": 110,
+      "December": 120
+    },
+    "yearly_points": {
+      "2021": 1000,
+      "2022": 1100,
+      "2023": 1200,
+      "2024": 1300
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/men/1.jpg",
+    "monthly_absence": {
+      "January": 0,
+      "February": 0,
+      "March": 0,
+      "April": 0,
+      "May": 0,
+      "June": 0,
+      "July": 0,
+      "August": 0,
+      "September": 0,
+      "October": 0,
+      "November": 0,
+      "December": 0
+    },
+    "yearly_absence": {
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0
+    },
+    "role_id": "1",
+    "marital_status": "Single",
+    "skills": ["JavaScript", "React", "Node.js"],
+    "salary": 2000
+  },
+  {
+    "user_id": "2",
+    "department_id": "2",
+    "last_name": "Smith",
+    "first_name": "Jane",
+    "phone": "987654321",
+    "birthday": "1995-05-05",
+    "gender": "Female",
+    "CIN": "654321",
+    "address": {
+      "street": "456 Elm St",
+      "city": "City",
+      "state": "State",
+      "zip": "54321",
+      "country": "Country"
+    },
+    "email": "jane.smith@example.com",
+    "password": "password456",
+    "job": "Designer",
+    "created_at": "2024-03-10T12:00:00Z",
+    "monthly_points": {
+      "January": 10,
+      "February": 20,
+      "March": 30,
+      "April": 40,
+      "May": 50,
+      "June": 60,
+      "July": 70,
+      "August": 80,
+      "September": 90,
+      "October": 100,
+      "November": 110,
+      "December": 120
+    },
+    "yearly_points": {
+      "2023": 1100,
+      "2024": 1200
+    },
+    "status": "out",
+    "photo": "https://randomuser.me/api/portraits/women/2.jpg",
+    "monthly_absence": {
+      "January": 0,
+      "February": 0,
+      "March": 1,
+      "April": 0,
+      "May": 0,
+      "June": 0,
+      "July": 0,
+      "August": 0,
+      "September": 0,
+      "October": 0,
+      "November": 0,
+      "December": 0
+    },
+    "yearly_absence": {
+      "2023": 0,
+      "2024": 0
+    },
+    "role_id": "2",
+    "marital_status": "Married",
+    "skills": ["Photoshop", "Illustrator", "UI/UX Design"],
+    "salary": 2000
+  },
+  {
+    "user_id": "3",
+    "department_id": "1",
+    "last_name": "Brown",
+    "first_name": "Alice",
+    "phone": "555555555",
+    "birthday": "1985-03-27",
+    "gender": "Female",
+    "CIN": "987654",
+    "address": {
+      "street": "789 Oak St",
+      "city": "City",
+      "state": "State",
+      "zip": "67890",
+      "country": "Country"
+    },
+    "email": "alice.brown@example.com",
+    "password": "password789",
+    "job": "Manager",
+    "created_at": "2022-07-05T12:00:00Z",
+    "monthly_points": {
+      "January": 10,
+      "February": 40,
+      "March": 30,
+      "April": 40,
+      "May": 50,
+      "June": 60,
+      "July": 70,
+      "August": 80,
+      "September": 90,
+      "October": 100,
+      "November": 110,
+      "December": 120
+    },
+    "yearly_points": {
+      "2022": 800,
+      "2023": 900,
+      "2024": 1000
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/women/3.jpg",
+    "monthly_absence": {
+      "January": 4,
+      "February": 1,
+      "March": 2,
+      "April": 1,
+      "May": 2,
+      "June": 7,
+      "July": 8,
+      "August": 3,
+      "September": 1,
+      "October": 2,
+      "November": 2,
+      "December": 1
+    },
+    "yearly_absence": {
+      "2022": 0,
+      "2023": 0,
+      "2024": 34
+    },
+    "role_id": "3",
+    "marital_status": "Divorced",
+    "skills": ["Leadership", "Management", "Communication"],
+    "salary": 1500
+  },
+  {
+    "user_id": "4",
+    "department_id": "2",
+    "last_name": "Johnson",
+    "first_name": "Michael",
+    "phone": "444444444",
+    "birthday": "1980-11-20",
+    "gender": "Male",
+    "CIN": "456789",
+    "address": {
+      "street": "101 Pine St",
+      "city": "City",
+      "state": "State",
+      "zip": "45678",
+      "country": "Country"
+    },
+    "email": "michael.johnson@example.com",
+    "password": "password101",
+    "job": "Analyst",
+    "created_at": "2024-01-20T12:00:00Z",
+    "monthly_points": {
+    "January": 20,
+    "February": 30,
+    "March": 40,
+    "April": 50,
+    "May": 60,
+    "June": 70,
+    "July": 80,
+    "August": 90,
+    "September": 100,
+    "October": 110,
+    "November": 120,
+    "December": 130
+    },
+    "yearly_points": {
+    "2024": 1400
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/men/4.jpg",
+    "monthly_absence": {
+    "January": 1,
+    "February": 0,
+    "March": 1,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 2
+    },
+    "role_id": "2",
+    "marital_status": "Single",
+    "skills": ["Data Analysis", "SQL", "Reporting"],
+    "salary": 3000
+    },
+    {
+    "user_id": "5",
+    "department_id": "1",
+    "last_name": "Williams",
+    "first_name": "Emily",
+    "phone": "333333333",
+    "birthday": "1992-04-10",
+    "gender": "Female",
+    "CIN": "987654",
+    "address": {
+    "street": "202 Maple St",
+    "city": "City",
+    "state": "State",
+    "zip": "23456",
+    "country": "Country"
+    },
+    "email": "emily.williams@example.com",
+    "password": "password202",
+    "job": "Engineer",
+    "created_at": "2024-02-20T12:00:00Z",
+    "monthly_points": {
+    "January": 20,
+    "February": 30,
+    "March": 40,
+    "April": 40,
+    "May": 50,
+    "June": 60,
+    "July": 70,
+    "August": 80,
+    "September": 90,
+    "October": 100,
+    "November": 110,
+    "December": 120
+    },
+    "yearly_points": {
+    "2024": 1300
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/women/5.jpg",
+    "monthly_absence": {
+    "January": 0,
+    "February": 0,
+    "March": 0,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 1
+    },
+    "role_id": "1",
+    "marital_status": "Married",
+    "skills": ["Mechanical Engineering", "CAD", "Problem Solving"],
+    "salary": 5000
+    },
+    {
+    "user_id": "6",
+    "department_id": "3",
+    "last_name": "Jones",
+    "first_name": "David",
+    "phone": "666666666",
+    "birthday": "1987-07-25",
+    "gender": "Male",
+    "CIN": "456123",
+    "address": {
+    "street": "505 Oak St",
+    "city": "Hammamet",
+    "state": "Nabeul",
+    "zip": "34567",
+    "country": "Tunisia"
+    },
+    "email": "david.jones@example.com",
+    "password": "password505",
+    "job": "Manager",
+    "created_at": "2024-01-20T12:00:00Z",
+    "monthly_points": {
+    "January": 20,
+    "February": 10,
+    "March": 30,
+    "April": 40,
+    "May": 50,
+    "June": 60,
+    "July": 70,
+    "August": 80,
+    "September": 90,
+    "October": 100,
+    "November": 110,
+    "December": 120
+    },
+    "yearly_points": {
+    "2024": 1300
+    },
+    "status": "out",
+    "photo": "https://randomuser.me/api/portraits/men/6.jpg",
+    "monthly_absence": {
+    "January": 1,
+    "February": 0,
+    "March": 2,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 3
+    },
+    "role_id": "3",
+    "marital_status": "Single",
+    "skills": ["Project Management", "Team Leadership", "Decision Making"],
+    "salary": 4000
+    },
+    {
+    "user_id": "7",
+    "department_id": "3",
+    "last_name": "Brown",
+    "first_name": "Emma",
+    "phone": "777777777",
+    "birthday": "1998-12-05",
+    "gender": "Female",
+    "CIN": "789456",
+    "address": {
+    "street": "707 Elm St",
+    "city": "City",
+    "state": "State",
+    "zip": "45678",
+    "country": "Country"
+    },
+    "email": "emma.brown@example.com",
+    "password": "password707",
+    "job": "Designer",
+    "created_at": "2024-01-20T12:00:00Z",
+    "monthly_points": {
+    "January": 20,
+    "February": 10,
+    "March": 30,
+    "April": 40,
+    "May": 50,
+    "June": 60,
+    "July": 70,
+    "August": 80,
+    "September": 90,
+    "October": 100,
+    "November": 110,
+    "December": 120
+    },
+    "yearly_points": {
+    "2024": 700
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/women/7.jpg",
+    "monthly_absence": {
+    "January": 0,
+    "February": 0,
+    "March": 0,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 0
+    },
+    "role_id": "2",
+    "marital_status": "Single",
+    "skills": ["UI/UX Design", "Illustrator", "Photoshop"],
+    "salary": 2500
+    },
+    {
+    "user_id": "8",
+    "department_id": "1",
+    "last_name": "Garcia",
+    "first_name": "Daniel",
+    "phone": "888888888",
+    "birthday": "1983-03-15",
+    "gender": "Male",
+    "CIN": "159753",
+    "address": {
+    "street": "909 Pine St",
+    "city": "City",
+    "state": "State",
+    "zip": "34567",
+    "country": "Country"
+    },
+    "email": "daniel.garcia@example.com",
+    "password": "password909",
+    "job": "Developer",
+    "created_at": "2024-04-20T12:00:00Z",
+    "monthly_points": {
+    "January": 0,
+    "February": 0,
+    "March": 0,
+    "April": 40,
+    "May": 50,
+    "June": 60,
+    "July": 70,
+    "August": 80,
+    "September": 90,
+    "October": 100,
+    "November": 110,
+    "December": 120
+    },
+    "yearly_points": {
+    "2024": 1300
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/men/8.jpg",
+    "monthly_absence": {
+    "January": 0,
+    "February": 0,
+    "March": 0,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 0
+    },
+    "role_id": "1",
+    "marital_status": "Married",
+    "skills": ["JavaScript", "React", "Node.js"],
+    "salary": 2000
+    },
+    {
+    "user_id": "9",
+    "department_id": "2",
+    "last_name": "Martinez",
+    "first_name": "Sophia",
+    "phone": "999999999",
+    "birthday": "1996-06-20",
+    "gender": "Female",
+    "CIN": "357159",
+    "address": {
+    "street": "111 Oak St",
+    "city": "City",
+    "state": "State",
+    "zip": "56789",
+    "country": "Country"
+    },
+    "email": "sophia.martinez@example.com",
+    "password": "password111",
+    "job": "Analyst",
+    "created_at": "2024-01-20T12:00:00Z",
+    "monthly_points": {
+    "January": 50,
+    "February": 30,
+    "March": 18,
+    "April": 40,
+    "May": 50,
+    "June": 60,
+    "July": 70,
+    "August": 80,
+    "September": 90,
+    "October": 100,
+    "November": 110,
+    "December": 120
+    },
+    "yearly_points": {
+    "2024": 1300
+    },
+    "status": "active",
+    "photo": "https://randomuser.me/api/portraits/women/9.jpg",
+    "monthly_absence": {
+    "January": 0,
+    "February": 0,
+    "March": 0,
+    "April": 0,
+    "May": 0,
+    "June": 0,
+    "July": 0,
+    "August": 0,
+    "September": 0,
+    "October": 0,
+    "November": 0,
+    "December": 0
+    },
+    "yearly_absence": {
+    "2024": 0
+    },
+    "role_id": "2",
+    "marital_status": "Single",
+    "skills": ["Data Analysis", "SQL", "Reporting"],
+    "salary": 4000
+    }
+    ]

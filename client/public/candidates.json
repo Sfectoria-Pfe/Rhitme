@@ -1,0 +1,58 @@
+[
+    {
+      "candidate_id": 1,
+      "offer_id": 1,
+      "firstname": "John",
+      "lastname": "Doe",
+      "email": "john.doe@example.com",
+      "phonenumber": "+1 123 456 7890",
+      "cv": "https://res.cloudinary.com/dyiyi2efn/image/upload/v1711986609/inckyyshbrteqhxnzu3e.pdf",
+      "accuracy": 85,
+      "posted_at": "2024-01-05T10:00:00Z"
+    },
+    {
+      "candidate_id": 2,
+      "offer_id": 1,
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "email": "jane.smith@example.com",
+      "phonenumber": "+1 234 567 8901",
+      "cv": "https://res.cloudinary.com/dyiyi2efn/image/upload/v1711986609/inckyyshbrteqhxnzu3e.pdf",
+      "accuracy": 92,
+      "posted_at": "2024-04-05T10:30:00Z"
+    },
+    {
+      "candidate_id": 3,
+      "offer_id": 2,
+      "firstname": "Alice",
+      "lastname": "Johnson",
+      "email": "alice.johnson@example.com",
+      "phonenumber": "+1 345 678 9012",
+      "cv": "https://res.cloudinary.com/dyiyi2efn/image/upload/v1711986609/inckyyshbrteqhxnzu3e.pdf",
+      "accuracy": 78,
+      "posted_at": "2024-04-05T11:00:00Z"
+    },
+    {
+      "candidate_id": 4,
+      "offer_id": 3,
+      "firstname": "Michael",
+      "lastname": "Brown",
+      "email": "michael.brown@example.com",
+      "phonenumber": "+1 456 789 0123",
+      "cv": "https://res.cloudinary.com/dyiyi2efn/image/upload/v1711986609/inckyyshbrteqhxnzu3e.pdf",
+      "accuracy": 80,
+      "posted_at": "2024-04-05T11:30:00Z"
+    },
+    {
+      "candidate_id": 5,
+      "offer_id": 4,
+      "firstname": "Sarah",
+      "lastname": "Wilson",
+      "email": "sarah.wilson@example.com",
+      "phonenumber": "+1 567 890 1234",
+      "cv": "https://res.cloudinary.com/dyiyi2efn/image/upload/v1711986609/inckyyshbrteqhxnzu3e.pdf",
+      "accuracy": 88,
+      "posted_at": "2024-04-05T12:00:00Z"
+    }
+  ]
+  

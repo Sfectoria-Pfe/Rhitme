@@ -15,6 +15,12 @@ import RootLayout from "./Layouts/RootLayout";
 import Reports from "./Pages/Reports/Reports";
 import MainLayout from "./Layouts/MainLayout";
 import ReportDetails from "./Pages/Reports/ReportDetails";
+import NotFound from "./Pages/NotFound/NotFound";
+import Personal from "./Pages/EmployeeInfos/EmployeeInfosPages/Personal";
+import Performance from "./Pages/EmployeeInfos/EmployeeInfosPages/Performance";
+import Job from "./Pages/EmployeeInfos/EmployeeInfosPages/Job";
+import Recruitment from "./Pages/Recruitment/Recruitment";
+import Candidates from "./Pages/Recruitment/Candidates";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,15 +30,22 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="dashboard" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="employees">
-          <Route index element={<Employees />} />
-          <Route path="employeeinfos/:id" element={<EmployeeInfos />} />
+        <Route path="employees" element={<Employees />} />
+        <Route path="employeeinfos/:id" element={<EmployeeInfos />}>
+          <Route index element={<Job />} />
+          <Route path="personal" element={<Personal />} />
+          <Route path="performance" element={<Performance />} />
         </Route>
         <Route path="reports">
           <Route index element={<Reports />} />
           <Route path="reportdetails/:id" element={<ReportDetails />} />
         </Route>
+        <Route path="recruitment">
+          <Route index element={<Recruitment />} />
+          <Route path=":id" element={<Candidates />} />
+        </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

@@ -9,8 +9,10 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaCircle } from "react-icons/fa";
 import { FaHamburger } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Settings from "./Settings";
+import Dropdown from "react-bootstrap/Dropdown";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import Pomodoro from "../Pomodoro/Pomodoro";
 
 function Navbar({ onStateChange }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -25,11 +27,12 @@ function Navbar({ onStateChange }) {
       dispatch(hideSidebar());
     }
   };
+
   return (
     <>
       <div className="n-container container-fluid bg-primary ">
         <div className="n-row row d-flex justify-content-between align-items center">
-          <div className=" d-flex align-items-center col-5 col-sm">
+          <div className=" d-flex align-items-center col-6 col-sm ">
             <label className="hamburger d-lg-block d-none">
               <input
                 type="checkbox"
@@ -48,23 +51,58 @@ function Navbar({ onStateChange }) {
               className="nav-icon mx-1 mx-sm-3 d-block d-lg-none"
               onClick={() => {
                 sidebar ? dispatch(hideSidebar()) : dispatch(showSidebar());
-                console.log(sidebar);
               }}
             />
-            <div className="n-title">SFECTORIA HR</div>
+            <Link to="/dashboard" className="n-title">
+              RHitm
+            </Link>
           </div>
-          <div className="n-functionalities d-flex justify-content-around align-items-center col-7 col-md-5 col-lg-4 col-xl-3">
-            <div className="n-notif">
+          <div className="col d-none d-lg-block">
+            <Pomodoro />
+          </div>
+
+          <div className="n-functionalities d-flex justify-content-end align-items-center col-6 col-md-5 col-lg-4 col-xl-3">
+            <div className="n-notif ">
               <IoIosNotificationsOutline className="n-notification-icon" />
               <FaCircle className="n-active" />
             </div>
-            <button className="n-logout">Logout</button>
-            <div className="n-infos d-flex  justify-content-around align-items-center">
-              <img src={profileImage} alt="Profile" className="n-profilepic" />
-              <div className="n-userinfos n-name d-none d-sm-block">
-                Firas Trabelsi
-              </div>
-            </div>
+            <Dropdown>
+              <Dropdown.Toggle
+                as="div"
+                className="n-infos d-flex justify-content-around align-items-center unselectable"
+                id="dropdown-basic"
+              >
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="n-profilepic"
+                />
+                <div className="n-userinfos n-name d-none d-sm-block">
+                  Firas Trabelsi
+                </div>
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="n-dropdown-menu px-2">
+                <Dropdown.Item
+                  className="n-dropdown-menu-item"
+                  href="#/action-2"
+                >
+                  <Link
+                    to={`employeeInfos/3`}
+                    className="n-link text-decoration-none"
+                  >
+                    Profile
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  className="n-dropdown-menu-item"
+                  href="#/action-1"
+                >
+                  <Link to="/logout" className="n-link text-decoration-none">
+                    Logout
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
 
             <FiMessageCircle
               className="n-messages"
