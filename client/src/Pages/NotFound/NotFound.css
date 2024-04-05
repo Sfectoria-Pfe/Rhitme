@@ -1,0 +1,59 @@
+.nf-container {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 30px;
+}
+
+.nf-animation {
+  height: 40%;
+}
+
+.nf-message {
+  gap: 30px;
+}
+
+.nf-head {
+  font-family: "Poppins", sans-serif;
+  color: #041b2a;
+}
+
+.nf-core {
+  font-family: "Poppins", sans-serif;
+  color: #041b2a;
+  text-align: center;
+}
+
+.nf-link {
+  width: 200px;
+  min-height: 40px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border-radius: 10px;
+  background-image: linear-gradient(135deg, #041b2ab6 0%, #041b2a 100%);
+  box-shadow: 0 20px 30px -6px #041b2aab;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 90%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nf-link:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.nf-link:active {
+  opacity: 0.5;
+}

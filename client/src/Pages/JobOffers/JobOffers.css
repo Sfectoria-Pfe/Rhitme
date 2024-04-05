@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #18191a;
+  background-color: #f0f2f5;
   gap: 55px;
 }
 
@@ -13,53 +13,389 @@
   align-items: center;
   width: 88%;
   align-self: center;
-  margin-top: 1.5%;
+  margin-top: 0.5%;
   height: 50px;
 }
 
-.jo-navbar h1 {
-  color: white;
-  font-family: "Syncopate", sans-serif;
-  font-size: 160%;
-  letter-spacing: 2px;
-  -webkit-text-stroke: 1px white;
+.jo-navbar div {
+  background-image: linear-gradient(to right, #42b1bc, #757575);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: "Climate Crisis", sans-serif;
+  letter-spacing: 5px;
+  font-size: 150%;
+  font-weight: bolder;
 }
 
 .jo-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  justify-content: center;
-  margin-bottom: 30px;
+  width: 75%;
 }
 
 .jo-offers-field {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 700px;
+  width: 43%;
+  gap: 20px;
 }
 
-.jo-offer {
-  width: 100%;
-  margin: 10px;
+.jo-details-field {
+  width: 55%;
+  position: sticky;
+  top: 5%;
+  height: fit-content;
 }
 
-.jo-title {
-  color: white;
-  font-family: "Syncopate", sans-serif;
-  font-weight: bolder;
-  font-size: 200%;
-  text-shadow: 30px 0px 90px rgba(255, 255, 255, 0.5);
-  -webkit-text-stroke: 2px white;
-  letter-spacing: 3px;
-  backdrop-filter: blur(60px);
+@media (max-width: 992px) {
+  .jo-offers-field {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .jo-details-field {
+    display: none;
+    width: 100%;
+    position: fixed;
+    background-color: #f0f2f5;
+    top: 10%;
+    left: 0%;
+  }
 }
 
 .o-container {
+  gap: 15px;
   width: 100%;
+  user-select: none;
+  cursor: pointer;
+  border: solid 1px #070f2b76;
+  border-radius: 10px;
+}
 
+.o-active {
+  border-color: #070f2b;
+  border-width: 2px;
+}
+
+.o-container:hover {
+  background-color: #dedede9f;
+}
+
+.o-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 110%;
+  width: 90%;
+}
+
+/* .jo-offers-field {
+  columns: 2;
+  -webkit-columns: 2;
+  border: solid 1px;
+  gap: 10px;
+   width: 700px; 
+}
+
+ .jo-offer {
+  width: 100%;
+  margin: 10px;
+} */
+
+.jo-title {
+  color: #041b2a;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 200%;
+  text-shadow: 30px 0px 90px #041b2a;
+  letter-spacing: 3px;
+}
+
+.jo-back {
+  height: 80%;
+  border: solid;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: center;
+  border-radius: 15px;
+  border: solid 1px #041b2a;
+  background: transparent;
+  cursor: pointer;
+  color: #041b2a;
+  font-size: larger;
+}
+
+.jo-back:hover .jo-back-icon {
+  animation: move 0.6s ease;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.od-container {
+  height: 90vh;
+  border: solid 1px #070f2b76;
+  border-radius: 10px;
+}
+
+.od-header {
+  height: 22%;
+  gap: 15%;
+  padding-left: 25px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.od-header div {
+  font-family: "Poppins", sans-serif;
+  font-size: 120%;
+  width: 90%;
+}
+
+.od-header button {
+  margin-left: 20px;
+  height: 35px;
+  letter-spacing: 0.5px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 8px;
+  background-image: linear-gradient(135deg, #041b2ab6 0%, #041b2a 100%);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 90%;
+  color: white;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.od-content {
+  gap: 15px;
+  margin-left: 20px;
+  height: 70%;
+  overflow-y: scroll;
+  padding-bottom: 25px;
+}
+
+.od-part {
+  border-bottom: solid 1px;
+  padding-bottom: 15px;
+  width: 97%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.od-part-icon {
+  margin-top: 2px;
+  font-size: 110%;
+}
+
+.od-part-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 110%;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.od-part-content {
+  display: flex;
+  gap: 20px;
+}
+
+.od-req-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.od-req {
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  background-color: #dedede;
+  border-radius: 7px;
+  width: fit-content;
+  padding: 1px 8px;
+  margin-top: 7px;
+  user-select: none;
+  margin-left: 5px;
+}
+
+.od-skills-list {
+  gap: 10px;
+}
+
+.od-description {
+  gap: 20px;
+}
+
+.od-desc {
+  width: 95%;
+}
+
+.od-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 180%;
+}
+
+.app-container {
+  width: 400px;
+  min-height: 370px;
+  gap: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  z-index: 10;
+  top: -100%;
+}
+
+.app-active {
+  animation: showapply 0.8s ease forwards;
+}
+
+@keyframes showapply {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 20%;
+  }
+}
+
+@media (max-width: 450px) {
+  .app-container {
+    width: 90%;
+  }
+}
+
+.app-title {
+  font-family: "Urbanist", sans-serif;
+  color: #070f2b;
+  font-weight: 300;
+  font-size: 21px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  width: 77%;
+  text-align: center;
+  padding: 0px 0px 10px 0;
+}
+
+.app-close {
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  color: #070f2b;
+}
+
+.app-form {
+  gap: 20px;
+}
+
+.app-form-field label {
+  margin-left: 10px;
+  color: #041b2a;
+  font-family: "Urbanist", sans-serif;
+  letter-spacing: 0.7px;
+  font-size: 14px;
+}
+
+.app-form-field input {
+  height: 30px;
+  padding-left: 10px;
+  border-radius: 20px;
+  border: solid 1px #070f2b;
+  background-color: transparent;
+  color: #070f2b;
+  font-family: "Urbanist", sans-serif;
+  font-size: 90%;
+}
+
+.app-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.app-attachement input {
+  display: none;
+}
+
+.app-input-label {
+  margin-top: 10px;
+  margin-bottom: 7px;
+  border: solid;
+  display: flex;
+  justify-content: space-around;
+  width: 150px;
+  align-items: center;
+  height: 30px;
+  border-color: #36454f;
+  border-width: 1px;
+  border-radius: 6px;
+
+  color: #070f2b;
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+}
+
+.app-pdf-icon {
+  font-size: 140%;
+}
+
+.app-file-name {
+  height: 15px;
+  font-size: 80%;
+}
+
+.app-shake {
+  animation: appshake 0.4s;
+}
+
+@keyframes appshake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.app-container button {
+  width: 35%;
+  align-self: center;
+  border-radius: 7px;
+  border: solid 1px;
+  height: 35px;
+  background-color: #070f2b;
+  color: white;
+  font-family: "Urbanist", sans-serif;
+  letter-spacing: 1px;
+}
+
+.app-alert {
+  color: red;
+}
+
+/* .o-container {
+  width: 100%;
   border-radius: 10px;
   background-color: #242526;
   display: flex;
@@ -151,35 +487,7 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-.o-attachement input {
-  display: none;
-}
 
-.o-input-label {
-  border: solid;
-  display: flex;
-  justify-content: space-around;
-  width: 27%;
-  align-items: center;
-  height: 30px;
-  background-color: #041b2a;
-  border-color: #36454f;
-  border-width: 1px;
-  border-radius: 6px;
-  cursor: pointer;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 70%;
-}
-
-.o-pdf-icon {
-  font-size: 140%;
-}
-
-.o-file-name {
-  height: 15px;
-  font-size: 80%;
-}
 
 .o-apply {
   width: 20%;
@@ -246,42 +554,4 @@
   100% {
     transform: rotate(0deg);
   }
-}
-
-.jo-back {
-  height: 80%;
-  border: solid;
-  display: flex;
-  align-items: center;
-  width: 3%;
-  justify-content: center;
-  border-radius: 15px;
-  border-style: solid;
-  border-width: 0;
-  background: linear-gradient(to bottom, white, rgb(146, 146, 146));
-  cursor: pointer;
-  color: black;
-  font-size: larger;
-}
-
-.jo-back:hover .jo-back-icon {
-  animation: move 0.6s ease;
-}
-
-@keyframes move {
-  0% {
-    transform: translateX(0px);
-  }
-  25% {
-    transform: translateX(2px);
-  }
-  50% {
-    transform: translateX(0px);
-  }
-  75% {
-    transform: translateX(2px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
+} */

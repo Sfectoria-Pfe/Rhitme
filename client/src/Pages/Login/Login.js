@@ -7,10 +7,9 @@ import { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Lottie from "lottie-react";
 import loginAnimation from "./Animation - 1710104365414.json";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [admin, setAdmin] = useState(true);
-  const [employee, setEmployee] = useState(false);
   const [seepassword, setSeepassword] = useState(false);
   const inputRef = useRef(null);
   const handlePasswordType = () => {
@@ -22,39 +21,17 @@ function Login() {
   }, []);
 
   return (
-    <div
-      className="vh-100 d-flex flex-column align-items-center justify-content-between"
-      style={{ backgroundColor: "white" }}
-    >
-      <div className="l-g-container"></div>
-      <div className="container mt-4 ">
-        <div className="row justify-content-lg-between justify-content-md-between justify-content-center align-items-center">
-          <div className="l-page-title col-7 text-sm-start text-center mb-3 mb-sm-0">
-            SFECTORIA HR
-          </div>
-          <div className="l-role col-2">
-            <button
-              className={admin === true ? "l-checked" : "l-inchecked"}
-              onClick={() => {
-                setAdmin(true);
-                setEmployee(false);
-              }}
-            >
-              Admin
-            </button>
-            <button
-              className={employee === true ? "l-checked" : "l-inchecked"}
-              onClick={() => {
-                setAdmin(false);
-                setEmployee(true);
-              }}
-            >
-              Employee
-            </button>
-          </div>
-        </div>
+    <div className="vh-100 d-flex flex-column justify-content-between position-relative overflow-x-hidden">
+      <div className="l-g-container "></div>
+      <div className=" mt-4 ">
+        <Link
+          to="/"
+          className="l-page-title text-decoration-none align-self-start "
+        >
+          RHitm
+        </Link>
       </div>
-      ;
+
       <div className="l-container mt-4 mt-sm-0 border">
         <Lottie
           animationData={loginAnimation}

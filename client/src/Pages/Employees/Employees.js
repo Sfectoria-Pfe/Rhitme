@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import "./Employees.css";
 import { CiSearch } from "react-icons/ci";
@@ -13,93 +13,40 @@ import p2 from "./picture2.jpg";
 import p3 from "./picture3.jpg";
 import p4 from "./picture4.jpg";
 import p5 from "./picture5.jpg";
-import api from "../../api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddEmployee from "../../Components/EmployeesCRUD.js/AddEmployee/AddEmployee";
 import { useSelector, useDispatch } from "react-redux";
 import { showAddWindow, hideAddWindow } from "../../State/addEmployeeState";
+import { fetchEmployees, updateEmployees } from "../../State/EmployeesState";
+import LoadingShape from "../../Components/LoadingShape.js/LoadingShape";
 
 function Employees() {
-  const employees = [
-    {
-      picture: p5,
-      name: "Ahmed Mohsen",
-      job: "Graphic designer",
-      status: true,
-    },
-    {
-      picture: p1,
-      name: "Firas Trabelsi",
-      job: "Web developer",
-      status: false,
-    },
-    {
-      picture: p2,
-      name: "Maria Ben Ahmed",
-      job: "SCRUM master",
-      status: true,
-    },
-    {
-      picture: p3,
-      name: "Youssef Takali",
-      job: "Data analyst",
-      status: true,
-    },
-    { picture: p4, name: "Zahra Salhi", job: "Web developer", status: true },
-    {
-      picture: p5,
-      name: "Ali",
-      job: "Graphic designer",
-      status: true,
-    },
-    {
-      picture: picture,
-      name: "Ali",
-      job: "Graphic designer",
-      status: true,
-    },
-    {
-      picture: picture,
-      name: "Ali",
-      job: "Graphic designer",
-      status: true,
-    },
-    {
-      picture: picture,
-      name: "Mohsen",
-      job: "Graphic designer",
-      status: false,
-    },
-    { picture: picture, name: "Mohsen", job: "Graphic designer", status: true },
-    {
-      picture: picture,
-      name: "Youssef",
-      job: "Graphic designer",
-      status: true,
-    },
-    { picture: picture, name: "Mohsen", job: "Graphic designer", status: true },
-    {
-      picture: picture,
-      name: "Ali",
-      job: "Graphic designer",
-      status: true,
-    },
-  ];
-
-  const add = useSelector((state) => state.add.value);
+  const add = useSelector((state) => state.add.add);
   const dispatch = useDispatch();
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [employees, setEmployees] = useState([]);
+  const employees = useSelector((state) => state.employees.employees);
+  const status = useSelector((state) => state.employees.status);
+  const error = useSelector((state) => state.employees.error);
   const [sortedby, setSortedby] = useState("name");
   const [searchInput, setSearchInput] = useState("");
+
   const Sort = (employees, sorting) => {
     if (sorting === "job") {
       employees.sort((a, b) => a.job.localeCompare(b.job));
     } else if (sorting === "name") {
-      employees.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      employees.sort((a, b) => a.first_name.localeCompare(b.first_name));
+    } else if (sorting === "date") {
+      employees.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    } else if (sorting === "points") {
+      employees.sort((a, b) => b.points - a.points);
     } else employees.sort((a, b) => a.status.localeCompare(b.status));
     return employees;
   };
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchEmployees());
+    }
+  }, [status, dispatch]);
+
   const Filter = (employees, searchInput) => {
     if (searchInput.trim() === "") {
       return employees;
@@ -107,45 +54,38 @@ function Employees() {
 
     return employees.filter(
       (employee) =>
-        employee.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
-        employee.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
+        employee.first_name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        employee.last_name.toLowerCase().includes(searchInput.toLowerCase()) ||
         employee.job.toLowerCase().includes(searchInput.toLowerCase())
     );
   };
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await api.get("/users");
-  //       let filteredEmployees = Filter(response.data, searchInput);
-  //       filteredEmployees = Sort(filteredEmployees, sortedby);
-  //       setEmployees(filteredEmployees);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchUsers();
-  //   console.log(employees);
-  // }, [sortedby, searchInput]);
 
-  // Capitalize the first letter of a string
-  const CapFirst = (str) => {
-    return str.charAt(0).toUpperCase() + str.substring(1);
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected;
+    setCurrentPage(selectedPage);
   };
 
   const handleSorting = (event) => {
-    setSortedby(event.target.value);
+    const selectedValue = event.target.value;
+    setSortedby(selectedValue);
+
+    const sortedEmployees = Sort([...employees], selectedValue);
+
+    dispatch(updateEmployees(sortedEmployees));
   };
 
   const handleSearch = (event) => {
     setSearchInput(event.target.value);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 5;
-  const lastPostIndex = currentPage * postsPerPage;
+  const lastPostIndex = (currentPage + 1) * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentEmployees = employees.slice(firstPostIndex, lastPostIndex);
+  const currentEmployees = Filter(employees, searchInput).slice(
+    firstPostIndex,
+    lastPostIndex
+  );
 
   return (
     <>
@@ -169,6 +109,7 @@ function Employees() {
                 className="e-search-input"
                 placeholder="Search"
                 onChange={handleSearch}
+                value={searchInput}
               />
               <CiSearch className="e-search-icon " />
             </div>
@@ -179,10 +120,8 @@ function Employees() {
           onClick={() => {
             if (!add) {
               dispatch(showAddWindow());
-              console.log(add);
             } else {
               dispatch(hideAddWindow());
-              console.log(add);
             }
           }}
         >
@@ -195,52 +134,82 @@ function Employees() {
             <option value="name">Name</option>
             <option value="status">Status</option>
             <option value="job">Occupation</option>
+            <option value="date">Hiring date</option>
+            <option value="points">Performance</option>
           </select>
         </div>
         <div className="employees-list">
-          {currentEmployees.map((item, index) => (
-            <EmployeeField
-              key={index}
-              id={item.id}
-              name={item.name}
-              job={item.job}
-              active={item.status}
-              picture={p1}
-            />
-          ))}
+          {status === "loading" ? (
+            <>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <div key={index} className="e-field">
+                  <LoadingShape height="70px" width="70px" borderRadius="50%" />
+                  <LoadingShape
+                    height="20px"
+                    width="150px"
+                    borderRadius="7px"
+                  />
+                  <LoadingShape
+                    height="20px"
+                    width="150px"
+                    borderRadius="7px"
+                  />
+                  <LoadingShape height="30px" width="60px" borderRadius="7px" />
+                </div>
+              ))}
+            </>
+          ) : (
+            currentEmployees.map((item, index) => (
+              <EmployeeField
+                key={index}
+                id={item.user_id}
+                name={item.first_name + " " + item.last_name}
+                job={item.job}
+                active={item.status}
+                picture={item.photo}
+                status={status}
+              />
+            ))
+          )}
         </div>
-        <ReactPaginate
-          className={employees.length <= postsPerPage ? "" : ""}
-          activeClassName={"e-item e-current "}
-          breakClassName={"e-item e-break-me "}
-          breakLabel={"..."}
-          containerClassName={"e-pagination d-flex my-5"}
-          disabledClassName={"e-disabled-page"}
-          marginPagesDisplayed={1}
-          nextClassName={"e-item e-next "}
-          nextLabel={
-            <MdNavigateNext
-              onClick={() =>
-                currentPage < Math.ceil(employees.length / postsPerPage)
-                  ? setCurrentPage(currentPage + 1)
-                  : setCurrentPage(currentPage)
-              }
-            />
-          }
-          pageCount={Math.ceil(employees.length / postsPerPage)}
-          pageClassName={"e-item e-pagination-page "}
-          pageRangeDisplayed={1}
-          previousClassName={"e-item e-previous"}
-          previousLabel={
-            <MdNavigateBefore
-              onClick={() =>
-                currentPage !== 1
-                  ? setCurrentPage(currentPage - 1)
-                  : setCurrentPage(currentPage)
-              }
-            />
-          }
-        />
+        {status !== "succeeded" || employees.length <= postsPerPage ? (
+          <div style={{ height: "70px" }}></div>
+        ) : (
+          <ReactPaginate
+            onPageChange={handlePageClick}
+            activeClassName={"e-item e-current "}
+            breakClassName={"e-item e-break-me "}
+            breakLabel={"..."}
+            containerClassName={"e-pagination d-flex my-5"}
+            disabledClassName={"e-disabled-page"}
+            marginPagesDisplayed={1}
+            nextClassName={"e-item e-next "}
+            nextLabel={
+              <MdNavigateNext
+                onClick={() =>
+                  currentPage < Math.ceil(employees.length / postsPerPage) - 1
+                    ? setCurrentPage(currentPage + 1)
+                    : setCurrentPage(currentPage)
+                }
+                style={{ color: "#041b2a" }}
+              />
+            }
+            pageCount={Math.ceil(employees.length / postsPerPage)}
+            pageClassName={"e-item e-pagination-page "}
+            pageRangeDisplayed={1}
+            previousClassName={"e-item e-previous"}
+            previousLabel={
+              <MdNavigateBefore
+                onClick={() =>
+                  currentPage !== 0
+                    ? setCurrentPage(currentPage - 1)
+                    : setCurrentPage(currentPage)
+                }
+                style={{ color: "#041b2a" }}
+              />
+            }
+          />
+        )}
       </div>
     </>
   );

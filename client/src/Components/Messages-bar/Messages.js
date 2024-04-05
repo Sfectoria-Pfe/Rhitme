@@ -16,7 +16,7 @@ function Messages() {
   return (
     <div className={`m-container ${messages ? " m-active" : ""} pt-2`}>
       <div className="m-title-container">
-        <div className="m-title">Discussions</div>
+        <div className="m-title unselectable">Discussions</div>
       </div>
       <div className="m-search">
         <input type="text" className="m-search-input" placeholder="Search" />

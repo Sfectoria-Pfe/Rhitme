@@ -78,7 +78,7 @@ function LandingPage() {
         <div className="lp-navbar container mt-4 mb-5">
           <div className="row justify-content-sm-between justify-content-center align-items-center">
             <h1 className="col-sm-6 col-12 fs-sm-6 text-sm-start text-center">
-              SFECTORIA HR
+              RHitm
             </h1>
             <Link to="/login" className="lp-login-text col-1 ">
               Log In

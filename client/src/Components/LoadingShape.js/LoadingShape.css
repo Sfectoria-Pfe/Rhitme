@@ -1,0 +1,17 @@
+.loading-shape {
+  background-color: #95a4b8;
+  animation: 2s infinite alternate ease-out pulse;
+  border: none;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #95a4b8;
+  }
+  50% {
+    background-color: #d5dde9;
+  }
+  100% {
+    background-color: #95a4b8;
+  }
+}

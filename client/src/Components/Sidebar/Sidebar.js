@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { hidePasswordWindow } from "../../State/revealePasswordState";
 import { hideDeleteWindow } from "../../State/deleteEmployeeState";
 import { hideReportReply } from "../../State/reportReply";
-import Pomodoro from "../Pomodoro/Pomodoro";
+import { IoPersonAdd } from "react-icons/io5";
+import { hideAddOfferWindow } from "../../State/WindowsStates";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Sidebar() {
@@ -18,6 +19,7 @@ function Sidebar() {
   const sidebar = useSelector((state) => state.sidebar.sidebar);
   const add = useSelector((state) => state.add.add);
   const report = useSelector((state) => state.report.report);
+  const addOffer = useSelector((state) => state.windows.addOffer);
 
   const dispatch = useDispatch();
 
@@ -26,16 +28,15 @@ function Sidebar() {
       className={`s-container ${sidebar === true ? "d-none" : "d-flex"} ${
         sidebar === true ? "d-lg-flex" : "d-lg-none"
       } flex-column justify-content-between align-items-center py-5 `}
+      onClick={() => {
+        if (deletee) dispatch(hideDeleteWindow());
+        if (password) dispatch(hidePasswordWindow());
+        if (add) dispatch(hideAddWindow());
+        if (report) dispatch(hideReportReply());
+        if (addOffer) dispatch(hideAddOfferWindow());
+      }}
     >
-      <ul
-        className="d-flex flex-column"
-        onClick={() => {
-          if (deletee) dispatch(hideDeleteWindow());
-          if (password) dispatch(hidePasswordWindow());
-          if (add) dispatch(hideAddWindow());
-          if (report) dispatch(hideReportReply());
-        }}
-      >
+      <ul className="d-flex flex-column">
         <NavLink
           className="s-link d-flex align-items-center justify-content-start"
           to=""
@@ -47,6 +48,7 @@ function Sidebar() {
         <NavLink
           className="s-link d-flex align-items-center justify-content-start"
           to="employees"
+          end
         >
           <FaUsers className="s-icon" />
           <div className="s-link-text"> Employees</div>
@@ -58,8 +60,14 @@ function Sidebar() {
           <BiSolidReport className="s-icon" />
           <div className="s-link-text"> Reports</div>
         </NavLink>
+        <NavLink
+          className="s-link d-flex align-items-center justify-content-start"
+          to="recruitment"
+        >
+          <IoPersonAdd className="s-icon" />
+          <div className="s-link-text">Recruitment</div>
+        </NavLink>
       </ul>
-      <Pomodoro />
     </div>
   );
 }

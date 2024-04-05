@@ -54,19 +54,49 @@
 }
 
 .e-add {
-  width: 160px;
-  height: 35px;
-  cursor: pointer;
-  border-style: solid;
-  border-radius: 7px;
-  border-width: 1px;
-  background-color: #041b2a;
-  color: white;
+  position: relative;
   font-family: "Poppins", sans-serif;
   font-size: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 170px;
+  height: 40px;
+  border: solid 2px;
+  padding: 0px 20px;
+  background-color: #070f2b;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.3s;
 }
 .e-add-icon {
-  color: white;
+  font-size: 140%;
+  position: absolute;
+  right: 0;
+  margin-right: 8px;
+  fill: white;
+  transition-duration: 0.3s;
+}
+
+.e-add:hover {
+  color: transparent;
+  border: none;
+}
+
+.e-add:hover svg {
+  right: 45%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.e-add:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px white;
 }
 
 .employees-list {
@@ -160,7 +190,7 @@
   align-items: center;
   width: 5%;
   height: 40px;
-  color: #0d99ff;
+  color: #041b2a;
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
@@ -170,7 +200,7 @@
 .e-item.e-current {
   color: white;
 
-  background-color: #0d99ff;
+  background-color: #041b2a;
 }
 
 .e-disabled-page {

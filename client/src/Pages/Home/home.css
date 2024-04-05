@@ -1,0 +1,321 @@
+.h-container {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.h-header {
+  border: solid 1px;
+  width: 100%;
+  min-height: 200px;
+  padding-left: 8%;
+  padding-right: 8%;
+  background: linear-gradient(to right, #041b2a 0%, #052337e2 100%);
+}
+
+.h-infos {
+  gap: 20px;
+}
+
+.h-infos img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.h-infos div {
+  font-family: "Poppins", sans-serif;
+  font-size: 150%;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: white;
+}
+
+.h-time {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 260%;
+}
+
+.h-date {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+  letter-spacing: 1px;
+}
+
+.h-content {
+  margin-bottom: 100px;
+  transform: translateY(-20px);
+  width: 97%;
+}
+
+.h-content .row {
+  gap: 20px;
+}
+
+.h-field {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 20px;
+  border-radius: 10px;
+  border: solid 1px #041b2a41;
+  background-color: white;
+}
+
+.h-field-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 120%;
+  font-weight: 500;
+}
+
+.h-empl-month-infos {
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.h-empl-month-infos img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.h-empl-month-infos div {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.h-crown {
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+}
+
+.h-congrats {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.h-field-first-value {
+  font-family: "Poppins", sans-serif;
+  font-size: 140%;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.h-small-values {
+  font-family: "Poppins", sans-serif;
+  font-size: 75%;
+}
+
+.h-field-change {
+  margin-right: 30px;
+}
+
+.h-field-change .icon {
+  font-size: 400%;
+  color: #ff5151;
+}
+
+.h-field-change div {
+  color: #041b2a;
+  font-size: 60%;
+  font-family: "Poppins", sans-serif;
+  background-color: #ff51513e;
+  padding: 0px 5px;
+  border-radius: 10px;
+}
+
+.h-tooltip {
+  background-color: white;
+  padding: 6px;
+}
+
+.h-tooltip-year {
+  font-weight: bold;
+}
+
+.h-recent {
+  gap: 10px;
+  border-radius: 8px;
+  background-color: #132f4b;
+}
+
+.h-recent-header {
+  background-color: #3b5875;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 110%;
+  border-radius: 7px 7px 0px 0px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.h-recent-content {
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.h-recent-item {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  gap: 5px;
+  padding: 8px;
+  border: solid 1px rgba(255, 255, 255, 0.507);
+  border-radius: 8px;
+}
+
+.h-recent-date {
+  font-size: 60%;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.467);
+}
+
+.h-recent-title {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.h-recent-desc {
+  font-size: 75%;
+}
+
+.h-nb-activities {
+  color: white;
+  font-size: 73%;
+  font-family: "Poppins", sans-serif;
+}
+
+.h-see-all {
+  font-size: 73%;
+  font-family: "Poppins", sans-serif;
+  padding: 5px 10px;
+  border: solid 0px;
+  border-radius: 7px;
+}
+
+.h-recent-rest {
+  gap: 10px;
+}
+
+.h-notes {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.h-notes-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 120%;
+  font-weight: 500;
+  color: #041b2a;
+  margin-left: 10px;
+}
+
+.h-note {
+  color: white;
+  background-color: #132f4b;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.h-note-header div {
+  color: rgba(255, 255, 255, 0.382);
+  font-family: "Poppins", sans-serif;
+  font-size: 70%;
+}
+
+.h-note-header .icon {
+  font-size: 150%;
+  cursor: pointer;
+}
+
+.h-note-body {
+  font-family: "Poppins", sans-serif;
+  font-size: 87%;
+}
+
+.h-add-note {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 130px;
+  height: 35px;
+  border: solid 2px;
+  padding: 0px 20px;
+  background-color: transparent;
+  color: #041b2a;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+.h-add-note .icon {
+  font-size: 120%;
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  fill: #041b2a;
+  transition-duration: 0.3s;
+}
+
+.h-add-note:hover {
+  color: transparent;
+  border: solid 2px #041b2a;
+}
+
+.h-add-note:hover .icon {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+  color: #041b2a;
+}
+
+.h-add-note:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px #041b2a;
+}
+
+.h-add-note-input {
+  gap: 5px;
+}
+
+.h-add-note-input textarea {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+  height: 100px;
+  font-family: "Poppins", sans-serif;
+  font-size: 87%;
+}
+
+.h-add-note-input button {
+  padding: 0px 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+  border: none;
+  background-color: #041b2a;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+}
