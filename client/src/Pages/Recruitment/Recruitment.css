@@ -2,13 +2,17 @@
   gap: 15px;
   user-select: none;
   cursor: pointer;
-  border: solid 1px #070f2b76;
+  /* border: solid 1px #070f2b76; */
   border-radius: 10px;
   height: fit-content;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  transition: scale 0.4s ease;
 }
 
 .off-container:hover {
-  background-color: #dedede9f;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  scale: 1.02;
 }
 
 .off-title {
@@ -44,7 +48,8 @@
 
 .c-off-section {
   gap: 10px;
-  border: solid 1px #070f2b76;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 
@@ -200,9 +205,6 @@
 .c-candidate-part {
   gap: 15px;
   width: 90%;
-}
-
-.c-candidate-part .row {
 }
 
 .c-candidate-part-content {

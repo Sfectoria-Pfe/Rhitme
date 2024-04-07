@@ -11,6 +11,7 @@ import { hideDeleteWindow } from "../../State/deleteEmployeeState";
 import { hideReportReply } from "../../State/reportReply";
 import { IoPersonAdd } from "react-icons/io5";
 import { hideAddOfferWindow } from "../../State/WindowsStates";
+import { PiBuildingsFill } from "react-icons/pi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Sidebar() {
@@ -66,6 +67,13 @@ function Sidebar() {
         >
           <IoPersonAdd className="s-icon" />
           <div className="s-link-text">Recruitment</div>
+        </NavLink>
+        <NavLink
+          className="s-link d-flex align-items-center justify-content-start"
+          to="departments"
+        >
+          <PiBuildingsFill className="s-icon" />
+          <div className="s-link-text"> Departments</div>
         </NavLink>
       </ul>
     </div>

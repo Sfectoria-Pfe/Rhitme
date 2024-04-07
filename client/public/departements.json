@@ -1,19 +1,22 @@
 [
-    {
-      "department_id": "1",
-      "department_name": "Human Resources"
-    },
-    {
-      "department_id": "2",
-      "department_name": "Finance"
-    },
-    {
-      "department_id": "3",
-      "department_name": "Marketing"
-    },
-    {
-      "department_id": "4",
-      "department_name": "IT"
-    }
+  {
+    "department_id": "1",
+    "department_name": "Human Resources ",
+    "department_head_id": "3"  
+  },
+  {
+    "department_id": "2",
+    "department_name": "Finance",
+    "department_head_id": "4" 
+  },
+  {
+    "department_id": "3",
+    "department_name": "Marketing",
+    "department_head_id": "7"  
+  },
+  {
+    "department_id": "4",
+    "department_name": "IT",
+    "department_head_id": null
+  }
 ]
-  

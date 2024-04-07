@@ -21,6 +21,7 @@ import Performance from "./Pages/EmployeeInfos/EmployeeInfosPages/Performance";
 import Job from "./Pages/EmployeeInfos/EmployeeInfosPages/Job";
 import Recruitment from "./Pages/Recruitment/Recruitment";
 import Candidates from "./Pages/Recruitment/Candidates";
+import Departments from "./Pages/Departments/Departments";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="dashboard" element={<RootLayout />}>
         <Route index element={<Home />} />
+        <Route path="departments" element={<Departments />} />
         <Route path="employees" element={<Employees />} />
         <Route path="employeeinfos/:id" element={<EmployeeInfos />}>
           <Route index element={<Job />} />

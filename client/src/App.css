@@ -8,7 +8,9 @@
 .blur {
   filter: blur(3px);
   transition: filter 0.7s;
+  overflow: hidden;
 }
+
 .blur * {
   pointer-events: none;
 }

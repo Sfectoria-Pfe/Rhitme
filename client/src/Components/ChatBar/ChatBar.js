@@ -11,6 +11,9 @@ import { useLayoutEffect, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { hideChat } from "../../State/chatState";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { MdEmojiEmotions } from "react-icons/md";
 
 function ChatBar() {
   const [value, setValue] = useState("");
@@ -19,16 +22,21 @@ function ChatBar() {
   const chat = useSelector((state) => state.chat.chat);
   const messages = useSelector((state) => state.messages.messages);
   const dispatch = useDispatch();
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [messages]);
 
   const scrollToBottom = () => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop =
         messageContainerRef.current.scrollHeight;
     }
+  };
+
+  const handleEmojiSelect = (emoji) => {
+    setValue((prevMessage) => prevMessage + emoji.native);
   };
 
   useLayoutEffect(() => {
@@ -41,6 +49,7 @@ function ChatBar() {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   return (
     <div
       className={` d-flex flex-column z-2 cb-container justify-content-between ${
@@ -70,6 +79,13 @@ function ChatBar() {
           <Receiver />
           <Receiver />
         </div>
+        <div
+          className={`emoji-picker position-absolute ${
+            showEmojiPicker ? "" : "d-none"
+          }`}
+        >
+          <Picker data={data} onEmojiSelect={handleEmojiSelect} theme="light" />
+        </div>
         <div className="cb-send my-2 ">
           <textarea
             ref={textareaRef}
@@ -77,6 +93,10 @@ function ChatBar() {
             value={value}
             onChange={handleChange}
             placeholder="Type your message..."
+          />
+          <MdEmojiEmotions
+            className="cb-emojies"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
           />
           <button>
             <IoSend />

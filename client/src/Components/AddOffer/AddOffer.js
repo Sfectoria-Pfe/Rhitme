@@ -25,7 +25,7 @@ function AddOffer() {
     if (!addOffer) {
       setFormData(initialFormData);
     }
-  }, [addOffer, initialFormData]);
+  }, [addOffer]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

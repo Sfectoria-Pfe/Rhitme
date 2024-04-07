@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, UnauthorizedException,Param } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+  Param,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Employees, Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
@@ -9,11 +14,14 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class UserService {
   constructor(private prisma: PrismaService) {}
   @ApiOperation({ summary: 'Add a new user' })
-  @ApiResponse({ status: 201, description: 'The user has been successfully added' })
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully added',
+  })
   async addUser(adduserdto: AddUserDto): Promise<Employees> {
     try {
       adduserdto.password = await this.hashPassword(adduserdto.password);
-  
+
       const data: Prisma.EmployeesCreateInput = {
         department: {
           connect: {
@@ -32,35 +40,40 @@ export class UserService {
         job: adduserdto.job,
         created_at: new Date(), // Use the current date/time or specify a default value
         points: 0, // Specify a default value
-        status: 'active', // Specify a default value
+        status: 'out', // Specify a default value
         nb_absence: 0, // Specify a default value
         // photo: adduserdto.photo
       };
-  
+
       const user = await this.prisma.employees.create({
         data: data,
       });
-  
+
       return user;
     } catch (error) {
       console.error('Error adding user:', error);
       throw new Error('Failed to add user');
     }
   }
-  
-  
 
   async hashPassword(password: string): Promise<string> {
-    const saltRounds = 100000;
-    return bcrypt.hash(password);
+    const saltRounds = 10; // You can adjust the number of salt rounds as needed
+    return bcrypt.hash(password, saltRounds);
   }
+
   @ApiOperation({ summary: 'Update a User' })
-  @ApiResponse({ status: 201, description: 'The user has been successfully updated' })
-  async updateUser(user_id: string, updateUserDto: UpdateUserDto): Promise<Employees> {
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully updated',
+  })
+  async updateUser(
+    user_id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<Employees> {
     try {
       const user = await this.prisma.employees.update({
         where: { user_id },
-        data:  updateUserDto
+        data: updateUserDto,
       });
       return user;
     } catch (error) {
@@ -71,7 +84,10 @@ export class UserService {
     }
   }
   @ApiOperation({ summary: 'Remove a user' })
-  @ApiResponse({ status: 201, description: 'The user has been successfully removed' })
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully removed',
+  })
   async removeUser(user_id: string): Promise<Employees> {
     const user = await this.prisma.employees.delete({
       where: { user_id },

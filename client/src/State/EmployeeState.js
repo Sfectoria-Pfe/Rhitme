@@ -7,7 +7,6 @@ export const fetchEmployeeById = createAsyncThunk(
     await new Promise((resolve) => setTimeout(resolve, 3000));
     const response = await axios.get("http://localhost:3000/employees.json");
     const employee = response.data.find((obj) => obj.user_id === id);
-
     return employee;
   }
 );

@@ -116,7 +116,7 @@
 
 .cb-send textarea {
   width: 92%;
-  padding-left: 10px;
+  padding: 2px 30px 2px 10px;
   border: none;
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
@@ -124,7 +124,6 @@
   max-height: 100px;
   min-height: 30px;
   resize: none;
-  padding-top: 2px;
   background-color: #e2e2e2;
   outline: none;
 }
@@ -167,4 +166,39 @@
 
 .cb-close:hover {
   scale: 1.1;
+}
+
+.message-dots {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 110%;
+  color: #041b2a;
+  opacity: 0.2;
+  cursor: pointer;
+}
+
+.rec-container:hover .message-dots {
+  opacity: 1;
+}
+
+.message-edit {
+  font-family: "Poppins", sans-serif;
+  font-size: 80%;
+}
+
+.sender-container:hover .message-dots {
+  opacity: 1;
+}
+
+.cb-emojies {
+  position: absolute;
+  right: 13.5%;
+  bottom: 18px;
+  font-size: 150%;
+  color: #041b2a;
+  cursor: pointer;
+}
+
+.emoji-picker {
+  right: 0px;
+  bottom: 50px;
 }
