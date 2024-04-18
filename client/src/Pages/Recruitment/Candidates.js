@@ -9,7 +9,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import EmployeeChange from "../EmployeeInfos/EmployeeInfosPages/EmployeeChange";
 import { fetchCandidates } from "../../State/CandidateState";
-import { all } from "axios";
 
 function Candidates() {
   const { id } = useParams();

@@ -21,7 +21,7 @@
   min-height: 200px;
   gap: 5%;
   align-items: flex-end;
-  background-color: #112d4e;
+  background: linear-gradient(to right, #041b2a 0%, #052337e2 100%);
 }
 
 .ei-header-functionalities {

@@ -102,7 +102,7 @@ function Job() {
             />
           </div>
           <div className="pi-section-group d-flex container m-0 p-0">
-            <div className="row ">
+            <div className="row">
               <div className="pi-content-info d-flex flex-column col mb-2 mb-sm-0">
                 <label htmlFor="department">Department</label>
                 <select

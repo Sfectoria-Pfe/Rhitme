@@ -9,18 +9,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { hidePasswordWindow } from "../../State/revealePasswordState";
 import { hideDeleteWindow } from "../../State/deleteEmployeeState";
 import { hideReportReply } from "../../State/reportReply";
+import { hideAddProjectWindow } from "../../State/WindowsStates";
 import { IoPersonAdd } from "react-icons/io5";
 import { hideAddOfferWindow } from "../../State/WindowsStates";
 import { PiBuildingsFill } from "react-icons/pi";
+import { FaProjectDiagram } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { hideTaskDetailsWindow } from "../../State/WindowsStates";
+import { hideAddDepartmentWindow } from "../../State/WindowsStates";
 
 function Sidebar() {
-  const password = useSelector((state) => state.password.password);
-  const deletee = useSelector((state) => state.delete.delete);
   const sidebar = useSelector((state) => state.sidebar.sidebar);
-  const add = useSelector((state) => state.add.add);
-  const report = useSelector((state) => state.report.report);
-  const addOffer = useSelector((state) => state.windows.addOffer);
 
   const dispatch = useDispatch();
 
@@ -30,11 +29,14 @@ function Sidebar() {
         sidebar === true ? "d-lg-flex" : "d-lg-none"
       } flex-column justify-content-between align-items-center py-5 `}
       onClick={() => {
-        if (deletee) dispatch(hideDeleteWindow());
-        if (password) dispatch(hidePasswordWindow());
-        if (add) dispatch(hideAddWindow());
-        if (report) dispatch(hideReportReply());
-        if (addOffer) dispatch(hideAddOfferWindow());
+        dispatch(hideDeleteWindow());
+        dispatch(hidePasswordWindow());
+        dispatch(hideAddWindow());
+        dispatch(hideReportReply());
+        dispatch(hideAddOfferWindow());
+        dispatch(hideAddProjectWindow());
+        dispatch(hideTaskDetailsWindow());
+        dispatch(hideAddDepartmentWindow());
       }}
     >
       <ul className="d-flex flex-column">
@@ -74,6 +76,13 @@ function Sidebar() {
         >
           <PiBuildingsFill className="s-icon" />
           <div className="s-link-text"> Departments</div>
+        </NavLink>
+        <NavLink
+          className="s-link d-flex align-items-center justify-content-start"
+          to="projects"
+        >
+          <FaProjectDiagram className="s-icon" />
+          <div className="s-link-text"> Projects</div>
         </NavLink>
       </ul>
     </div>

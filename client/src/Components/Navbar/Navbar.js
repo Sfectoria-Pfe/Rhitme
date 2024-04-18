@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FiMessageCircle } from "react-icons/fi";
 import "./Navbar.css";
 import profileImage from "./photo.png";
@@ -13,12 +13,40 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Pomodoro from "../Pomodoro/Pomodoro";
+import { fetchNotifications } from "../../State/NotificationsState";
+import { fetchEmployees } from "../../State/EmployeesState";
+import rh from "./download.jpg";
 
-function Navbar({ onStateChange }) {
+function Navbar() {
   const [isChecked, setIsChecked] = useState(false);
+  const employees = useSelector((state) => state.employees.employees);
+  const employeesStatus = useSelector((state) => state.employees.status);
   const messages = useSelector((state) => state.messages.messages);
   const sidebar = useSelector((state) => state.sidebar.sidebar);
+  const notifications = useSelector(
+    (state) => state.notifications.notifications
+  );
+  const status = useSelector((state) => state.notifications.status);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchNotifications());
+    }
+  }, [dispatch, status]);
+
+  useEffect(() => {
+    if (employeesStatus === "idle") {
+      dispatch(fetchEmployees());
+    }
+  }, [dispatch, employeesStatus]);
+
+  useEffect(() => {
+    if (employeesStatus === "succeeded") {
+      console.log(employees);
+    }
+  }, [employeesStatus]);
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
@@ -27,6 +55,23 @@ function Navbar({ onStateChange }) {
       dispatch(hideSidebar());
     }
   };
+
+  function getDateDifferenceString(dateString) {
+    const date = new Date(dateString);
+    const currentDate = new Date();
+    const differenceInMilliseconds = currentDate - date;
+    const differenceInDays = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24)
+    );
+
+    if (differenceInDays === 0) {
+      return "Today";
+    } else if (differenceInDays === 1) {
+      return "Yesterday";
+    } else {
+      return `${differenceInDays} days ago`;
+    }
+  }
 
   return (
     <>
@@ -62,10 +107,80 @@ function Navbar({ onStateChange }) {
           </div>
 
           <div className="n-functionalities d-flex justify-content-end align-items-center col-6 col-md-5 col-lg-4 col-xl-3">
-            <div className="n-notif ">
-              <IoIosNotificationsOutline className="n-notification-icon" />
-              <FaCircle className="n-active" />
-            </div>
+            <Dropdown autoClose="outside">
+              <Dropdown.Toggle
+                as="div"
+                className=" unselectable"
+                id="dropdown-basic"
+              >
+                <div className="n-notif ">
+                  <IoIosNotificationsOutline className="n-notification-icon" />
+                  <FaCircle className="n-active" />
+                </div>
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="notifications ">
+                <Dropdown.Header>
+                  <div className="notif-header">Notifications</div>
+                </Dropdown.Header>
+                {status === "succeeded" && employeesStatus === "succeeded" ? (
+                  notifications.map((item, index) => (
+                    <Dropdown.Item
+                      className="notification "
+                      onClick={() => {
+                        window.location.href = item.link;
+                      }}
+                    >
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div
+                          className="d-flex align-items-center"
+                          style={{ gap: "10px" }}
+                        >
+                          <img
+                            className="notif-sender"
+                            src={
+                              item.sender === null
+                                ? rh
+                                : employees?.find(
+                                    (employee) =>
+                                      employee.user_id === item.sender
+                                  ).photo
+                            }
+                          />
+                          <div
+                            className={`notif-content ${
+                              item.seen ? "text-muted" : ""
+                            }`}
+                          >
+                            {item.content}
+                          </div>
+                        </div>
+                        <div
+                          className="d-flex align-items-center justify-content-center"
+                          style={{ width: "20px" }}
+                        >
+                          <FaCircle
+                            className={`notif-unseen ${
+                              item.seen ? "d-none" : ""
+                            }`}
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        className={`notif-date align-self-end ${
+                          item.seen ? "notif-seen-date text-muted" : ""
+                        }`}
+                      >
+                        {getDateDifferenceString(item.date)}
+                      </div>
+                    </Dropdown.Item>
+                  ))
+                ) : (
+                  <div>Loading...</div>
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
+
             <Dropdown>
               <Dropdown.Toggle
                 as="div"

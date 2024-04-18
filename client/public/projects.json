@@ -1,0 +1,79 @@
+[
+    {
+        "project_id": "1",
+        "title": "Website Redesign",
+        "description": "Redesigning the company website for better user experience.",
+        "starting": "2024-04-01",
+        "ending": "2024-06-30",
+        "revenue": "50000",
+        "manager": "3",
+        "client": "ABC Company",
+        "delivered": false
+    },
+    {
+        "project_id": "2",
+        "title": "Mobile App Development",
+        "description": "Developing a mobile app for iOS and Android platforms.",
+        "starting": "2024-05-01",
+        "ending": "2024-08-31",
+        "revenue": "80000",
+        "manager": "6",
+        "client": "XYZ Corporation",
+        "delivered": false
+    },
+    {
+        "project_id": "3",
+        "title": "Product Launch Campaign",
+        "description": "Planning and executing a marketing campaign for a new product launch.",
+        "starting": "2024-06-01",
+        "ending": "2024-09-30",
+        "revenue": "60000",
+        "manager": "6",
+        "client": "DEF Industries",
+        "delivered": false
+    },
+    {
+        "project_id": "4",
+        "title": "Software Upgrade",
+        "description": "Upgrading existing software to enhance performance and add new features.",
+        "starting": "2024-07-01",
+        "ending": "2024-10-31",
+        "revenue": "70000",
+        "manager": "3",
+        "client": "GHI Corporation",
+        "delivered": false
+    },
+    {
+        "project_id": "5",
+        "title": "Customer Satisfaction Survey",
+        "description": "Conducting a survey to gauge customer satisfaction and gather feedback.",
+        "starting": "2024-08-01",
+        "ending": "2024-11-30",
+        "revenue": "40000",
+        "manager": "6",
+        "client": "JKL Enterprises",
+        "delivered": false
+    },
+    {
+        "project_id": "6",
+        "title": "New Product Development",
+        "description": "Developing a new product from concept to launch.",
+        "starting": "2024-09-01",
+        "ending": "2025-01-31",
+        "revenue": "90000",
+        "manager": "3",
+        "client": "MNO Innovations",
+        "delivered": false
+    },
+    {
+        "project_id": "7",
+        "title": "Market Research Study",
+        "description": "Conducting a market research study to identify new opportunities.",
+        "starting": "2024-10-01",
+        "ending": "2025-02-28",
+        "revenue": "75000",
+        "manager": "3",
+        "client": "PQR Solutions",
+        "delivered": false
+    }
+]
