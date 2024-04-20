@@ -35,12 +35,12 @@ model Badgeuse {
 
 model Media {
   media_id  String @id @default(uuid())
-  extension String
-  path      String
-  file_name String
-  // employee    Employees? @relation(fields: [employee_id], references: [user_id])
-  // employee_id String?    @unique
-}
+  url       String
+  employee    Employees? @relation(fields: [employee_id], references: [user_id])
+  employee_id String?    @unique
+  departed    DepartedEmployee? @relation(fields: [departed_id],references: [departed_id])
+  departed_id String?    @unique
+ }
 
 model Events {
   event_id    String              @id @default(uuid())
@@ -59,7 +59,71 @@ model EventParticipants {
 
   @@id([user_id, event_id])
 }
+model Monthly{
+  month_id String    @id @default(uuid())
+  January  Int
+  February  Int 
+  March  Int
+  April  Int 
+  May  Int
+  June  Int 
+  July  Int
+  August  Int 
+  September  Int 
+  October  Int 
+  November  Int 
+  December  Int 
+  Employee Employees?
+}
+model Yearly{
+  year_id String @id @default(uuid())
+  y2023 Int
+  y2024  Int 
+  y2025 Int
+  y2026 Int
+  Employee Employees?
 
+}
+model Address{
+  address_id    String      @id @default(uuid())
+  street String
+  city   String
+  state  String
+  zip    String
+  country String
+  Employees Employees?
+}
+model absenceMonthly{
+  mabs_id     String    @id @default(uuid())
+    January  Int
+  February  Int 
+  March  Int
+  April  Int 
+  May  Int
+  June  Int 
+  July  Int
+  August  Int 
+  September  Int 
+  October  Int 
+  November  Int 
+  December  Int 
+  Employee Employees?
+}
+model absenceYearly{
+  yabs_id String @id @default(uuid())
+  y2023 Int
+  y2024 Int
+  y2025 Int 
+  y2026 Int 
+  Employee Employees?
+}
+model absence{
+  absence_id   String @id @default(uuid())
+  date DateTime
+  justificated Boolean @default(false)
+  employee   Employees  @relation(fields: [employee_id],references: [user_id])
+  employee_id String
+}
 model Employees {
   user_id          String              @id @default(uuid())
   department       Departments         @relation(fields: [department_id], references: [department_id])
@@ -70,15 +134,23 @@ model Employees {
   birthday         DateTime            @db.Date
   gender           String
   CIN              String              @unique
-  address          String
+  address_id       String             @unique
+  address          Address @relation(fields: [address_id],references: [address_id]) 
   email            String              @unique
   password         String
   job              String
   created_at       DateTime
-  points           Int
   status           String
-  // photo            Media?         
-  nb_absence       Int
+  photo            Media?
+  monthly_id       String             @unique
+  MonthlyPoints    Monthly @relation(fields: [monthly_id],references: [month_id])  
+  Yearly_id        String             @unique 
+  YearlyPoints    Yearly @relation(fields: [Yearly_id],references: [year_id])              
+  monthly_abs       String             @unique
+  Monthlyabs      absenceMonthly @relation(fields: [monthly_abs],references: [mabs_id])  
+  Yearly_abs        String             @unique 
+  Yearlyabs      absenceYearly @relation(fields: [Yearly_abs],references: [yabs_id])     
+  absence        absence[]
   eventarticipants EventParticipants[]
   role             Role[]
   participants     Participants[]
@@ -88,7 +160,20 @@ model Employees {
   badgeuse         Badgeuse[]
   report           Reports[]
 }
-
+model DepartedEmployee{
+  departed_id     String   @id @default(uuid())
+  email String
+  password String
+  job String
+  createdat DateTime
+  status String
+  photo Media?
+  marital_Status String
+  skills String
+  salary Int
+  date_left DateTime
+  reason String
+}
 model Departments {
   department_id   String      @id @default(uuid())
   department_name String
@@ -128,6 +213,8 @@ model Messages {
   user_id         String
   content         String
   sent_at         DateTime
+  senderId     String
+  recipientId  String
 }
 
 model Offers {
@@ -183,4 +270,8 @@ model Tasks {
   starting    DateTime
   ending      DateTime
   points      Int
+}
+model Notes{
+  id_note String @id @default(uuid())
+  Description String
 }

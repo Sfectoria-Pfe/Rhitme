@@ -1,12 +1,12 @@
 // reports.controller.ts
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
-import { ReportsService } from './report.service';
+import { ReportService } from './report.service';
 import { CreateReportDto, UpdateReportDto } from './report.dto';
 import { Reports } from '@prisma/client';
 
 @Controller('reports')
-export class ReportsController {
-  constructor(private readonly reportsService: ReportsService) {}
+export class ReportController {
+  constructor(private readonly reportsService: ReportService) {}
 
   @Get()
   async findAll(): Promise<Reports[]> {
@@ -18,9 +18,9 @@ export class ReportsController {
     return this.reportsService.findOne(id);
   }
 
-  @Post()
-  async create(@Body() createReportDto: CreateReportDto): Promise<Reports> {
-    return this.reportsService.create(createReportDto);
+  @Post('addreport')
+  async create(@Body() createReportDto: CreateReportDto , token:string): Promise<Reports> {
+    return this.reportsService.create(createReportDto,token);
   }
 
   @Put(':id')
@@ -29,7 +29,7 @@ export class ReportsController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<void> {
+  async remove(@Param('id') id: string): Promise<Reports> {
     return this.reportsService.remove(id);
   }
 }

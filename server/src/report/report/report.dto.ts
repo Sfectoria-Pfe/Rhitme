@@ -4,10 +4,6 @@ import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 export class CreateReportDto {
   @IsString()
   @IsNotEmpty()
-  user_id: string;
-
-  @IsString()
-  @IsNotEmpty()
   title: string;
 
   @IsString()
