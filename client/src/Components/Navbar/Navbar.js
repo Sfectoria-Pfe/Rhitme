@@ -16,6 +16,7 @@ import Pomodoro from "../Pomodoro/Pomodoro";
 import { fetchNotifications } from "../../State/NotificationsState";
 import { fetchEmployees } from "../../State/EmployeesState";
 import rh from "./download.jpg";
+import LoadingShape from "../LoadingShape.js/LoadingShape";
 
 function Navbar() {
   const [isChecked, setIsChecked] = useState(false);
@@ -122,62 +123,78 @@ function Navbar() {
                 <Dropdown.Header>
                   <div className="notif-header">Notifications</div>
                 </Dropdown.Header>
-                {status === "succeeded" && employeesStatus === "succeeded" ? (
-                  notifications.map((item, index) => (
-                    <Dropdown.Item
-                      className="notification "
-                      onClick={() => {
-                        window.location.href = item.link;
-                      }}
-                    >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div
-                          className="d-flex align-items-center"
-                          style={{ gap: "10px" }}
-                        >
-                          <img
-                            className="notif-sender"
-                            src={
-                              item.sender === null
-                                ? rh
-                                : employees?.find(
-                                    (employee) =>
-                                      employee.user_id === item.sender
-                                  ).photo
-                            }
-                          />
+                {status === "succeeded" && employeesStatus === "succeeded"
+                  ? notifications.map((item, index) => (
+                      <Dropdown.Item
+                        className="notification "
+                        onClick={() => {
+                          window.location.href = item.link;
+                        }}
+                      >
+                        <div className="d-flex justify-content-between align-items-center">
                           <div
-                            className={`notif-content ${
-                              item.seen ? "text-muted" : ""
-                            }`}
+                            className="d-flex align-items-center"
+                            style={{ gap: "10px" }}
                           >
-                            {item.content}
+                            <img
+                              className="notif-sender"
+                              src={
+                                item.sender === null
+                                  ? rh
+                                  : employees?.find(
+                                      (employee) =>
+                                        employee.user_id === item.sender
+                                    ).photo
+                              }
+                            />
+                            <div
+                              className={`notif-content ${
+                                item.seen ? "text-muted" : ""
+                              }`}
+                            >
+                              {item.content}
+                            </div>
+                          </div>
+                          <div
+                            className="d-flex align-items-center justify-content-center"
+                            style={{ width: "20px" }}
+                          >
+                            <FaCircle
+                              className={`notif-unseen ${
+                                item.seen ? "d-none" : ""
+                              }`}
+                            />
                           </div>
                         </div>
+
                         <div
-                          className="d-flex align-items-center justify-content-center"
-                          style={{ width: "20px" }}
+                          className={`notif-date align-self-end ${
+                            item.seen ? "notif-seen-date text-muted" : ""
+                          }`}
                         >
-                          <FaCircle
-                            className={`notif-unseen ${
-                              item.seen ? "d-none" : ""
-                            }`}
+                          {getDateDifferenceString(item.date)}
+                        </div>
+                      </Dropdown.Item>
+                    ))
+                  : Array.from({ length: 5 }, (_, index) => (
+                      <Dropdown.Item key={index} className="mt-3">
+                        <div
+                          className="d-flex align-items-center"
+                          style={{ gap: "20px" }}
+                        >
+                          <LoadingShape
+                            width="50px"
+                            height="50px"
+                            borderRadius="50%"
+                          />
+                          <LoadingShape
+                            width="200px"
+                            height="15px"
+                            borderRadius="7px"
                           />
                         </div>
-                      </div>
-
-                      <div
-                        className={`notif-date align-self-end ${
-                          item.seen ? "notif-seen-date text-muted" : ""
-                        }`}
-                      >
-                        {getDateDifferenceString(item.date)}
-                      </div>
-                    </Dropdown.Item>
-                  ))
-                ) : (
-                  <div>Loading...</div>
-                )}
+                      </Dropdown.Item>
+                    ))}
               </Dropdown.Menu>
             </Dropdown>
 

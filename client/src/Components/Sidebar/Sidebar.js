@@ -17,6 +17,7 @@ import { FaProjectDiagram } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { hideTaskDetailsWindow } from "../../State/WindowsStates";
 import { hideAddDepartmentWindow } from "../../State/WindowsStates";
+import { hideAddTaskWindow } from "../../State/WindowsStates";
 
 function Sidebar() {
   const sidebar = useSelector((state) => state.sidebar.sidebar);
@@ -37,6 +38,7 @@ function Sidebar() {
         dispatch(hideAddProjectWindow());
         dispatch(hideTaskDetailsWindow());
         dispatch(hideAddDepartmentWindow());
+        dispatch(hideAddTaskWindow());
       }}
     >
       <ul className="d-flex flex-column">

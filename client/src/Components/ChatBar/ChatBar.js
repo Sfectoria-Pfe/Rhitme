@@ -14,6 +14,7 @@ import { hideChat } from "../../State/chatState";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { MdEmojiEmotions } from "react-icons/md";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function ChatBar() {
   const [value, setValue] = useState("");
@@ -79,13 +80,13 @@ function ChatBar() {
           <Receiver />
           <Receiver />
         </div>
-        <div
+        {/* <div
           className={`emoji-picker position-absolute ${
             showEmojiPicker ? "" : "d-none"
           }`}
         >
           <Picker data={data} onEmojiSelect={handleEmojiSelect} theme="light" />
-        </div>
+        </div> */}
         <div className="cb-send my-2 ">
           <textarea
             ref={textareaRef}
@@ -94,10 +95,24 @@ function ChatBar() {
             onChange={handleChange}
             placeholder="Type your message..."
           />
-          <MdEmojiEmotions
-            className="cb-emojies"
-            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-          />
+          <Dropdown autoClose="outside">
+            <Dropdown.Toggle as="div" id="dropdown-basic">
+              <MdEmojiEmotions
+                className="cb-emojies"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="p-0">
+              <Dropdown.Item className="emojis p-0">
+                <Picker
+                  data={data}
+                  onEmojiSelect={handleEmojiSelect}
+                  theme="light"
+                />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <button>
             <IoSend />
           </button>

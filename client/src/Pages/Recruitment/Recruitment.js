@@ -20,12 +20,13 @@ function Recruitment() {
   useEffect(() => {
     if (status === "idle") dispatch(fetchOffers());
   }, [status, dispatch]);
+  console.log(addOffer);
 
   return (
     <>
       <AddOffer />
       <div
-        className={`r-container d-flex flex-column my-4 align-items-center pb-5${
+        className={`r-container d-flex flex-column my-4 align-items-center pb-5 ${
           addOffer ? "blur unselactable" : ""
         }`}
         onClick={() => {

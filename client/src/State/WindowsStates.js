@@ -10,6 +10,7 @@ export const windowsSlice = createSlice({
       status: false,
       task: null,
     },
+    addTask: false,
   },
   reducers: {
     showAddOfferWindow: (state) => {
@@ -38,6 +39,12 @@ export const windowsSlice = createSlice({
       state.taskDetails.status = true;
       state.taskDetails.task = action.payload;
     },
+    showAddTaskWindow: (state) => {
+      state.addTask = true;
+    },
+    hideAddTaskWindow: (state) => {
+      state.addTask = false;
+    },
   },
 });
 
@@ -50,6 +57,8 @@ export const {
   hideAddProjectWindow,
   hideTaskDetailsWindow,
   showTaskDetailsWindow,
+  showAddTaskWindow,
+  hideAddTaskWindow,
 } = windowsSlice.actions;
 
 export default windowsSlice.reducer;

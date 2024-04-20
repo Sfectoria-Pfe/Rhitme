@@ -9,6 +9,8 @@ import LoadingShape from "../../Components/LoadingShape.js/LoadingShape";
 import { fetchEmployees } from "../../State/EmployeesState";
 import TaskDetails from "./TaskDetails";
 import { hideTaskDetailsWindow } from "../../State/WindowsStates";
+import AddTask from "../../Components/AddTask/AddTask";
+import { hideAddTaskWindow } from "../../State/WindowsStates";
 
 function ProjectDetails() {
   const { id } = useParams();
@@ -19,6 +21,7 @@ function ProjectDetails() {
   const employees = useSelector((state) => state.employees.employees);
   const employeesStatus = useSelector((state) => state.employees.status);
   const taskDetails = useSelector((state) => state.windows.taskDetails.status);
+  const addTask = useSelector((state) => state.windows.addTask);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,13 +47,17 @@ function ProjectDetails() {
   return (
     <>
       <TaskDetails />
+      <AddTask project={id} />
       <div
         className={`pd-container d-flex flex-column mt-4 mb-4 pb-5 align-items-center ${
-          taskDetails ? "blur unselactable" : ""
+          taskDetails || addTask ? "blur unselactable" : ""
         }`}
         onClick={() => {
           if (taskDetails) {
             dispatch(hideTaskDetailsWindow());
+          }
+          if (addTask) {
+            dispatch(hideAddTaskWindow());
           }
         }}
       >
@@ -97,7 +104,7 @@ function ProjectDetails() {
               </div>
             ) : (
               <div className="w-100">
-                <Outlet context={{ project, tasks, employees }} />
+                <Outlet context={{ project, tasks, employees, id }} />
               </div>
             )}
           </div>

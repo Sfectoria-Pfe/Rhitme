@@ -8,10 +8,10 @@ import { useState } from "react";
 function AddDepartment({ employees }) {
   const addDepartment = useSelector((state) => state.windows.addDepartment);
   const dispatch = useDispatch();
-  const [jobTitle, setJobTitle] = useState("");
+  const [departmentName, setDepartmentName] = useState("");
 
   const handleInputChange = (event) => {
-    setJobTitle(event.target.value);
+    setDepartmentName(event.target.value);
   };
   return (
     <div
@@ -32,14 +32,14 @@ function AddDepartment({ employees }) {
           <input
             name="name"
             placeholder="Department name"
-            value={jobTitle}
+            value={departmentName}
             onChange={handleInputChange}
           />
         </div>
         <button
           className="ao-form-submit"
           type="submit"
-          disabled={!jobTitle.trim()}
+          disabled={!departmentName.trim()}
         >
           Add
         </button>

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Projects.css";
 import { useDrop } from "react-dnd";
-import { reorderTasks } from "../../State/TasksState";
 import { ItemTypes } from "./Task";
 import { updateTask } from "../../State/TasksState";
 import { useDispatch, useSelector } from "react-redux";
+import { IoIosAdd } from "react-icons/io";
+import { showAddTaskWindow } from "../../State/WindowsStates";
 
 function List({ type, children }) {
   const [listName, setListName] = useState("");
   const [listColor, setListColor] = useState("");
   const tasks = useSelector((state) => state.tasks.tasksByProject);
   const dispatch = useDispatch();
+  const addTask = useSelector((state) => state.windows.addTask);
 
   const currentDate = `${new Date().getFullYear()}-${String(
     new Date().getMonth() + 1
@@ -73,7 +75,7 @@ function List({ type, children }) {
     <div
       ref={drop}
       style={{ minWidth: "270px", maxWidth: "270px" }}
-      className="proj-list-container d-flex flex-column align-items-center col "
+      className="proj-list-container d-flex flex-column align-items-center col pb-4"
     >
       <div
         className="proj-list-name py-2"
@@ -82,11 +84,25 @@ function List({ type, children }) {
         {listName}
       </div>
       <div
-        className="d-flex flex-column align-items-center w-100 pb-5 "
-        style={{ gap: "8px", minHeight: "300px" }}
+        className="d-flex flex-column align-items-center w-100"
+        style={{ gap: "8px", minHeight: "250px" }}
       >
         {children}
       </div>
+      <div className={`${type !== "upcoming" ? "d-none" : ""} border `}></div>
+      <button
+        className={`e-add d-flex align-items-center justify-content-around py-1 ${
+          type !== "upcoming" ? "d-none" : ""
+        } border `}
+        onClick={() => {
+          if (!addTask) {
+            dispatch(showAddTaskWindow());
+          }
+        }}
+      >
+        <IoIosAdd className="e-add-icon" />
+        <div className="e-add-text">Add new task</div>
+      </button>
     </div>
   );
 }

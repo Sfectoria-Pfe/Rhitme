@@ -191,8 +191,8 @@
 
 .cb-emojies {
   position: absolute;
-  right: 13.5%;
-  bottom: 18px;
+  right: 13px;
+  bottom: 10px;
   font-size: 150%;
   color: #041b2a;
   cursor: pointer;
@@ -201,4 +201,8 @@
 .emoji-picker {
   right: 0px;
   bottom: 50px;
+}
+
+.emojis:active {
+  background-color: transparent !important;
 }
