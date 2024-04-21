@@ -1,0 +1,123 @@
+.dep-content {
+  width: 100%;
+}
+
+.dep-name {
+  font-family: "Poppins", sans-serif;
+  color: #070f2b;
+  font-weight: 500;
+  font-size: 120%;
+  gap: 20px;
+  border-bottom: solid 1px;
+  padding-left: 5px;
+}
+
+.dep-name input {
+  padding-left: 10px;
+  border-radius: 8px;
+  border: solid 1px #070f2ba8;
+  background-color: transparent;
+  width: 70%;
+}
+
+.dep-head-title {
+  font-family: "Poppins", sans-serif;
+  color: #070f2b;
+  font-weight: 500;
+  font-size: 90%;
+}
+
+.dep-head {
+  text-decoration: none;
+}
+
+.dep-head:hover {
+  background-color: #dedede9f;
+  border-radius: 10px;
+}
+
+.dep-head img {
+  width: 15%;
+  border-radius: 50%;
+}
+
+.dep-head-name {
+  font-family: "Poppins", sans-serif;
+  color: #070f2b;
+  font-size: 90%;
+}
+
+.dep-department {
+  gap: 10px;
+  height: fit-content;
+  user-select: none;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.dep-no-head {
+  font-family: "Poppins", sans-serif;
+  color: #070f2b;
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.editBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.editBtn::before {
+  content: "";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  transform: scale(0);
+  transition: all 0.3s;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+.editBtn:hover::before {
+  transform: scale(1);
+}
+
+.editBtn svg {
+  height: 15px;
+  fill: #070f2b;
+  transition: all 0.2s;
+  transform-origin: bottom;
+}
+
+.editBtn:hover svg {
+  transform: rotate(-15deg) translateX(5px);
+}
+
+.editBtn::after {
+  content: "";
+  width: 15px;
+  height: 1.5px;
+  position: absolute;
+  bottom: 7.5px;
+  left: -7px;
+  background-color: #070f2b;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+}
+
+.editBtn:hover::after {
+  transform: scaleX(1);
+  left: 0px;
+  transform-origin: right;
+}

@@ -12,7 +12,7 @@ function Pomodoro() {
   const [workDuration, setWorkDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showTitmer, setShowTimer] = useState(true);
+  const [showTitmer, setShowTimer] = useState(false);
 
   const bellsound = new Audio(bell);
   const audiosound = new Audio(audio);

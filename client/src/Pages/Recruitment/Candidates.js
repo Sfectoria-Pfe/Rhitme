@@ -9,7 +9,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import EmployeeChange from "../EmployeeInfos/EmployeeInfosPages/EmployeeChange";
 import { fetchCandidates } from "../../State/CandidateState";
-import { all } from "axios";
 
 function Candidates() {
   const { id } = useParams();
@@ -290,7 +289,7 @@ function Candidates() {
                     <div className="col my-xl-4 my-1 col-xl-2 text-center c-candidate-info ">
                       {item.email}
                     </div>
-                    <div className="col-12 my-xl-2 my-1 col-xl-2 text-end c-candidate-info ">
+                    <div className="col-12 my-xl-2 my-1 col-xl-2 text-xl-end text-center c-candidate-info ">
                       {item.phonenumber}
                     </div>
                     <div className="col-12 my-xl-1 my-1 col-xl-2 c-candidate-date text-center ">

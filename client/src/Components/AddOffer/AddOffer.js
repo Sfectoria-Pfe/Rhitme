@@ -25,7 +25,7 @@ function AddOffer() {
     if (!addOffer) {
       setFormData(initialFormData);
     }
-  }, [addOffer, initialFormData]);
+  }, [addOffer]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -139,7 +139,7 @@ function AddOffer() {
             </button>
           </div>
         </div>
-        <div className="d-flex">
+        <div className="d-flex justify-content-between">
           <div className="d-flex flex-column ae-input ao-shared">
             <label htmlFor="exp">Experience</label>
             <div className="d-flex align-items-center" style={{ gap: "5px" }}>

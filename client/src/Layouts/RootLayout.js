@@ -17,7 +17,6 @@ function RootLayout() {
   return (
     <div className="vh-100 d-flex flex-column">
       <Navbar />
-
       <main className="main d-flex overflow-y-hidden">
         <Messages />
         <Sidebar

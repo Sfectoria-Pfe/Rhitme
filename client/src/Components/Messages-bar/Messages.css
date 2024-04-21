@@ -33,7 +33,7 @@
 
 @media (max-width: 824px) {
   .m-active {
-    z-index: 0;
+    z-index: 1;
   }
 }
 

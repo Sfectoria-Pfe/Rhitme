@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "content": "You have a new message",
+    "date": "2024-04-16T08:00:00Z",
+    "link": "http://localhost:3000/dashboard/employees",
+    "seen": false,
+    "receiver": "3",
+    "sender": "2"
+  },
+  {
+    "id": "2",
+    "content": "Your task deadline is approaching ",
+    "date": "2024-04-15T12:00:00Z",
+    "link": "https://example.com/task/123",
+    "seen": true,
+    "receiver": "3",
+    "sender": "4"
+  },
+  {
+    "id": "3",
+    "content": "Meeting reminder",
+    "date": "2024-04-17T09:30:00Z",
+    "link": "https://example.com/meeting/456",
+    "seen": false,
+    "receiver": "3",
+    "sender": "1"
+  },
+  {
+    "id": "4",
+    "content": "New comment on your post",
+    "date": "2024-04-18T14:45:00Z",
+    "link": "https://example.com/post/789",
+    "seen": false,
+    "receiver": "3",
+    "sender": null
+  },
+  {
+    "id": "5",
+    "content": "Task assigned to you",
+    "date": "2024-04-19T10:00:00Z",
+    "link": "https://example.com/task/456",
+    "seen": false,
+    "receiver": "3",
+    "sender": "6"
+  },
+  {
+    "id": "6",
+    "content": "Reminder: Team meeting tomorrow",
+    "date": "2024-04-20T09:00:00Z",
+    "link": "https://example.com/meeting/789",
+    "seen": true,
+    "receiver": "3",
+    "sender": "7"
+  },
+  {
+    "id": "7",
+    "content": "You have a new message",
+    "date": "2024-04-16T08:00:00Z",
+    "link": "https://example.com/message/1",
+    "seen": false,
+    "receiver": "6",
+    "sender": "3"
+  },
+  {
+    "id": "8",
+    "content": "Your task deadline is approaching",
+    "date": "2024-04-15T12:00:00Z",
+    "link": "https://example.com/task/123",
+    "seen": true,
+    "receiver": "6",
+    "sender": "5"
+  },
+  {
+    "id": "9",
+    "content": "Meeting reminder",
+    "date": "2024-04-17T09:30:00Z",
+    "link": "https://example.com/meeting/456",
+    "seen": false,
+    "receiver": "6",
+    "sender": "1"
+  },
+  {
+    "id": "10",
+    "content": "New comment on your post",
+    "date": "2024-04-18T14:45:00Z",
+    "link": "https://example.com/post/789",
+    "seen": false,
+    "receiver": "6",
+    "sender": null
+  },
+  {
+    "id": "11",
+    "content": "Task assigned to you",
+    "date": "2024-04-19T10:00:00Z",
+    "link": "https://example.com/task/456",
+    "seen": false,
+    "receiver": "6",
+    "sender": "2"
+  },
+  {
+    "id": "12",
+    "content": "Reminder: Team meeting tomorrow",
+    "date": "2024-04-20T09:00:00Z",
+    "link": "https://example.com/meeting/789",
+    "seen": true,
+    "receiver": "6",
+    "sender": "8"
+  }
+]

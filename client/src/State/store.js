@@ -14,6 +14,9 @@ import absenceReducer from "./AbsenceState";
 import departedEmployeesReducer from "./DepartedEmployeesState";
 import candidateReducer from "./CandidateState";
 import windowsReducer from "./WindowsStates";
+import projectsReducer from "./ProjectsState";
+import tasksReducer from "./TasksState";
+import notificationsReducer from "./NotificationsState";
 
 export default configureStore({
   reducer: {
@@ -32,5 +35,8 @@ export default configureStore({
     departedEmployees: departedEmployeesReducer,
     candidate: candidateReducer,
     windows: windowsReducer,
+    projects: projectsReducer,
+    tasks: tasksReducer,
+    notifications: notificationsReducer,
   },
 });
