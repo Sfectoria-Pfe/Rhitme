@@ -1,12 +1,34 @@
-// media/media.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { CloudinaryService } from './cloudinary.service';
+import { PrismaService } from 'src/prisma/prisma.service'; // Import PrismaService
+import { Media } from '@prisma/client'; // Import Media type
 
 @Injectable()
 export class MediaService {
-  async uploadPhoto(extension: string, path: string, fileName: string): Promise<string> {
-    // Your logic for uploading and storing the photo
-    // This could involve saving the photo to a database or filesystem
-    // For now, we'll simply return a mock media_id
-    return 'mock_media_id';
+  constructor(
+    private cloudinaryService: CloudinaryService,
+    private prisma: PrismaService, // Inject PrismaService here
+  ) {}
+
+  async uploadFile(file: Express.Multer.File): Promise<string> {
+    if (!file) {
+      throw new BadRequestException('No file uploaded');
+    }
+
+    const result = await this.cloudinaryService.uploadFile(file);
+
+    if (!result) {
+      throw new BadRequestException('Error uploading file');
+    }
+
+    return result.url;
+  }
+
+  async createMedia(url: string): Promise<Media> {
+    return this.prisma.media.create({
+      data: {
+        url,
+      },
+    });
   }
 }
