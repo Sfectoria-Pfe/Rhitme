@@ -5,7 +5,7 @@ import LoadingShape from "../../Components/LoadingShape.js/LoadingShape";
 
 function EmployeeField({ picture, name, job, active, id, status }) {
   const add = useSelector((state) => state.add.add);
-  console.log(status);
+
   if (add) {
     return (
       <div className="e-field">

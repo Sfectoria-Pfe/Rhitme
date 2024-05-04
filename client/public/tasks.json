@@ -1,0 +1,588 @@
+[
+  {
+    "task_id": 1,
+    "project_id": "1",
+    "employee_id": "1",
+    "title": "Design homepage layout",
+    "description": "Create a visually appealing layout for the homepage, focusing on user engagement and easy navigation.",
+    "start": "2024-04-01",
+    "end": "2024-04-11",
+    "points": 5,
+    "subtasks": [
+      { "name": "Create wireframes", "done": true },
+      { "name": "Design mockups", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": "in progress",
+    "comments": [
+      {
+        "commentator_id": "1",
+        "comment": "This is a comment This is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a commentThis is a comment.",
+        "date": "2024-04-10"
+      },
+      {
+        "commentator_id": "2",
+        "comment": "Another comment here.",
+        "date": "2024-04-11"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 2,
+    "project_id": "1",
+    "employee_id": "2",
+    "title": "Implement responsive design",
+    "description": "Ensure the website design is responsive and adapts seamlessly to different screen sizes and devices.",
+    "start": "2024-04-05",
+    "end": "2024-04-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Implement media queries", "done": false },
+      { "name": "Test on multiple devices", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": "todo",
+    "comments": [
+      {
+        "commentator_id": "3",
+        "comment": "Great job so far!",
+        "date": "2024-04-12"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 3,
+    "project_id": "1",
+    "employee_id": "3",
+    "title": "Optimize images and graphics",
+    "description": "Compress images and optimize graphics to improve website loading speed and performance.",
+    "start": "2024-04-10",
+    "end": "2024-04-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Reduce image file sizes", "done": false },
+      { "name": "Optimize SVG graphics", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "4",
+        "comment": "Need more details on the optimization process.",
+        "date": "2024-04-13"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 4,
+    "project_id": "1",
+    "employee_id": "4",
+    "title": "Test website on different browsers",
+    "description": "Conduct thorough testing of the website on various browsers to ensure compatibility and consistent performance.",
+    "start": "2024-04-15",
+    "end": "2024-04-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Test on Chrome", "done": false },
+      { "name": "Test on Firefox", "done": false },
+      { "name": "Test on Safari", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "1",
+        "comment": "Consider adding testing on Edge as well.",
+        "date": "2024-04-16"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 5,
+    "project_id": "2",
+    "employee_id": "1",
+    "title": "Develop login functionality",
+    "description": "Implement login and authentication features for the mobile app.",
+    "start": "2024-05-01",
+    "end": "2024-05-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Create login form", "done": false },
+      { "name": "Implement authentication logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "2",
+        "comment": "Need to discuss login flow.",
+        "date": "2024-05-02"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 6,
+    "project_id": "2",
+    "employee_id": "2",
+    "title": "Design user interface",
+    "description": "Create intuitive and user-friendly interfaces for the mobile app.",
+    "start": "2024-05-05",
+    "end": "2024-05-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Create UI wireframes", "done": false },
+      { "name": "Design UI mockups", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "3",
+        "comment": "Consider using a simpler color scheme.",
+        "date": "2024-05-06"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 7,
+    "project_id": "2",
+    "employee_id": "3",
+    "title": "Implement backend APIs",
+    "description": "Develop backend APIs to support the mobile app's functionality.",
+    "start": "2024-05-10",
+    "end": "2024-05-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Design API endpoints", "done": false },
+      { "name": "Implement API logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "4",
+        "comment": "Need to finalize API documentation.",
+        "date": "2024-05-12"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 8,
+    "project_id": "2",
+    "employee_id": "4",
+    "title": "Test app on real devices",
+    "description": "Test the mobile app on actual devices to ensure smooth performance and functionality.",
+    "start": "2024-05-15",
+    "end": "2024-05-29",
+    "points": 8,
+    "subtasks": [
+      { "name": "Test on iOS devices", "done": false },
+      { "name": "Test on Android devices", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [
+      {
+        "commentator_id": "1",
+        "comment": "Consider testing on older devices as well.",
+        "date": "2024-05-16"
+      }
+    ],
+    "done_date": null
+  },
+  {
+    "task_id": 9,
+    "project_id": "3",
+    "employee_id": "1",
+    "title": "Gather user requirements",
+    "description": "Collect and document the requirements and expectations of the users for the new software.",
+    "start": "2024-06-01",
+    "end": "2024-06-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Conduct user interviews", "done": false },
+      { "name": "Create user personas", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 10,
+    "project_id": "3",
+    "employee_id": "2",
+    "title": "Design database schema",
+    "description": "Plan and design the database structure for the new software.",
+    "start": "2024-06-05",
+    "end": "2024-06-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Identify data entities", "done": false },
+      { "name": "Create entity-relationship diagrams", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 11,
+    "project_id": "3",
+    "employee_id": "3",
+    "title": "Develop frontend",
+    "description": "Build the user interface and frontend components for the new software.",
+    "start": "2024-06-10",
+    "end": "2024-06-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Create UI components", "done": false },
+      { "name": "Implement frontend logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 12,
+    "project_id": "3",
+    "employee_id": "4",
+    "title": "Develop backend",
+    "description": "Build the backend logic and functionality for the new software.",
+    "start": "2024-06-15",
+    "end": "2024-06-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Design API endpoints", "done": false },
+      { "name": "Implement database queries", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 13,
+    "project_id": "4",
+    "employee_id": "1",
+    "title": "Implement user authentication",
+    "description": "Add user authentication and authorization features to the software.",
+    "start": "2024-07-01",
+    "end": "2024-07-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Implement login functionality", "done": false },
+      { "name": "Create access control rules", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 14,
+    "project_id": "4",
+    "employee_id": "2",
+    "title": "Implement data encryption",
+    "description": "Add data encryption features to protect sensitive information.",
+    "start": "2024-07-05",
+    "end": "2024-07-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Encrypt sensitive data", "done": false },
+      { "name": "Implement decryption logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 15,
+    "project_id": "4",
+    "employee_id": "3",
+    "title": "Implement data backup",
+    "description": "Set up regular data backups to prevent data loss.",
+    "start": "2024-07-10",
+    "end": "2024-07-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Configure backup schedules", "done": false },
+      { "name": "Test data restoration", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 16,
+    "project_id": "4",
+    "employee_id": "4",
+    "title": "Implement logging and monitoring",
+    "description": "Set up logging and monitoring features to track software performance and detect issues.",
+    "start": "2024-07-15",
+    "end": "2024-07-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Configure logging levels", "done": false },
+      { "name": "Set up monitoring alerts", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 17,
+    "project_id": "5",
+    "employee_id": "1",
+    "title": "Create project plan",
+    "description": "Develop a detailed plan outlining the tasks, timelines, and resources required for the project.",
+    "start": "2024-08-01",
+    "end": "2024-08-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Define project scope", "done": false },
+      { "name": "Allocate resources", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 18,
+    "project_id": "5",
+    "employee_id": "2",
+    "title": "Create wireframes",
+    "description": "Design wireframes to visualize the layout and functionality of the new features.",
+    "start": "2024-08-05",
+    "end": "2024-08-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Create wireframes for each screen", "done": false },
+      { "name": "Review and finalize wireframes", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 19,
+    "project_id": "5",
+    "employee_id": "3",
+    "title": "Develop frontend components",
+    "description": "Build the frontend components and user interface for the new features.",
+    "start": "2024-08-10",
+    "end": "2024-08-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Create UI components", "done": false },
+      { "name": "Implement frontend logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 20,
+    "project_id": "5",
+    "employee_id": "4",
+    "title": "Develop backend functionality",
+    "description": "Implement the backend logic and functionality required for the new features.",
+    "start": "2024-08-15",
+    "end": "2024-08-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Design API endpoints", "done": false },
+      { "name": "Implement database queries", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 21,
+    "project_id": "6",
+    "employee_id": "1",
+    "title": "Gather requirements",
+    "description": "Meet with stakeholders to gather and document the requirements for the project.",
+    "start": "2024-09-01",
+    "end": "2024-09-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Schedule meetings with stakeholders", "done": false },
+      { "name": "Document requirements", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 22,
+    "project_id": "6",
+    "employee_id": "2",
+    "title": "Create functional specifications",
+    "description": "Translate the requirements into detailed functional specifications.",
+    "start": "2024-09-05",
+    "end": "2024-09-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Define system functionality", "done": false },
+      { "name": "Review specifications with stakeholders", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 23,
+    "project_id": "6",
+    "employee_id": "3",
+    "title": "Design database schema",
+    "description": "Create a database schema to support the application's data requirements.",
+    "start": "2024-09-10",
+    "end": "2024-09-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Identify data entities", "done": false },
+      { "name": "Design database tables", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 24,
+    "project_id": "6",
+    "employee_id": "4",
+    "title": "Develop frontend prototypes",
+    "description": "Create interactive prototypes to demonstrate the user interface and interactions.",
+    "start": "2024-09-15",
+    "end": "2024-09-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Design prototype screens", "done": false },
+      { "name": "Implement interactive elements", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 25,
+    "project_id": "7",
+    "employee_id": "1",
+    "title": "Develop backend functionality",
+    "description": "Implement the backend logic and functionality to support the application's features.",
+    "start": "2024-10-01",
+    "end": "2024-10-15",
+    "points": 5,
+    "subtasks": [
+      { "name": "Define API endpoints", "done": false },
+      { "name": "Implement data processing logic", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 26,
+    "project_id": "7",
+    "employee_id": "2",
+    "title": "Integrate frontend with backend",
+    "description": "Connect the frontend components with the backend functionality.",
+    "start": "2024-10-05",
+    "end": "2024-10-20",
+    "points": 7,
+    "subtasks": [
+      { "name": "Implement API calls", "done": false },
+      { "name": "Test frontend-backend interactions", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 27,
+    "project_id": "7",
+    "employee_id": "3",
+    "title": "Perform system testing",
+    "description": "Conduct comprehensive testing to ensure the application meets all requirements.",
+    "start": "2024-10-10",
+    "end": "2024-10-25",
+    "points": 6,
+    "subtasks": [
+      { "name": "Create test cases", "done": false },
+      { "name": "Execute test cases", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  },
+  {
+    "task_id": 28,
+    "project_id": "7",
+    "employee_id": "4",
+    "title": "Deploy to production",
+    "description": "Deploy the application to the production environment for public use.",
+    "start": "2024-10-15",
+    "end": "2024-10-30",
+    "points": 8,
+    "subtasks": [
+      { "name": "Prepare deployment plan", "done": false },
+      { "name": "Execute deployment", "done": false }
+    ],
+    "employee_done": false,
+    "manager_approved": false,
+    "status": null,
+    "comments": [],
+    "done_date": null
+  }
+]

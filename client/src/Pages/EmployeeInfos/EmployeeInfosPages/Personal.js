@@ -177,7 +177,11 @@ function Personal() {
                 </div>
                 <div className="pi-content-info d-flex flex-column col mb-2 mb-sm-0">
                   <label htmlFor="state">State</label>
-                  <input id="state" value={editableEmployee.address.state} />
+                  <input
+                    id="state"
+                    value={editableEmployee.address.state}
+                    onChange={(e) => handleChange(e, "address.state")}
+                  />
                 </div>
                 <div className="pi-content-info d-flex flex-column col">
                   <label htmlFor="zip">ZIP</label>

@@ -11,6 +11,10 @@ import { useLayoutEffect, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { hideChat } from "../../State/chatState";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { MdEmojiEmotions } from "react-icons/md";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function ChatBar() {
   const [value, setValue] = useState("");
@@ -19,16 +23,21 @@ function ChatBar() {
   const chat = useSelector((state) => state.chat.chat);
   const messages = useSelector((state) => state.messages.messages);
   const dispatch = useDispatch();
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [messages]);
 
   const scrollToBottom = () => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop =
         messageContainerRef.current.scrollHeight;
     }
+  };
+
+  const handleEmojiSelect = (emoji) => {
+    setValue((prevMessage) => prevMessage + emoji.native);
   };
 
   useLayoutEffect(() => {
@@ -41,6 +50,7 @@ function ChatBar() {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   return (
     <div
       className={` d-flex flex-column z-2 cb-container justify-content-between ${
@@ -70,6 +80,13 @@ function ChatBar() {
           <Receiver />
           <Receiver />
         </div>
+        {/* <div
+          className={`emoji-picker position-absolute ${
+            showEmojiPicker ? "" : "d-none"
+          }`}
+        >
+          <Picker data={data} onEmojiSelect={handleEmojiSelect} theme="light" />
+        </div> */}
         <div className="cb-send my-2 ">
           <textarea
             ref={textareaRef}
@@ -78,6 +95,24 @@ function ChatBar() {
             onChange={handleChange}
             placeholder="Type your message..."
           />
+          <Dropdown autoClose="outside">
+            <Dropdown.Toggle as="div" id="dropdown-basic">
+              <MdEmojiEmotions
+                className="cb-emojies"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="p-0">
+              <Dropdown.Item className="emojis p-0">
+                <Picker
+                  data={data}
+                  onEmojiSelect={handleEmojiSelect}
+                  theme="light"
+                />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <button>
             <IoSend />
           </button>

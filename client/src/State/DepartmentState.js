@@ -5,7 +5,6 @@ export const fetchDepartment = createAsyncThunk(
   "department/fetchDepartment",
   async () => {
     const response = await axios.get("http://localhost:3000/departements.json");
-
     return response.data;
   }
 );

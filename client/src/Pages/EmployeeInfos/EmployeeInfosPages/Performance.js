@@ -233,7 +233,7 @@ function Performance() {
     const change = ((currentValue - previousValue) / previousValue) * 100;
     return change >= 0 ? `${change.toFixed(2)}%` : `${-change.toFixed(2)}%`;
   };
-  console.log(monthlyPointsData);
+
   return (
     <div className="pi-container w-100 mt-3 d-flex flex-column ">
       <EmployeeChange save={save} onCancel={onCancel} />
