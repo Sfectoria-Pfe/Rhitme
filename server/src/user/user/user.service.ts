@@ -1,14 +1,16 @@
 import {
   Injectable,
   NotFoundException,
-  UnauthorizedException,
-  Param,
+  ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Employees, Prisma } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import { Employees } from '@prisma/client';
 import { AddUserDto, UpdateUserDto } from './user.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { MediaService } from 'src/media/media/media.service';
+import { CloudinaryService } from 'src/media/media/cloudinary.service';
+import { Prisma } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+import { Any } from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -40,7 +42,7 @@ export class UserService {
         job: adduserdto.job,
         created_at: new Date(), // Use the current date/time or specify a default value
         points: 0, // Specify a default value
-        status: 'out', // Specify a default value
+        status: 'active', // Specify a default value
         nb_absence: 0, // Specify a default value
         // photo: adduserdto.photo
       };
@@ -57,10 +59,9 @@ export class UserService {
   }
 
   async hashPassword(password: string): Promise<string> {
-    const saltRounds = 10; // You can adjust the number of salt rounds as needed
-    return bcrypt.hash(password, saltRounds);
+    const saltRounds = 100000;
+    return bcrypt.hash(password);
   }
-
   @ApiOperation({ summary: 'Update a User' })
   @ApiResponse({
     status: 201,
@@ -71,6 +72,31 @@ export class UserService {
     updateUserDto: UpdateUserDto,
   ): Promise<Employees> {
     try {
+      const existingEmailUser = await this.prisma.employees.findFirst({
+        where: { email: updateUserDto.email },
+      });
+      if (existingEmailUser) {
+        throw new ConflictException('Email already in use');
+      }
+
+      const existingCINUser = await this.prisma.employees.findFirst({
+        where: { CIN: updateUserDto.CIN },
+      });
+      if (existingCINUser) {
+        throw new ConflictException('CIN already in use');
+      }
+      let data: any = {
+        ...updateUserDto,
+      };
+
+      if (updateUserDto.photo) {
+        const imageUrl = await this.cloudinaryService.uploadImage(
+          updateUserDto.photo,
+        );
+        const media = await this.mediaService.createMedia(imageUrl);
+        data.photo = { connect: { media_id: media.media_id } }; // Use connect to link the media ID
+      }
+
       const user = await this.prisma.employees.update({
         where: { user_id },
         data: updateUserDto,
@@ -95,10 +121,15 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID ${user_id} not found`);
     }
+    await this.prisma.notes.create({
+      data: {
+        Description: `User ${user.first_name} ${user.last_name} was deleted`,
+      },
+    });
+
     return user;
   }
-  @ApiOperation({ summary: 'Find a user' })
-  @ApiResponse({ status: 201, description: 'User found' })
+
   async getUserById(id: string): Promise<Employees> {
     const user = await this.prisma.employees.findFirst({
       where: {
@@ -110,9 +141,16 @@ export class UserService {
     }
     return user;
   }
-  @ApiOperation({ summary: 'Find all users' })
-  @ApiResponse({ status: 201, description: 'all users' })
+
   async getAllUsers(): Promise<Employees[]> {
     return this.prisma.employees.findMany();
+  }
+
+  async hashPassword(password: string): Promise<string> {
+    if (!password) {
+      throw new Error('Password is required');
+    }
+    const saltRounds = 10;
+    return bcrypt.hash(password, saltRounds);
   }
 }
