@@ -1,24 +1,23 @@
-import React, { useEffect, useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import "./Projects.css";
 import { useSelector, useDispatch } from "react-redux";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { useState } from "react";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
 import { IoSend } from "react-icons/io5";
-import { MdEmojiEmotions } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { hideTaskDetailsWindow } from "../../State/WindowsStates";
 import EmployeeChange from "../EmployeeInfos/EmployeeInfosPages/EmployeeChange";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import Accordion from "react-bootstrap/Accordion";
 import { MdOutlineCancel } from "react-icons/md";
+import axios from "axios";
+import { updateTask } from "../../State/TasksState";
 
 function TaskDetails() {
   const task = useSelector((state) => state.windows.taskDetails.task);
   const employees = useSelector((state) => state.employees.employees);
   const [updatedTask, setUpdatedTask] = useState();
-  const project = useSelector((state) => state.projects.selectedProject);
+  const project = useSelector((state) => state.projects.project);
   const [listColor, setListColor] = useState("");
   const [newComment, setNewComment] = useState("");
   const textareaRef = useRef(null);
@@ -32,7 +31,7 @@ function TaskDetails() {
   const [changeAssignee, setChangeAssignee] = useState(false);
   const [addSubtask, setAddSubtask] = useState(false);
   const [newSubtask, setNewSubtask] = useState("");
-
+  const employee = JSON.parse(localStorage.getItem("employee"));
   const onCancel = () => {
     setSave(false);
     setUpdatedTask(task);
@@ -68,11 +67,10 @@ function TaskDetails() {
     return `${month} ${day}, ${year}`;
   }
 
-  const assignee = employees.find(
-    (employee) => employee.user_id === updatedTask?.employee_id
-  );
+  const assignee = updatedTask?.employee;
+
   useEffect(() => {
-    if (updatedTask?.employee_done) {
+    if (updatedTask?.status === "done") {
       setListColor("#3ac93a65");
     } else if (updatedTask?.status === "todo") {
       setListColor("#3a78c978");
@@ -101,24 +99,48 @@ function TaskDetails() {
     }
   }, [detailsWindow]);
 
-  const addComment = () => {
+  const addComment = async () => {
     if (newComment.trim() !== "") {
       const newCommentObj = {
-        commentator_id: "2",
-        comment: newComment.trim(),
-        date: new Date().toISOString(),
+        task_id: task.task_id,
+        commentator_id: employee.employee_id,
+        content: newComment.trim(),
+        created_at: new Date().toISOString(),
       };
       setUpdatedTask((prevTask) => ({
         ...prevTask,
         comments: [...prevTask.comments, newCommentObj],
       }));
+
+      await axios.post("http://localhost:3000/comments", {
+        taskId: task.task_id,
+        commentatorId: employee.employee_id,
+        content: newComment,
+      });
       setNewComment("");
     }
   };
 
+  const onSave = () => {
+    const updateData = {
+      title: updatedTask.title,
+      description: updatedTask.description,
+      start: updatedTask.start,
+      end: updatedTask.end,
+      points: updatedTask.points,
+      status: updatedTask.status,
+      manager_approved: updatedTask.manager_approved,
+      done_date: updatedTask.done_date,
+      employee_id: updatedTask.employee_id,
+    };
+
+    dispatch(updateTask({ taskId: updatedTask.task_id, taskData: updateData }));
+    setSave(false);
+  };
+  console.log(updatedTask);
   return (
     <>
-      <EmployeeChange save={save} onCancel={onCancel} />
+      <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
       <div
         className={`task-det-container position-fixed overflow-y-scroll px-4 d-flex flex-column py-3 ${
           detailsWindow ? "task-det-active" : ""
@@ -238,17 +260,19 @@ function TaskDetails() {
                             {employees.map((employee) => (
                               <div
                                 className="dep-head d-flex justify-content-start align-items-center py-2 my-1"
-                                key={employee.user_id}
+                                key={employee.employee_id}
                                 style={{
                                   gap: "10px",
                                   cursor: "pointer",
                                 }}
-                                // onClick={() =>
-                                //   handleDepartmentHeadChange(
-                                //     item.department_id,
-                                //     employee.user_id
-                                //   )
-                                // }
+                                onClick={() => {
+                                  setUpdatedTask((prevTask) => ({
+                                    ...prevTask,
+                                    employee_id: employee.employee_id,
+                                    employee: employee,
+                                  }));
+                                  setSave(true);
+                                }}
                               >
                                 <img src={employee.photo} />
                                 <div className="dep-head-name">
@@ -276,7 +300,7 @@ function TaskDetails() {
                     ? "Todo"
                     : updatedTask?.status === "in progress"
                     ? "In Progress"
-                    : updatedTask?.employee_done
+                    : updatedTask?.status === "done"
                     ? "Done"
                     : "Upcoming"}
                 </td>
@@ -288,7 +312,11 @@ function TaskDetails() {
                     type="date"
                     className="task-det-deadline px-2"
                     id="deadline"
-                    value={updatedTask?.end}
+                    value={
+                      updatedTask?.end
+                        ? new Date(updatedTask.end).toISOString().split("T")[0]
+                        : ""
+                    }
                     onChange={(e) => {
                       setUpdatedTask((prevTask) => ({
                         ...prevTask,
@@ -349,17 +377,24 @@ function TaskDetails() {
                   type="checkbox"
                   id={index}
                   checked={item.done}
-                  onChange={(e) =>
+                  onChange={async (e) => {
                     setUpdatedTask((prevTask) => {
                       const updatedSubtasks = [...prevTask.subtasks];
                       updatedSubtasks[index] = {
                         ...updatedSubtasks[index],
                         done: e.target.checked,
                       };
-                      setSave(true);
                       return { ...prevTask, subtasks: updatedSubtasks };
-                    })
-                  }
+                    });
+                    try {
+                      await axios.put(
+                        `http://localhost:3000/subtasks/${item.subtask_id}`,
+                        { done: !item.done }
+                      );
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
                 />
                 <label>{item.name}</label>
               </div>
@@ -377,17 +412,28 @@ function TaskDetails() {
                 <div className="d-flex ms-3" style={{ gap: "10px" }}>
                   <div
                     className="task-addsub-butt  px-2"
-                    onClick={() => {
+                    onClick={async () => {
                       if (newSubtask.trim() !== "") {
                         setUpdatedTask((prevTask) => ({
                           ...prevTask,
                           subtasks: [
                             ...prevTask.subtasks,
-                            { name: newSubtask, done: false },
+                            {
+                              name: newSubtask,
+                              done: false,
+                              task: task.task_id,
+                            },
                           ],
                         }));
                         setNewSubtask("");
-                        setSave(true);
+                        try {
+                          await axios.post("http://localhost:3000/subtasks", {
+                            name: newSubtask,
+                            taskId: task.task_id,
+                          });
+                        } catch (error) {
+                          console.log(error);
+                        }
                       }
                     }}
                   >
@@ -418,13 +464,13 @@ function TaskDetails() {
             style={{ gap: "5px" }}
           >
             <label className="task-det-label text-muted">Comments</label>
-            {updatedTask?.comments.map((item, index) => (
+            {updatedTask?.comments?.map((item, index) => (
               <div key={index} className="d-flex ps-2 " style={{ gap: "8px" }}>
                 <img
                   className="task-comment-img"
                   src={
                     employees.find(
-                      (employee) => employee.user_id === item.commentator_id
+                      (employee) => employee.employee_id === item.commentator_id
                     ).photo
                   }
                 />
@@ -432,9 +478,9 @@ function TaskDetails() {
                   className="d-flex flex-column "
                   style={{ width: "fit-content", maxWidth: "60%" }}
                 >
-                  <div className="task-comment px-2 py-1">{item.comment}</div>
+                  <div className="task-comment px-2 py-1">{item.content}</div>
                   <div className="task-comment-date align-self-end text-muted">
-                    {formatDate(item.date)}
+                    {formatDate(item.created_at)}
                   </div>
                 </div>
               </div>

@@ -15,17 +15,9 @@ import AddProject from "../../Components/AddProject/AddProject";
 
 function Projects() {
   const projects = useSelector((state) => state.projects.projects);
-  const status = useSelector((state) => state.projects.status);
-  const tasks = useSelector((state) => state.tasks.tasks);
-  const tasksStatus = useSelector((state) => state.tasks.status);
+  const status = useSelector((state) => state.projects.fetchStatus);
   const dispatch = useDispatch();
   const addwindow = useSelector((state) => state.windows.addProject);
-
-  useEffect(() => {
-    if (tasksStatus == "idle") {
-      dispatch(fetchTasks());
-    }
-  }, [status, tasksStatus]);
 
   useEffect(() => {
     if (status === "idle") dispatch(fetchProjects());
@@ -59,7 +51,7 @@ function Projects() {
         </button>
         <div className="rec-offers container">
           <div className="row d-flex justify-content-center">
-            {status === "loading" || tasksStatus === "loading" ? (
+            {status === "loading" ? (
               <>
                 {Array.from({ length: 4 }).map((_, index) => (
                   <div key={index} className=" col-5">
@@ -77,9 +69,7 @@ function Projects() {
                   <Project
                     item={item}
                     key={item.project_id}
-                    tasks={tasks.filter(
-                      (task) => task.project_id === item.project_id
-                    )}
+                    tasks={item.tasks}
                   />
                 ))}
               </>

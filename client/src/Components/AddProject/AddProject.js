@@ -4,17 +4,20 @@ import { IoMdClose } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { hideAddProjectWindow } from "../../State/WindowsStates";
 import { useState, useEffect } from "react";
+import { createProject } from "../../State/ProjectsState";
 
 function AddProject() {
   const addProject = useSelector((state) => state.windows.addProject);
+  const employeeId = JSON.parse(localStorage.getItem("employee")).employee_id;
   const dispatch = useDispatch();
   const initialFormData = {
     title: "",
     description: "",
-    starting: "",
-    ending: "",
+    start: "",
+    end: "",
     revenue: "",
     client: "",
+    manager: employeeId,
   };
   const [formData, setFormData] = useState(initialFormData);
 
@@ -48,7 +51,10 @@ function AddProject() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(createProject(formData));
+    window.location.reload();
+    setFormData(initialFormData);
+    dispatch(hideAddProjectWindow());
   };
   return (
     <div
@@ -91,18 +97,18 @@ function AddProject() {
               <input
                 type="date"
                 id="starting"
-                name="starting"
-                value={formData.starting}
+                name="start"
+                value={formData.start}
                 onChange={handleChange}
               />
             </div>
             <div className="d-flex flex-column ae-input col-12 col-md-5 col-lg-5 px-0 px-md-1 px-lg-0">
-              <label htmlFor="ending">Ends at</label>
+              <label htmlFor="end">Ends at</label>
               <input
                 type="date"
                 id="ending"
-                name="ending"
-                value={formData.ending}
+                name="end"
+                value={formData.end}
                 onChange={handleChange}
               />
             </div>

@@ -1,35 +1,63 @@
-// user.controller.ts
-import { Controller, Post, Body, Param, Put, Delete, Get } from '@nestjs/common';
-import { UserService } from './user.service';
-import { Employees } from '@prisma/client';
-import { AddUserDto, UpdateUserDto } from './user.dto';
-import { ApiTags } from '@nestjs/swagger';
-@ApiTags('users')
-@Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+import {
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Param,
+  Body,
+  NotFoundException,
+} from '@nestjs/common';
+import { EmployeeService } from './user.service';
+import { Employee } from '@prisma/client';
+import { CreateEmployeeDto, UpdateEmployeeDto } from './user.dto';
 
-  @Post('add')
-  async addUser(@Body() adduserdto : AddUserDto): Promise<Employees> {
-    return this.userService.addUser(adduserdto);
+@Controller('employees')
+export class EmployeeController {
+  constructor(private readonly employeeService: EmployeeService) {}
+
+  @Get()
+  async getEmployees(): Promise<Employee[]> {
+    return this.employeeService.getEmployees();
+  }
+
+  @Get(':id')
+  async getEmployeeById(@Param('id') id: string): Promise<Employee> {
+    const employee = await this.employeeService.getEmployeeById(id);
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
+  }
+
+  @Post()
+  async createEmployee(
+    @Body() createEmployeeDto: CreateEmployeeDto,
+  ): Promise<Employee> {
+    return this.employeeService.createEmployee(createEmployeeDto);
   }
 
   @Put(':id')
-  async updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<Employees> {
-    return this.userService.updateUser(id, updateUserDto);
+  async updateEmployee(
+    @Param('id') id: string,
+    @Body() updateEmployeeDto: UpdateEmployeeDto,
+  ): Promise<Employee> {
+    const employee = await this.employeeService.updateEmployee(
+      id,
+      updateEmployeeDto,
+    );
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
   }
 
   @Delete(':id')
-  async removeUser(@Param('id') id: string): Promise<Employees> {
-    return this.userService.removeUser(id);
+  async deleteEmployee(@Param('id') id: string): Promise<Employee> {
+    const employee = await this.employeeService.deleteEmployee(id);
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
   }
-  @Get(':id')
-  async getUserById(@Param('id') id: string): Promise<Employees> {
-    return this.userService.getUserById(id);
-  }
-  @Get('allusers')
-  async getAllUsers(): Promise<Employees[]> {
-    return this.userService.getAllUsers();
-  }
-
 }

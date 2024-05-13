@@ -3,11 +3,25 @@ import axios from "axios";
 
 export const fetchEmployeeById = createAsyncThunk(
   "employees/fetchEmployeeById",
-  async (id) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    const response = await axios.get("http://localhost:3000/employees.json");
-    const employee = response.data.find((obj) => obj.user_id === id);
-    return employee;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`http://localhost:3000/employees/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateEmployee = createAsyncThunk(
+  "employees/updateEmployee",
+  async ({ id, updatedEmployeeData }) => {
+    const response = await axios.put(
+      `http://localhost:3000/users/${id}`,
+      updatedEmployeeData
+    );
+
+    return response.data;
   }
 );
 
@@ -30,7 +44,7 @@ export const EmployeeSlice = createSlice({
       })
       .addCase(fetchEmployeeById.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });

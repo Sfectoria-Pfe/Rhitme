@@ -1,22 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+import * as dotenv from 'dotenv';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({ whitelist:true}))
-
-  const config = new DocumentBuilder()
-  .setTitle('Hr sfectoria')
-  .setDescription('')
-  .setVersion('1.0')
-  .addTag('user')
-  .build();
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
-
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.enableCors();
+  app.useWebSocketAdapter(new IoAdapter(app));
 
   await app.listen(3000);
 }

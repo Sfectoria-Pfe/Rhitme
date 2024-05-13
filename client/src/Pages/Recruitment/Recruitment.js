@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import "./Recruitment.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,13 +13,13 @@ import {
 
 function Recruitment() {
   const offers = useSelector((state) => state.offer.offers);
-  const status = useSelector((state) => state.offer.status);
+  const status = useSelector((state) => state.offer.fetchStatus);
   const addOffer = useSelector((state) => state.windows.addOffer);
   const dispatch = useDispatch();
   useEffect(() => {
     if (status === "idle") dispatch(fetchOffers());
   }, [status, dispatch]);
-  console.log(addOffer);
+  console.log(offers);
 
   return (
     <>
@@ -63,7 +62,7 @@ function Recruitment() {
               <>
                 {offers.map((item, index) => (
                   <Link
-                    to={`${item.id}`}
+                    to={`${item.offer_id}`}
                     key={index}
                     className={`off-container py-3 px-3 d-flex flex-column justify-content-center col-lg-5 col-12 text-decoration-none`}
                   >

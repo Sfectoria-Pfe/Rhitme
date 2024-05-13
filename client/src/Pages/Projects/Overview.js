@@ -6,14 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import Accordion from "react-bootstrap/Accordion";
 import { MdOutlineCancel } from "react-icons/md";
+import { updateProject } from "../../State/ProjectsState";
 
 function Overview() {
   const { project } = useOutletContext();
   const [editableProject, setEditableProject] = useState(project);
   const [save, setSave] = useState(false);
+
   const employees = useSelector((state) => state.employees.employees);
   const [changeManager, setChangeManager] = useState(false);
-
+  const dispatch = useDispatch();
   const onCancel = () => {
     setSave(false);
     setEditableProject(project);
@@ -24,13 +26,32 @@ function Overview() {
       ...prevProject,
       [field]: value,
     }));
-    console.log(editableProject);
+
     setSave(true);
+  };
+
+  const onSave = () => {
+    const updateData = {
+      title: editableProject.title,
+      description: editableProject.description,
+      start: editableProject.start,
+      end: editableProject.end,
+      revenue: editableProject.revenue,
+      manager: editableProject.manager_id,
+      client: editableProject.client,
+      delivered: editableProject.delivered,
+    };
+    console.log(updateData);
+
+    dispatch(
+      updateProject({ projectId: project.project_id, projectData: updateData })
+    );
+    setSave(false);
   };
 
   return (
     <div className="ps-3">
-      <EmployeeChange save={save} onCancel={onCancel} />
+      <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
       <div
         className="pi-section d-flex flex-column py-3 "
         style={{ borderTop: "none" }}
@@ -54,8 +75,8 @@ function Overview() {
                   id="starting"
                   type="date"
                   className="pro-ovr-date"
-                  value={editableProject.starting}
-                  onChange={(e) => handleChange(e, "starting")}
+                  value={editableProject.start.slice(0, 10)}
+                  onChange={(e) => handleChange(e, "start")}
                 />
               </div>
               <div className="pi-content-info d-flex flex-column col ">
@@ -64,8 +85,8 @@ function Overview() {
                   type="date"
                   className="pro-ovr-date"
                   id="ending"
-                  value={editableProject.ending}
-                  onChange={(e) => handleChange(e, "ending")}
+                  value={editableProject.end.slice(0, 10)}
+                  onChange={(e) => handleChange(e, "end")}
                 />
               </div>
             </div>
@@ -78,16 +99,19 @@ function Overview() {
                 <img
                   src={
                     employees.find(
-                      (employee) => employee.user_id === editableProject.manager
+                      (employee) =>
+                        employee.employee_id === editableProject.manager_id
                     ).photo
                   }
                 />
                 {employees.find(
-                  (employee) => employee.user_id === editableProject.manager
+                  (employee) =>
+                    employee.employee_id === editableProject.manager_id
                 ).first_name +
                   " " +
                   employees.find(
-                    (employee) => employee.user_id === editableProject.manager
+                    (employee) =>
+                      employee.employee_id === editableProject.manager_id
                   ).last_name}
               </div>
               {changeManager ? (
@@ -131,7 +155,7 @@ function Overview() {
                         {employees.map((employee) => (
                           <div
                             className="dep-head d-flex justify-content-start align-items-center py-2 my-1"
-                            key={employee.user_id}
+                            key={employee.employee_id}
                             style={{
                               gap: "10px",
                               cursor: "pointer",
@@ -139,7 +163,7 @@ function Overview() {
                             onClick={() => {
                               setEditableProject((prevProject) => ({
                                 ...prevProject,
-                                manager: employee.user_id,
+                                manager_id: employee.employee_id,
                               }));
 
                               setSave(true);
@@ -175,7 +199,6 @@ function Overview() {
                   style={{ gap: "5px" }}
                 >
                   <input
-                    type="number"
                     style={{ width: "100px" }}
                     min="0"
                     id="ending"

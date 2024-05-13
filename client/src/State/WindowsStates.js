@@ -11,8 +11,15 @@ export const windowsSlice = createSlice({
       task: null,
     },
     addTask: false,
+    sendReport: false,
   },
   reducers: {
+    showSendReportWindow: (state) => {
+      state.sendReport = true;
+    },
+    hideSendReportWindow: (state) => {
+      state.sendReport = false;
+    },
     showAddOfferWindow: (state) => {
       state.addOffer = true;
     },
@@ -34,6 +41,7 @@ export const windowsSlice = createSlice({
     hideTaskDetailsWindow: (state) => {
       state.taskDetails.status = false;
       state.taskDetails.task = null;
+      window.location.reload();
     },
     showTaskDetailsWindow: (state, action) => {
       state.taskDetails.status = true;
@@ -59,6 +67,8 @@ export const {
   showTaskDetailsWindow,
   showAddTaskWindow,
   hideAddTaskWindow,
+  showSendReportWindow,
+  hideSendReportWindow,
 } = windowsSlice.actions;
 
 export default windowsSlice.reducer;

@@ -1,10 +1,12 @@
 import React from "react";
-import pic from "./picture1.jpg";
 import "./ChatBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import { deleteMessage } from "../../State/MessagesSlice";
+import { useDispatch } from "react-redux";
 
-function Sender() {
+function Sender({ message }) {
+  const dispatch = useDispatch();
   return (
     <div className="sender-container d-flex align-items-start justify-content-end ">
       <div className="align-self-center">
@@ -14,22 +16,18 @@ function Sender() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item>
-              <div className="message-edit">Delete</div>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <div className="message-edit">Delete for me</div>
+              <div
+                className="message-edit"
+                onClick={() => dispatch(deleteMessage(message.message_id))}
+              >
+                Delete
+              </div>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <div className="sen-message">
-        Hi my name is Firas Hi my name is Firas Hi my name is Firas Hi my name
-        is Firas Hi my name is Firas Hi my name is Firas Hi my name is Firas Hi
-        my name is Firas Hi my name is Firas Hi my name is Firas Hi my name is
-        Firas Hi my name is Firas Hi my name is Firas Hi my name is Firas Hi my
-        name is Firas{" "}
-      </div>
-      <img src={pic} className="mes-pic" />
+      <div className="sen-message">{message?.content}</div>
+      <img src={message?.sender?.photo} className="mes-pic" />
     </div>
   );
 }

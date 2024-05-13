@@ -1,16 +1,13 @@
-import React from "react";
 import "./JobOffers.css";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { hideApplyWindow } from "../../State/OffersSlice";
+import { createCandidate } from "../../State/CandidateState";
 
 function Apply() {
   const current_offer = useSelector((state) => state.offer.current_offer);
-  const offer = useSelector((state) =>
-    state.offer.offers.find((offer) => offer.id === current_offer)
-  );
   const applyWindow = useSelector((state) => state.offer.applyWindow);
   const dispatch = useDispatch();
 
@@ -23,7 +20,7 @@ function Apply() {
     if (file && file.name.endsWith(".pdf")) {
       setFormData({
         ...formData,
-        cvFile: file,
+        cv: file,
       });
       setFileName(file.name);
       setFileAlert("");
@@ -35,11 +32,11 @@ function Apply() {
     }
   }
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    phoneNumber: "",
-    cvFile: null,
+    phone: "",
+    cv: null,
   });
 
   const handleInputChange = (event) => {
@@ -61,14 +58,37 @@ function Apply() {
       }, 3000);
       return;
     }
+
+    console.log({
+      cv: formData.cv,
+      candidateData: {
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        email: formData.email,
+        phone: formData.phone,
+        offer_id: current_offer.offer_id,
+      },
+    });
+    dispatch(
+      createCandidate({
+        cv: formData.cv,
+        candidateData: {
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          email: formData.email,
+          phone: formData.phone,
+          offer_id: current_offer.offer_id,
+        },
+      })
+    );
     dispatch(hideApplyWindow());
 
     setFormData({
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
-      phoneNumber: "",
-      cvFile: null,
+      phone: "",
+      cv: null,
     });
     setFileName("");
   };
@@ -85,7 +105,8 @@ function Apply() {
             className="position-absolute app-close"
             onClick={() => dispatch(hideApplyWindow())}
           />
-          Applying for <span style={{ fontWeight: "500" }}>{offer.title}</span>
+          Applying for{" "}
+          <span style={{ fontWeight: "500" }}>{current_offer?.title}</span>
         </div>
         <div
           className={`app-alert ${alert === "" ? "d-none" : "d-block"} mt-2`}
@@ -104,10 +125,10 @@ function Apply() {
               <label htmlFor="firstname">First name</label>
               <input
                 id="firstname"
-                name="firstName"
+                name="first_name"
                 type="text"
                 placeholder="First name"
-                value={formData.firstName}
+                value={formData.first_name}
                 onChange={handleInputChange}
               />
             </div>
@@ -115,10 +136,10 @@ function Apply() {
               <label htmlFor="lastname">Last name</label>
               <input
                 id="lastname"
-                name="lastName"
+                name="last_name"
                 type="text"
                 placeholder="Last name"
-                value={formData.lastName}
+                value={formData.last_name}
                 onChange={handleInputChange}
               />
             </div>
@@ -141,10 +162,10 @@ function Apply() {
               <label htmlFor="number">Phone number</label>
               <input
                 id="number"
-                name="phoneNumber"
+                name="phone"
                 type="text"
                 placeholder="Phone number"
-                value={formData.phoneNumber}
+                value={formData.phone}
                 onChange={handleInputChange}
               />
             </div>

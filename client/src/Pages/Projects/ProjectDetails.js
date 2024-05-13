@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { fetchProjectById } from "../../State/ProjectsState";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useParams, Outlet } from "react-router-dom";
-import { fetchTasksByProject } from "../../State/TasksState";
 import { GrOverview } from "react-icons/gr";
 import { CiViewBoard } from "react-icons/ci";
 import LoadingShape from "../../Components/LoadingShape.js/LoadingShape";
@@ -11,18 +10,25 @@ import TaskDetails from "./TaskDetails";
 import { hideTaskDetailsWindow } from "../../State/WindowsStates";
 import AddTask from "../../Components/AddTask/AddTask";
 import { hideAddTaskWindow } from "../../State/WindowsStates";
+import { fetchTasksByProject } from "../../State/TasksState";
 
 function ProjectDetails() {
   const { id } = useParams();
-  const project = useSelector((state) => state.projects.selectedProject);
-  const projectStatus = useSelector((state) => state.projects.projectStatus);
-  const tasks = useSelector((state) => state.tasks.tasksByProject);
-  const tasksStatus = useSelector((state) => state.tasks.tasksByProjectStatus);
+  const project = useSelector((state) => state.projects.project);
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const TasksStatus = useSelector((state) => state.tasks.fetchStatus);
+  const projectStatus = useSelector((state) => state.projects.fetchByIdStatus);
   const employees = useSelector((state) => state.employees.employees);
   const employeesStatus = useSelector((state) => state.employees.status);
   const taskDetails = useSelector((state) => state.windows.taskDetails.status);
   const addTask = useSelector((state) => state.windows.addTask);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (TasksStatus === "idle" || project.project_id !== id) {
+      dispatch(fetchProjectById(id));
+    }
+  }, [TasksStatus, id, project, dispatch]);
 
   useEffect(() => {
     if (employeesStatus === "idle") {
@@ -32,15 +38,9 @@ function ProjectDetails() {
 
   useEffect(() => {
     if (projectStatus === "idle" || project.project_id !== id) {
-      dispatch(fetchProjectById(id));
-    }
-  }, [projectStatus, dispatch, id]);
-
-  useEffect(() => {
-    if (tasksStatus === "idle" || project.project_id !== id) {
       dispatch(fetchTasksByProject(id));
     }
-  }, [tasksStatus, id, project, dispatch]);
+  }, [projectStatus, dispatch, id]);
 
   const classNameFunc = ({ isActive }) => (isActive ? "pd-active" : "pd-link");
 
@@ -64,7 +64,8 @@ function ProjectDetails() {
         <div className="c-off-title">
           {projectStatus === "loading" ||
           project?.project_id !== id ||
-          employeesStatus === "loading" ? (
+          employeesStatus === "loading" ||
+          TasksStatus !== "succeeded" ? (
             <LoadingShape height="20px" width="300px" borderRadius="10px" />
           ) : (
             project?.title
@@ -104,7 +105,7 @@ function ProjectDetails() {
               </div>
             ) : (
               <div className="w-100">
-                <Outlet context={{ project, tasks, employees, id }} />
+                <Outlet context={{ project, employees, id, tasks }} />
               </div>
             )}
           </div>

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "./JobOffers.css";
 import { MdOutlineSchedule } from "react-icons/md";
 import { FaMoneyBill } from "react-icons/fa";
@@ -11,12 +10,7 @@ import { IoClose } from "react-icons/io5";
 
 function OfferDetails() {
   const current_offer = useSelector((state) => state.offer.current_offer);
-  const offer = useSelector((state) =>
-    state.offer.offers.find((offer) => offer.id === current_offer)
-  );
-
   const dispatch = useDispatch();
-  const desc = offer.description.replace(/\n/g, "<br/>");
 
   return (
     <div className="od-container ">
@@ -25,7 +19,7 @@ function OfferDetails() {
           className="od-close d-block d-lg-none"
           onClick={() => dispatch(hideOfferDetails())}
         />
-        <div>{offer.title}</div>
+        <div>{current_offer?.title}</div>
         <button
           className="px-2 py-1"
           onClick={() => {
@@ -49,7 +43,7 @@ function OfferDetails() {
               <div className="od-req-title">Skills</div>
               <div className="od-skills-list d-flex list-unstyled container">
                 <div className="row">
-                  {offer.skills.map((item, index) => (
+                  {current_offer?.requirements.map((item, index) => (
                     <li className="od-req col-1" key={index}>
                       {item}
                     </li>
@@ -67,7 +61,9 @@ function OfferDetails() {
             />
             <div>
               <div className="od-req-title">Experience</div>
-              <div className="od-req">{offer.experience}</div>
+              <div className="od-req">
+                {current_offer?.experience + " years"}{" "}
+              </div>
             </div>
           </div>
         </div>
@@ -77,21 +73,21 @@ function OfferDetails() {
             <FaMoneyBill className="od-part-icon" />
             <div>
               <div className="od-req-title">Pay</div>
-              <div className="od-req">{offer.pay}</div>
+              <div className="od-req">{current_offer?.pay + " DT"}</div>
             </div>
           </div>
           <div className="od-part-content">
             <MdWork className="od-part-icon" />
             <div>
               <div className="od-req-title">Job type</div>
-              <div className="od-req">{offer.job_type}</div>
+              <div className="od-req">{current_offer?.job_type}</div>
             </div>
           </div>
           <div className="od-part-content">
             <MdOutlineSchedule className="od-part-icon" />
             <div>
               <div className="od-req-title">Workdays</div>
-              <div className="od-req">{offer.workdays}</div>
+              <div className="od-req">{current_offer?.workdays}</div>
             </div>
           </div>
         </div>
@@ -100,8 +96,10 @@ function OfferDetails() {
           <div className="od-part-title">Description</div>
           <div
             className="od-desc"
-            dangerouslySetInnerHTML={{ __html: desc }}
-          ></div>
+            // dangerouslySetInnerHTML={{ __html: desc }}
+          >
+            {current_offer?.description}
+          </div>
         </div>
       </div>
     </div>

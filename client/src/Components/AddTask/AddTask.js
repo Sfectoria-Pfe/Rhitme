@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./AddTask.css";
 import { IoMdClose } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { hideAddTaskWindow } from "../../State/WindowsStates";
 import Accordion from "react-bootstrap/Accordion";
+import { createTask } from "../../State/TasksState";
 
 function AddTask({ project }) {
-  console.log(project);
   const employees = useSelector((state) => state.employees.employees);
   const addTask = useSelector((state) => state.windows.addTask);
   const dispatch = useDispatch();
@@ -20,12 +20,8 @@ function AddTask({ project }) {
     start: "",
     end: "",
     points: "",
-    subtasks: [],
-    employee_done: false,
     manager_approved: false,
     status: "upcoming",
-    comments: [],
-    done_date: null,
   });
 
   const handleInputChange = (event) => {
@@ -60,9 +56,31 @@ function AddTask({ project }) {
       newTask.end.trim() !== "" &&
       newTask.description.trim() !== "" &&
       newTask.points.trim() !== "" &&
-      newTask.employee_id !== ""
+      newTask.employee !== ""
     );
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(newTask);
+    dispatch(createTask(newTask));
+    // setNewTask({
+    //   project: project,
+    //   employee: "",
+    //   title: "",
+    //   description: "",
+    //   start: "",
+    //   end: "",
+    //   points: "",
+    //   status: "upcoming",
+    //   done_date: null,
+    // });
+    window.location.reload();
+    setSelectedEmployee(null);
+    setAccordionOpen(false);
+    dispatch(hideAddTaskWindow());
+  };
+
   console.log(newTask);
   return (
     <div
@@ -77,7 +95,7 @@ function AddTask({ project }) {
         />
         <div>Add Task</div>
       </div>
-      <form className="ao-form d-flex flex-column">
+      <form className="ao-form d-flex flex-column" onSubmit={handleSubmit}>
         <div className="d-flex flex-column ae-input">
           <label htmlFor="title">Taks title</label>
           <input
@@ -129,7 +147,6 @@ function AddTask({ project }) {
               id="points"
               name="points"
               placeholder="Points"
-              type="number"
               min="0"
               style={{ width: "120px" }}
               value={newTask.points}
@@ -192,7 +209,7 @@ function AddTask({ project }) {
                         }}
                         onClick={() =>
                           handleEmployeeClick(
-                            employee.user_id,
+                            employee.employee_id,
                             employee.photo,
                             employee.first_name + " " + employee.last_name
                           )

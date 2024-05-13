@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { RiSuitcaseFill } from "react-icons/ri";
 import { useState } from "react";
@@ -7,9 +7,11 @@ import { fetchDepartment } from "../../../State/DepartmentState";
 import EmployeeChange from "./EmployeeChange";
 import { IoIosAdd } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import { updateEmployee } from "../../../State/EmployeesState";
+import { changeEmployee } from "../../../State/EmployeesState";
 
 function Job() {
-  const { employee, selectedDepartment } = useOutletContext();
+  const { employee } = useOutletContext();
   const [editableEmployee, setEditableEmployee] = useState(employee);
   const departments = useSelector((state) => state.department.departments);
   const status = useSelector((state) => state.department.fetchDepartmentStatus);
@@ -23,7 +25,7 @@ function Job() {
     setEditableEmployee(employee);
   };
   useEffect(() => {
-    if (status === "idle" && employee && selectedDepartment) {
+    if (status === "idle" && employee) {
       dispatch(fetchDepartment());
     }
   }, [dispatch, status]);
@@ -79,9 +81,44 @@ function Job() {
     setSave(true);
   };
 
+  const onSave = () => {
+    let updateData = {
+      department_id: editableEmployee.department_id,
+      first_name: editableEmployee.first_name,
+      last_name: editableEmployee.last_name,
+      phone: editableEmployee.phone,
+      gender: editableEmployee.gender,
+      birthday: editableEmployee.birthday,
+      marital_status: editableEmployee.marital_status,
+      cin: editableEmployee.cin,
+      state: editableEmployee.address.state,
+      city: editableEmployee.address.city,
+      street: editableEmployee.address.street,
+      zip: editableEmployee.address.zip,
+      country: editableEmployee.address.country,
+      email: editableEmployee.email,
+      password: editableEmployee.password,
+      job: editableEmployee.job,
+      status: editableEmployee.status,
+      photo: editableEmployee.photo,
+      role_id: editableEmployee.role_id,
+      salary: editableEmployee.salary,
+      skills: editableEmployee.skills,
+      last_opened: editableEmployee.last_opened,
+    };
+    dispatch(
+      updateEmployee({
+        employeeId: editableEmployee.employee_id,
+        employeeData: updateData,
+      })
+    );
+    dispatch(changeEmployee(editableEmployee));
+    setSave(false);
+  };
+
   return (
     <div className="pi-container w-100 mt-3 d-flex flex-column ">
-      <EmployeeChange save={save} onCancel={onCancel} />
+      <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
 
       <div className="pi-header d-flex align-items-center">
         <RiSuitcaseFill className="pi-header-icon" />
@@ -166,6 +203,7 @@ function Job() {
                           skills: [...prevEmployee.skills, newSkill],
                         }));
                         setNewSkill("");
+                        setSave(true);
                       }}
                     >
                       Add skill

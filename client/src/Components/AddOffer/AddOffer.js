@@ -1,9 +1,9 @@
-import React from "react";
 import "./AddOffer.css";
 import { IoMdClose } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { hideAddOfferWindow } from "../../State/WindowsStates";
 import { useState, useEffect } from "react";
+import { createOffer } from "../../State/OffersSlice";
 
 function AddOffer() {
   const addOffer = useSelector((state) => state.windows.addOffer);
@@ -11,7 +11,7 @@ function AddOffer() {
   const initialFormData = {
     title: "",
     summary: [""],
-    skills: [""],
+    requirements: [""],
     experience: "",
     pay: "",
     job_type: "",
@@ -42,7 +42,7 @@ function AddOffer() {
   const handleDynamicChange = (field, index, value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [field]: prevFormData[field].map((item, idx) =>
+      [field]: prevFormData[field]?.map((item, idx) =>
         idx === index ? value : item
       ),
     }));
@@ -57,7 +57,10 @@ function AddOffer() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(createOffer(formData));
+    dispatch(hideAddOfferWindow());
+    setFormData(initialFormData);
+    window.location.reload();
   };
 
   const handleTextareaHeight = (event) => {
@@ -121,20 +124,23 @@ function AddOffer() {
           <label htmlFor="skills">Required skills</label>
           <div className="ao-dynamic-skill d-flex flex-column container  pe-0">
             <div className="row">
-              {formData.skills.map((value, index) => (
+              {formData.requirements.map((value, index) => (
                 <input
                   key={index}
                   type="text"
                   value={value}
                   onChange={(e) =>
-                    handleDynamicChange("skills", index, e.target.value)
+                    handleDynamicChange("requirements", index, e.target.value)
                   }
                   placeholder="Skill"
                   className="col-5"
                 />
               ))}
             </div>
-            <button type="button" onClick={() => handleAddField("skills")}>
+            <button
+              type="button"
+              onClick={() => handleAddField("requirements")}
+            >
               Add Skill
             </button>
           </div>
@@ -147,7 +153,6 @@ function AddOffer() {
                 id="exp"
                 name="experience"
                 placeholder="Exp"
-                type="number"
                 min="0"
                 style={{ width: "100px" }}
                 value={formData.experience}

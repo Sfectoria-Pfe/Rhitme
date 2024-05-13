@@ -13,6 +13,7 @@ import {
   hideAddDepartmentWindow,
 } from "../../State/WindowsStates";
 import AddDepartment from "../../Components/AddDepartment/AddDepartment";
+import { updateDepartment } from "../../State/DepartmentState";
 
 function Departments() {
   const departements = useSelector((state) => state.department.departments);
@@ -26,12 +27,25 @@ function Departments() {
   const [editName, setEditName] = useState(false);
   const [save, setSave] = useState(false);
   const addDepartment = useSelector((state) => state.windows.addDepartment);
-  const [selectedDepartmentId, setSelectedDepartmentId] = useState(null);
+  const updateStatus = (state) => state.department.updateDepartmentStatus;
 
   const onCancel = () => {
     setSave(false);
     setEditableDepartments(departements);
     setEditName(false);
+  };
+
+  const onSave = () => {
+    editableDepartments.forEach((element) => {
+      dispatch(
+        updateDepartment({
+          departmentId: element.department_id,
+          department: element,
+        })
+      );
+    });
+    setEditName(false);
+    setSave(false);
   };
 
   useEffect(() => {
@@ -72,7 +86,7 @@ function Departments() {
     if (departmentIndex !== -1) {
       updatedDepartments[departmentIndex] = {
         ...updatedDepartments[departmentIndex],
-        department_head_id: newHead,
+        department_head: newHead,
       };
       setEditableDepartments(updatedDepartments);
 
@@ -91,7 +105,7 @@ function Departments() {
           if (addDepartment) dispatch(hideAddDepartmentWindow());
         }}
       >
-        <EmployeeChange save={save} onCancel={onCancel} />
+        <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
         {departementStatus === "loading" || employeesStatus === "loading" ? (
           <div className="spinner-container">
             <div className="spinner">
@@ -163,7 +177,7 @@ function Departments() {
                       style={{ gap: "10px" }}
                     >
                       <div>
-                        {item.department_head_id === null ? (
+                        {item.department_head === null ? (
                           <div className="dep-no-head">
                             Department head has not yet been appointed
                           </div>
@@ -177,46 +191,49 @@ function Departments() {
                               to={`../employeeInfos/${
                                 employees.find(
                                   (employee) =>
-                                    employee.user_id === item.department_head_id
-                                )?.user_id
+                                    employee.employee_id ===
+                                    item.department_head
+                                )?.employee_id
                               }`}
                             >
                               <img
                                 src={
                                   employees.find(
                                     (employee) =>
-                                      employee.user_id ===
-                                      item.department_head_id
+                                      employee.employee_id ===
+                                      item.department_head
                                   )?.photo
                                 }
                               />
                               <div className="dep-head-name">
                                 {employees.find(
                                   (employee) =>
-                                    employee.user_id === item.department_head_id
+                                    employee.employee_id ===
+                                    item.department_head
                                 )?.first_name +
                                   " " +
                                   employees.find(
                                     (employee) =>
-                                      employee.user_id ===
-                                      item.department_head_id
+                                      employee.employee_id ===
+                                      item.department_head
                                   )?.last_name}
                               </div>
                               <div
                                 className={`e-status ${
                                   employees.find(
                                     (employee) =>
-                                      employee.user_id ===
-                                      item.department_head_id
-                                  )?.status === "active"
+                                      employee.employee_id ===
+                                      item.department_head
+                                  )?.status === "Active"
                                     ? "e-active"
                                     : "e-out"
                                 }`}
                               >
                                 {employees.find(
                                   (employee) =>
-                                    employee.user_id === item.department_head_id
-                                )?.status === "active"
+                                    employee.employee_id ===
+                                    item.department_head
+                                )?.status === "Active"
                                   ? "Active"
                                   : "Out"}
                               </div>
@@ -253,13 +270,13 @@ function Departments() {
                                     (employee) =>
                                       employee.department_id ===
                                         item.department_id &&
-                                      employee.user_id !==
-                                        item.department_head_id
+                                      employee.employee_id !==
+                                        item.department_head
                                   )
                                   .map((employee) => (
                                     <div
                                       className="dep-head d-flex justify-content-start align-items-center py-2 my-1"
-                                      key={employee.user_id}
+                                      key={employee.employee_id}
                                       style={{
                                         gap: "10px",
                                         cursor: "pointer",
@@ -267,7 +284,7 @@ function Departments() {
                                       onClick={() =>
                                         handleDepartmentHeadChange(
                                           item.department_id,
-                                          employee.user_id
+                                          employee.employee_id
                                         )
                                       }
                                     >
@@ -296,16 +313,16 @@ function Departments() {
                                     (employee) =>
                                       employee.department_id ===
                                         item.department_id &&
-                                      employee.user_id !==
-                                        item.department_head_id
+                                      employee.employee_id !==
+                                        item.department_head
                                   ).length +
                                     " " +
                                     (employees.filter(
                                       (employee) =>
                                         employee.department_id ===
                                           item.department_id &&
-                                        employee.user_id !==
-                                          item.department_head_id
+                                        employee.employee_id !==
+                                          item.department_head
                                     ).length === 1
                                       ? "employee"
                                       : "employees")}
@@ -320,16 +337,17 @@ function Departments() {
                                   (employee) =>
                                     employee.department_id ===
                                       item.department_id &&
-                                    employee.user_id !== item.department_head_id
+                                    employee.employee_id !==
+                                      item.department_head
                                 )
                                 .map((employee) => (
                                   <Link
                                     className="dep-head d-flex justify-content-around align-items-center py-2 my-1"
-                                    to={`../employeeInfos/${employee.user_id}`}
+                                    to={`../employeeInfos/${employee.employee_id}`}
                                     style={{
                                       borderBottom: "solid 1px #000000b4",
                                     }}
-                                    key={employee.user_id}
+                                    key={employee.employee_id}
                                   >
                                     <img src={employee.photo} />
                                     <div className="dep-head-name">
@@ -339,12 +357,12 @@ function Departments() {
                                     </div>
                                     <div
                                       className={`e-status ${
-                                        employee.status === "active"
+                                        employee.status === "Active"
                                           ? "e-active"
                                           : "e-out"
                                       }`}
                                     >
-                                      {employee.status === "active"
+                                      {employee.status === "Active"
                                         ? "Active"
                                         : "Out"}
                                     </div>
