@@ -1,13 +1,19 @@
-import { Employees } from "@prisma/client";
-import { IsDate, IsEmail, IsISO8601, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { Year } from '@prisma/client';
+import { Type } from 'class-transformer/types/decorators/type.decorator';
+import {
+  IsNotEmpty,
+  IsEmail,
+  IsString,
+  IsOptional,
+  IsISO8601,
+  IsArray,
+  ValidateNested,
+} from 'class-validator';
 
-export class AddUserDto {
-  @IsString()
-  department_id: string;
-
+export class CreateEmployeeDto {
   @IsString()
   @IsNotEmpty()
-  last_name: string;
+  department_id: string;
 
   @IsString()
   @IsNotEmpty()
@@ -15,11 +21,15 @@ export class AddUserDto {
 
   @IsString()
   @IsNotEmpty()
-  phone_number: string;
+  last_name: string;
 
-  @IsISO8601()
+  @IsString()
   @IsNotEmpty()
-  birthday: Date;
+  phone: string;
+
+  @IsNotEmpty()
+  @IsString()
+  birthday: string;
 
   @IsString()
   @IsNotEmpty()
@@ -27,26 +37,25 @@ export class AddUserDto {
 
   @IsString()
   @IsNotEmpty()
-  CIN: string;
+  marital_status: string;
 
   @IsString()
   @IsNotEmpty()
-  street: string;
+  cin: string;
 
   @IsString()
-  @IsNotEmpty()
-  city: string;
-
-  @IsString()
-  @IsNotEmpty()
   state: string;
 
   @IsString()
-  @IsNotEmpty()
+  city: string;
+
+  @IsString()
+  street: string;
+
+  @IsString()
   zip: string;
 
   @IsString()
-  @IsNotEmpty()
   country: string;
 
   @IsEmail()
@@ -61,53 +70,121 @@ export class AddUserDto {
   @IsNotEmpty()
   job: string;
 
-  photo?: Express.Multer.File;
+  @IsString()
+  @IsNotEmpty()
+  role_id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  salary: string;
 }
-export class UpdateUserDto {
-  @IsOptional()
-  @IsString()
-  department_id?: string;
 
+export class UpdateEmployeeDto {
   @IsOptional()
   @IsString()
-  last_name?: string;
+  @IsNotEmpty()
+  department_id: string;
 
   @IsOptional()
   @IsString()
-  first_name?: string;
+  @IsNotEmpty()
+  first_name: string;
 
   @IsOptional()
   @IsString()
-  phone?: string;
+  @IsNotEmpty()
+  last_name: string;
 
   @IsOptional()
   @IsString()
-  gender?: string;
+  @IsNotEmpty()
+  phone: string;
 
   @IsOptional()
   @IsString()
-  CIN?: string;
+  @IsNotEmpty()
+  birthday: Date;
 
   @IsOptional()
   @IsString()
-  address?: string;
-
-  @IsOptional()
-  @IsEmail()
-  email?: string;
+  @IsNotEmpty()
+  gender: string;
 
   @IsOptional()
   @IsString()
-  password?: string;
+  @IsNotEmpty()
+  marital_status: string;
 
   @IsOptional()
   @IsString()
-  job?: string;
-  
-  @IsOptional()
-  photo: Express.Multer.File;
+  @IsNotEmpty()
+  cin: string;
 
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  state: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  city: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  street: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  zip: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  country: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  job: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  status: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  photo: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  role_id: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  salary: string;
+
+  @IsOptional()
+  @IsString({ each: true })
+  skills: string[];
+
+  @IsOptional()
+  @IsString()
+  last_opened: Date;
 }
-export class DeleteUserDto {
-    user_id: string;
-  }

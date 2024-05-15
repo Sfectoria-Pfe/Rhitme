@@ -1,18 +1,71 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const response = await axios.get("http://localhost:3000/tasks.json");
-  return response.data;
-});
-
 export const fetchTasksByProject = createAsyncThunk(
   "tasks/fetchTasksByProject",
-  async (id) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    const response = await axios.get("http://localhost:3000/tasks.json");
-    const tasks = response.data.filter((obj) => obj.project_id === id);
-    return tasks;
+  async (projectId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/tasks/project/${projectId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw Error(error.response.data.message);
+    }
+  }
+);
+
+export const fetchTaskById = createAsyncThunk(
+  "tasks/fetchTaskById",
+  async (taskId) => {
+    try {
+      const response = await axios.get(`http://localhost:3000/tasks/${taskId}`);
+      return response.data;
+    } catch (error) {
+      throw Error(error.response.data.message);
+    }
+  }
+);
+
+export const createTask = createAsyncThunk(
+  "tasks/createTask",
+  async (taskData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/tasks",
+        taskData
+      );
+      return response.data;
+    } catch (error) {
+      throw Error(error.response.data.message);
+    }
+  }
+);
+
+export const updateTask = createAsyncThunk(
+  "tasks/updateTask",
+  async ({ taskId, taskData }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/tasks/${taskId}`,
+        taskData
+      );
+      return response.data;
+    } catch (error) {
+      throw Error(error.response.data.message);
+    }
+  }
+);
+
+export const deleteTask = createAsyncThunk(
+  "tasks/deleteTask",
+  async (taskId) => {
+    try {
+      await axios.delete(`http://localhost:3000/tasks/${taskId}`);
+      return taskId;
+    } catch (error) {
+      throw Error(error.response.data.message);
+    }
   }
 );
 
@@ -20,51 +73,86 @@ export const TasksSlice = createSlice({
   name: "tasks",
   initialState: {
     tasks: [],
-    status: "idle",
+    task: {},
+    fetchStatus: "idle",
+    fetchByIdStatus: "idle",
+    createStatus: "idle",
+    updateStatus: "idle",
+    deleteStatus: "idle",
     error: null,
-    tasksByProject: [],
-    tasksByProjectStatus: "idle",
-    tasksByProjectError: null,
   },
   reducers: {
-    updateTask(state, action) {
+    changeTask(state, action) {
       const updatedTask = action.payload;
-      state.tasksByProject = state.tasksByProject.map((task) =>
+      state.tasks = state.tasks.map((task) =>
         task.task_id === updatedTask.task_id ? updatedTask : task
       );
-    },
-    reorderTasks(state, action) {
-      const { listType, updatedTasks } = action.payload;
-      state[listType] = updatedTasks;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchTasks.pending, (state, action) => {
-        state.status = "loading";
-      })
-      .addCase(fetchTasks.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.tasks = action.payload;
-      })
-      .addCase(fetchTasks.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      .addCase(fetchTasksByProject.pending, (state, action) => {
-        state.tasksByProjectStatus = "loading";
+      .addCase(fetchTasksByProject.pending, (state) => {
+        state.fetchStatus = "loading";
       })
       .addCase(fetchTasksByProject.fulfilled, (state, action) => {
-        state.tasksByProjectStatus = "succeeded";
-        state.tasksByProject = action.payload;
+        state.fetchStatus = "succeeded";
+        state.tasks = action.payload;
+        state.error = null;
       })
       .addCase(fetchTasksByProject.rejected, (state, action) => {
-        state.tasksByProjectStatus = "failed";
-        state.tasksByProjectError = action.error.message;
+        state.fetchStatus = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(fetchTaskById.pending, (state) => {
+        state.fetchByIdStatus = "loading";
+      })
+      .addCase(fetchTaskById.fulfilled, (state, action) => {
+        state.fetchByIdStatus = "succeeded";
+        state.task = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchTaskById.rejected, (state, action) => {
+        state.fetchByIdStatus = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(createTask.pending, (state) => {
+        state.createStatus = "loading";
+      })
+      .addCase(createTask.fulfilled, (state, action) => {
+        state.createStatus = "succeeded";
+        state.tasks.push(action.payload);
+        state.error = null;
+      })
+      .addCase(createTask.rejected, (state, action) => {
+        state.createStatus = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(updateTask.pending, (state) => {
+        state.updateStatus = "loading";
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        state.updateStatus = "succeeded";
+        state.error = null;
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.updateStatus = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.deleteStatus = "loading";
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.deleteStatus = "succeeded";
+        state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+        state.error = null;
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        state.deleteStatus = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-export const { updateTask, reorderTasks } = TasksSlice.actions;
+export const { changeTask } = TasksSlice.actions;
 
 export default TasksSlice.reducer;

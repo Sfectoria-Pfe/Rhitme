@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import "./EmployeeInfosPages.css";
 import { FaUserAlt } from "react-icons/fa";
@@ -7,15 +6,31 @@ import { useOutletContext } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import EmployeeChange from "./EmployeeChange";
+import { updateEmployee } from "../../../State/EmployeesState";
+import { useDispatch } from "react-redux";
+import { changeEmployee } from "../../../State/EmployeesState";
 
 function Personal() {
   const { employee } = useOutletContext();
   const [editableEmployee, setEditableEmployee] = useState(employee);
   const [save, setSave] = useState(false);
+  const dispatch = useDispatch();
 
+  console.log(employee);
   const onCancel = () => {
     setSave(false);
     setEditableEmployee(employee);
+  };
+
+  const updateAddress = (field, value) => {
+    setEditableEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      address: {
+        ...prevEmployee.address,
+        [field]: value,
+      },
+    }));
+    setSave(true);
   };
 
   const handleChange = (e, field) => {
@@ -74,9 +89,44 @@ function Personal() {
     return age;
   }
 
+  const onSave = () => {
+    let updateData = {
+      department_id: editableEmployee.department_id,
+      first_name: editableEmployee.first_name,
+      last_name: editableEmployee.last_name,
+      phone: editableEmployee.phone,
+      gender: editableEmployee.gender,
+      birthday: editableEmployee.birthday,
+      marital_status: editableEmployee.marital_status,
+      cin: editableEmployee.cin,
+      state: editableEmployee.address.state,
+      city: editableEmployee.address.city,
+      street: editableEmployee.address.street,
+      zip: editableEmployee.address.zip,
+      country: editableEmployee.address.country,
+      email: editableEmployee.email,
+      password: editableEmployee.password,
+      job: editableEmployee.job,
+      status: editableEmployee.status,
+      photo: editableEmployee.photo,
+      role_id: editableEmployee.role_id,
+      salary: editableEmployee.salary,
+      skills: editableEmployee.skills,
+      last_opened: editableEmployee.last_opened,
+    };
+    dispatch(
+      updateEmployee({
+        employeeId: editableEmployee.employee_id,
+        employeeData: updateData,
+      })
+    );
+
+    dispatch(changeEmployee(editableEmployee));
+    setSave(false);
+  };
   return (
     <div className="pi-container w-100 mt-3 d-flex flex-column ">
-      <EmployeeChange save={save} onCancel={onCancel} />
+      <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
 
       <div className="pi-header d-flex align-items-center ">
         <FaUserAlt className="pi-header-icon" />
@@ -147,7 +197,7 @@ function Personal() {
             </div>
             <div className="pi-content-single-info d-flex flex-column">
               <label htmlFor="cin">CIN</label>
-              <input id="cin" defaultValue={employee.CIN} readOnly />
+              <input id="cin" defaultValue={employee.cin} readOnly />
             </div>
           </div>
         </div>
@@ -162,7 +212,7 @@ function Personal() {
               <input
                 id="street"
                 value={editableEmployee.address.street}
-                onChange={(e) => handleChange(e, "address.street")}
+                onChange={(e) => updateAddress("street", e.target.value)}
               />
             </div>
             <div className="pi-section-group d-flex container m-0 p-0">
@@ -172,7 +222,7 @@ function Personal() {
                   <input
                     id="city"
                     value={editableEmployee.address.city}
-                    onChange={(e) => handleChange(e, "address.city")}
+                    onChange={(e) => updateAddress("city", e.target.value)}
                   />
                 </div>
                 <div className="pi-content-info d-flex flex-column col mb-2 mb-sm-0">
@@ -180,7 +230,7 @@ function Personal() {
                   <input
                     id="state"
                     value={editableEmployee.address.state}
-                    onChange={(e) => handleChange(e, "address.state")}
+                    onChange={(e) => updateAddress("state", e.target.value)}
                   />
                 </div>
                 <div className="pi-content-info d-flex flex-column col">
@@ -188,7 +238,7 @@ function Personal() {
                   <input
                     id="zip"
                     value={editableEmployee.address.zip}
-                    onChange={(e) => handleChange(e, "address.zip")}
+                    onChange={(e) => updateAddress("zip", e.target.value)}
                   />
                 </div>
               </div>
@@ -198,7 +248,7 @@ function Personal() {
               <input
                 id="country"
                 value={editableEmployee.address.country}
-                onChange={(e) => handleChange(e, "address.zip")}
+                onChange={(e) => updateAddress("country", e.target.value)}
               />
             </div>
           </div>

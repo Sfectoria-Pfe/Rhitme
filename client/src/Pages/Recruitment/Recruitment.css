@@ -40,6 +40,7 @@
 
 .c-offer-part {
   height: fit-content;
+  width: 100%;
 }
 
 .c-off-content {
@@ -209,4 +210,62 @@
 
 .c-candidate-part-content {
   gap: 15px;
+}
+
+.c-no-candidate {
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  color: #070f2b;
+  font-weight: 500;
+}
+
+.del-off-icon {
+  color: #070f2b !important;
+}
+
+.del-offer-btn {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 35px;
+  border: solid 2px;
+  padding: 0px 20px;
+  background-color: transparent;
+  color: #070f2b;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+.del-offer-btn .icon {
+  font-size: 120%;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: #070f2b;
+  transition-duration: 0.3s;
+}
+
+.del-offer-btn:hover {
+  color: transparent;
+  border: solid 2px #070f2b;
+}
+
+.del-offer-btn:hover .icon {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.del-offer-btn:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px #070f2b;
 }

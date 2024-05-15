@@ -4,9 +4,12 @@ import { IoMdClose } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { hideAddDepartmentWindow } from "../../State/WindowsStates";
 import { useState } from "react";
+import { addDepartment } from "../../State/DepartmentState";
 
-function AddDepartment({ employees }) {
-  const addDepartment = useSelector((state) => state.windows.addDepartment);
+function AddDepartment() {
+  const addDepartmentWindow = useSelector(
+    (state) => state.windows.addDepartment
+  );
   const dispatch = useDispatch();
   const [departmentName, setDepartmentName] = useState("");
 
@@ -16,7 +19,7 @@ function AddDepartment({ employees }) {
   return (
     <div
       className={`ao-container d-flex flex-column align-items-center position-absolute py-2  ${
-        addDepartment ? "ad-active" : ""
+        addDepartmentWindow ? "ad-active" : ""
       }`}
     >
       <div className="ae-title ">
@@ -40,6 +43,7 @@ function AddDepartment({ employees }) {
           className="ao-form-submit"
           type="submit"
           disabled={!departmentName.trim()}
+          onClick={() => dispatch(addDepartment(departmentName))}
         >
           Add
         </button>

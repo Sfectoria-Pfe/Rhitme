@@ -15,30 +15,30 @@ function Management() {
           <div className="row d-flex justify-content-around">
             <List type="done">
               {tasks
-                .filter((task) => task.employee_done)
-                .map((item, index) => {
-                  return <Task task={item} index={index} key={item.task_id} />;
+                .filter((task) => task.status === "done")
+                .map((item) => {
+                  return <Task task={item} key={item.task_id} />;
                 })}
             </List>
             <List type="progress">
               {tasks
                 .filter((task) => task.status === "in progress")
-                .map((item, index) => {
-                  return <Task task={item} index={index} key={item.task_id} />;
+                .map((item) => {
+                  return <Task task={item} key={item.task_id} />;
                 })}
             </List>
             <List type="todo">
               {tasks
                 .filter((task) => task.status === "todo")
-                .map((item, index) => {
-                  return <Task task={item} index={index} key={item.task_id} />;
+                .map((item) => {
+                  return <Task task={item} key={item.task_id} />;
                 })}
             </List>
             <List type="upcoming">
               {tasks
-                .filter((task) => task.status === null && !task.employee_done)
-                .map((item, index) => {
-                  return <Task task={item} index={index} key={item.task_id} />;
+                .filter((task) => task.status === "upcoming")
+                .map((item) => {
+                  return <Task task={item} key={item.task_id} />;
                 })}
             </List>
           </div>

@@ -3,18 +3,42 @@ import axios from "axios";
 
 export const fetchDepartment = createAsyncThunk(
   "department/fetchDepartment",
-  async () => {
-    const response = await axios.get("http://localhost:3000/departements.json");
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("http://localhost:3000/departments");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
 );
 
-export const fetchDepartmentById = createAsyncThunk(
-  "department/fetchDepartmentById",
-  async (id) => {
-    const response = await axios.get("http://localhost:3000/departements.json");
-    const department = response.data.find((obj) => obj.department_id === id);
-    return department;
+export const updateDepartment = createAsyncThunk(
+  "department/update",
+  async ({ departmentId, department }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/departments/${departmentId}`,
+        department
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const addDepartment = createAsyncThunk(
+  "department/add",
+  async (departmentName, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("http://localhost:3000/departments", {
+        department_name: departmentName,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -22,9 +46,9 @@ export const DepartmentSlice = createSlice({
   name: "department",
   initialState: {
     departments: [],
-    selectedDepartment: null,
     fetchDepartmentStatus: "idle",
-    fetchDepartmentByIdStatus: "idle",
+    updateDepartmentStatus: "idle",
+    addDepartmentStatus: "idle",
     error: null,
   },
   reducers: {},
@@ -38,21 +62,40 @@ export const DepartmentSlice = createSlice({
         if (state.departments.length === 0) {
           state.departments = state.departments.concat(action.payload);
         }
+        state.error = null;
       })
       .addCase(fetchDepartment.rejected, (state, action) => {
         state.fetchDepartmentStatus = "failed";
-        state.error = action.error.message;
+        state.error = action.payload;
       })
-      .addCase(fetchDepartmentById.pending, (state, action) => {
-        state.fetchDepartmentByIdStatus = "loading";
+      .addCase(updateDepartment.pending, (state, action) => {
+        state.updateDepartmentStatus = "loading";
       })
-      .addCase(fetchDepartmentById.fulfilled, (state, action) => {
-        state.fetchDepartmentByIdStatus = "succeeded";
-        state.selectedDepartment = action.payload;
+      .addCase(updateDepartment.fulfilled, (state, action) => {
+        state.updateDepartmentStatus = "succeeded";
+        state.departments = state.departments.map((department) =>
+          department.department_id === action.payload.department_id
+            ? action.payload
+            : department
+        );
+        state.error = null;
       })
-      .addCase(fetchDepartmentById.rejected, (state, action) => {
-        state.fetchDepartmentByIdStatus = "failed";
-        state.error = action.error.message;
+      .addCase(updateDepartment.rejected, (state, action) => {
+        state.updateDepartmentStatus = "failed";
+        state.error = action.payload;
+      })
+      .addCase(addDepartment.pending, (state) => {
+        state.addDepartmentStatus = "loading";
+        state.error = null;
+      })
+      .addCase(addDepartment.fulfilled, (state, action) => {
+        state.addDepartmentStatus = "succeeded";
+        state.departments.push(action.payload);
+        state.error = null;
+      })
+      .addCase(addDepartment.rejected, (state, action) => {
+        state.addDepartmentStatus = "failed";
+        state.error = action.payload;
       });
   },
 });

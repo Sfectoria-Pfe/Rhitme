@@ -1,41 +1,63 @@
-import { Controller, Post, Body, Param, Put, Delete, Get, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { UserService } from './user.service';
-import { Employees } from '@prisma/client';
-import { AddUserDto, UpdateUserDto } from './user.dto';
-// import { FileInterceptor } from '@nestjs/platform-express';
-// import { diskStorage } from 'multer';
-// import { extname } from 'path';
-// import * as path from 'path';
+import {
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Param,
+  Body,
+  NotFoundException,
+} from '@nestjs/common';
+import { EmployeeService } from './user.service';
+import { Employee } from '@prisma/client';
+import { CreateEmployeeDto, UpdateEmployeeDto } from './user.dto';
 
-@Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('employees')
+export class EmployeeController {
+  constructor(private readonly employeeService: EmployeeService) {}
 
-  @Post('add')
-  async addUser(@Body() addUserDto: AddUserDto): Promise<Employees> {
-    // const user = await this.userService.addUser(addUserDto, profilePicture);
-    const user = await this.userService.addUser(addUserDto);
-    return user;
+  @Get()
+  async getEmployees(): Promise<Employee[]> {
+    return this.employeeService.getEmployees();
+  }
+
+  @Get(':id')
+  async getEmployeeById(@Param('id') id: string): Promise<Employee> {
+    const employee = await this.employeeService.getEmployeeById(id);
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
+  }
+
+  @Post()
+  async createEmployee(
+    @Body() createEmployeeDto: CreateEmployeeDto,
+  ): Promise<Employee> {
+    return this.employeeService.createEmployee(createEmployeeDto);
   }
 
   @Put(':id')
-  async updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<Employees> {
-    const user = await this.userService.updateUser(id, updateUserDto);
-    return user;
+  async updateEmployee(
+    @Param('id') id: string,
+    @Body() updateEmployeeDto: UpdateEmployeeDto,
+  ): Promise<Employee> {
+    const employee = await this.employeeService.updateEmployee(
+      id,
+      updateEmployeeDto,
+    );
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
   }
 
   @Delete(':id')
-  async removeUser(@Param('id') id: string): Promise<Employees> {
-    return this.userService.removeUser(id);
-  }
-
-  @Get('employee/:id')
-  async getUserById(@Param('id') id: string): Promise<Employees> {
-    return this.userService.getUserById(id);
-  }
-
-  @Get('allusers')
-  async getAllUsers(): Promise<Employees[]> {
-    return this.userService.getAllUsers();
+  async deleteEmployee(@Param('id') id: string): Promise<Employee> {
+    const employee = await this.employeeService.deleteEmployee(id);
+    if (!employee) {
+      throw new NotFoundException('Employee not found');
+    }
+    return employee;
   }
 }

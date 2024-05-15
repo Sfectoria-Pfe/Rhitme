@@ -6,6 +6,7 @@ import Lottie from "lottie-react";
 import notFoundAnimation from "./Animation - 1710770583973.json";
 
 function NotFound() {
+  const isLoggedIn = localStorage.getItem("token") !== null;
   return (
     <div className="d-flex flex-column nf-container ">
       <Lottie
@@ -20,9 +21,15 @@ function NotFound() {
           access to it
         </div>
       </div>
-      <Link to="/" className="nf-link px-2">
-        Back to landing page
-      </Link>
+      {isLoggedIn ? (
+        <Link to="/dashboard" className="nf-link px-2">
+          Back to dashboard
+        </Link>
+      ) : (
+        <Link to="/" className="nf-link px-2">
+          Back to landing page
+        </Link>
+      )}
     </div>
   );
 }

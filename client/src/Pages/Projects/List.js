@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./Projects.css";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./Task";
-import { updateTask } from "../../State/TasksState";
+import { changeTask } from "../../State/TasksState";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosAdd } from "react-icons/io";
 import { showAddTaskWindow } from "../../State/WindowsStates";
+import { updateTask } from "../../State/TasksState";
 
 function List({ type, children }) {
   const [listName, setListName] = useState("");
   const [listColor, setListColor] = useState("");
-  const tasks = useSelector((state) => state.tasks.tasksByProject);
+  const tasks = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
   const addTask = useSelector((state) => state.windows.addTask);
 
@@ -21,26 +22,25 @@ function List({ type, children }) {
   function moveTask(status, task) {
     let updatedTask = { ...task.task };
     if (status === "done") {
-      updatedTask.status = null;
-      updatedTask.employee_done = true;
+      updatedTask.status = "done";
       updatedTask.done_date = currentDate;
     } else if (status === "progress") {
       updatedTask.status = "in progress";
-      updatedTask.employee_done = false;
       updatedTask.manager_approved = false;
       updatedTask.done_date = null;
     } else if (status === "todo") {
       updatedTask.status = "todo";
-      updatedTask.employee_done = false;
       updatedTask.manager_approved = false;
       updatedTask.done_date = null;
     } else {
       updatedTask.status = null;
-      updatedTask.employee_done = false;
       updatedTask.manager_approved = false;
       updatedTask.done_date = null;
     }
-    dispatch(updateTask(updatedTask));
+    dispatch(changeTask(updatedTask));
+    dispatch(
+      updateTask({ taskId: updatedTask.task_id, taskData: updatedTask })
+    );
   }
 
   useEffect(() => {
@@ -70,6 +70,8 @@ function List({ type, children }) {
     }),
     [type]
   );
+  console.log(type);
+  console.log(children);
 
   return (
     <div

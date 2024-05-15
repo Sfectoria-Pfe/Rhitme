@@ -4,17 +4,16 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState: {
     chat: false,
-    conversationID: "",
+    conversation: {},
   },
   reducers: {
-    showChat: (state) => {
+    showChat: (state, action) => {
       state.chat = true;
+      state.conversation = action.payload;
+      console.log(action.payload);
     },
     hideChat: (state) => {
       state.chat = false;
-    },
-    setConversationID: (state, action) => {
-      state.conversationID = action.payload;
     },
   },
 });

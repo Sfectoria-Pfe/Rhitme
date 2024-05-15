@@ -5,8 +5,9 @@ import { CircularProgressbar } from "react-circular-progressbar";
 
 function Project({ item, tasks }) {
   const managerApprovalPercentage =
-    tasks.length > 0
-      ? (tasks.filter((task) => task.manager_approved).length / tasks.length) *
+    tasks?.length > 0
+      ? (tasks?.filter((task) => task?.manager_approved).length /
+          tasks?.length) *
         100
       : 0;
 

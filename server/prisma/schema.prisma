@@ -13,265 +13,244 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Reports {
-  report_id   String    @id @default(uuid())
-  user        Employees @relation(fields: [user_id], references: [user_id])
-  user_id     String
-  created_at  DateTime
-  title       String
-  description String
-  type        String
-  receiver    String?
-}
-
-model Badgeuse {
-  badgeuse_id String    @id @default(uuid())
-  employee    Employees @relation(fields: [employee_id], references: [user_id])
-  employee_id String
-  created_at  DateTime
-  start_time  DateTime
-  end_start   DateTime
-}
-
-model Media {
-  media_id  String @id @default(uuid())
-  url       String
-  employee    Employees? @relation(fields: [employee_id], references: [user_id])
-  employee_id String?    @unique
-  departed    DepartedEmployee? @relation(fields: [departed_id],references: [departed_id])
-  departed_id String?    @unique
- }
-
-model Events {
-  event_id    String              @id @default(uuid())
-  coordinator String
-  title       String
-  description String
-  budget      Float
-  event       EventParticipants[]
-}
-
-model EventParticipants {
-  user     Employees @relation(fields: [user_id], references: [user_id])
-  user_id  String
-  event    Events    @relation(fields: [event_id], references: [event_id])
-  event_id String
-
-  @@id([user_id, event_id])
-}
-model Monthly{
-  month_id String    @id @default(uuid())
-  January  Int
-  February  Int 
-  March  Int
-  April  Int 
-  May  Int
-  June  Int 
-  July  Int
-  August  Int 
-  September  Int 
-  October  Int 
-  November  Int 
-  December  Int 
-  Employee Employees?
-}
-model Yearly{
-  year_id String @id @default(uuid())
-  y2023 Int
-  y2024  Int 
-  y2025 Int
-  y2026 Int
-  Employee Employees?
-
-}
-model Address{
-  address_id    String      @id @default(uuid())
-  street String
-  city   String
-  state  String
-  zip    String
-  country String
-  Employees Employees?
-}
-model absenceMonthly{
-  mabs_id     String    @id @default(uuid())
-    January  Int
-  February  Int 
-  March  Int
-  April  Int 
-  May  Int
-  June  Int 
-  July  Int
-  August  Int 
-  September  Int 
-  October  Int 
-  November  Int 
-  December  Int 
-  Employee Employees?
-}
-model absenceYearly{
-  yabs_id String @id @default(uuid())
-  y2023 Int
-  y2024 Int
-  y2025 Int 
-  y2026 Int 
-  Employee Employees?
-}
-model absence{
-  absence_id   String @id @default(uuid())
-  date DateTime
-  justificated Boolean @default(false)
-  employee   Employees  @relation(fields: [employee_id],references: [user_id])
-  employee_id String
-}
-model Employees {
-  user_id          String              @id @default(uuid())
-  department       Departments         @relation(fields: [department_id], references: [department_id])
-  department_id    String
-  last_name        String
-  first_name       String
-  phone            String
-  birthday         DateTime            @db.Date
-  gender           String
-  CIN              String              @unique
-  address_id       String             @unique
-  address          Address @relation(fields: [address_id],references: [address_id]) 
-  email            String              @unique
-  password         String
-  job              String
-  created_at       DateTime
-  status           String
-  photo            Media?
-  monthly_id       String             @unique
-  MonthlyPoints    Monthly @relation(fields: [monthly_id],references: [month_id])  
-  Yearly_id        String             @unique 
-  YearlyPoints    Yearly @relation(fields: [Yearly_id],references: [year_id])              
-  monthly_abs       String             @unique
-  Monthlyabs      absenceMonthly @relation(fields: [monthly_abs],references: [mabs_id])  
-  Yearly_abs        String             @unique 
-  Yearlyabs      absenceYearly @relation(fields: [Yearly_abs],references: [yabs_id])     
-  absence        absence[]
-  eventarticipants EventParticipants[]
-  role             Role[]
-  participants     Participants[]
-  messages         Messages[]
-  leaves           Leaves[]
-  tasks            Tasks[]
-  badgeuse         Badgeuse[]
-  report           Reports[]
-}
-model DepartedEmployee{
-  departed_id     String   @id @default(uuid())
-  email String
-  password String
-  job String
-  createdat DateTime
-  status String
-  photo Media?
-  marital_Status String
-  skills String
-  salary Int
-  date_left DateTime
-  reason String
-}
-model Departments {
+// Department table
+model Department {
   department_id   String      @id @default(uuid())
   department_name String
-  employees       Employees[]
+  employee        Employee?     @relation("DepartmentHead",fields: [department_head], references: [employee_id], onDelete: SetNull)
+  department_head String?     @unique
+  employees       Employee[]
 }
 
+// Address table
+model Address {
+  address_id   String   @id @default(uuid())
+  state        String
+  city         String
+  country      String
+  zip  String
+  street       String
+  employee_id  String?  @unique
+  employee     Employee? @relation(fields: [employee_id], references: [employee_id] , onDelete: Cascade)
+}
+
+// Role table
 model Role {
-  role_id    String    @id @default(uuid())
-  user       Employees @relation(fields: [user_id], references: [user_id])
-  user_id    String
-  role       String
-  permission Json
+  role_id   String   @id @default(uuid())
+  role_name String
+  employees Employee[]
 }
 
-model Participants {
-  conversation    Conversations @relation(fields: [conversation_id], references: [conversation_id])
-  conversation_id String
-  user            Employees     @relation(fields: [user_id], references: [user_id])
-  user_id         String
-
-  @@id([conversation_id, user_id])
+// Year table
+model Year {
+  year_id           String    @id @default(uuid())
+  year              String
+  monthly_absences  Int[]
+  monthly_points    Int[]
+  employee_id       String
+  employee          Employee  @relation(fields: [employee_id], references: [employee_id], onDelete: Cascade)
 }
 
-model Conversations {
-  conversation_id String         @id @default(uuid())
-  name            String
-  type            String
-  participants    Participants[]
-  messages        Messages[]
-}
-
-model Messages {
-  message_id      String        @id @default(uuid())
-  conversation    Conversations @relation(fields: [conversation_id], references: [conversation_id])
-  conversation_id String
-  user            Employees     @relation(fields: [user_id], references: [user_id])
-  user_id         String
-  content         String
-  sent_at         DateTime
-  senderId     String
-  recipientId  String
-}
-
-model Offers {
-  offer_id     String   @id @default(uuid())
-  position     String
+// Report table
+model Report {
+  report_id    String    @id @default(uuid())
+  employee_id  String
+  sender       Employee  @relation("reports_sent", fields: [employee_id], references: [employee_id], onDelete: Cascade)
+  created_at   DateTime  @default(now())
+  title        String
   description  String
+ receiver_id  String?
+  receiver     Employee? @relation("receiver",fields: [receiver_id], references: [employee_id])
+  replies     ReportReply[]
+}
+
+// ReportReply table
+model ReportReply {
+  report_reply_id String   @id @default(uuid())
+  report_id       String
+  report          Report   @relation(fields: [report_id], references: [report_id], onDelete: Cascade)
+  sender_id       String 
+  sender          Employee @relation(fields: [sender_id], references: [employee_id])
+  created_at      DateTime @default(now())
+  content         String
+}
+
+// Employee table
+model Employee {
+  employee_id     String    @id @default(uuid())
+  department_id   String
+  department      Department @relation(fields: [department_id], references: [department_id], onDelete: Cascade)
+  first_name      String
+  last_name       String
+  phone           String
+  birthday        DateTime
+  gender          String
+  marital_status  String
+  cin             String    @unique
+  address         Address?  
+  email           String    @unique
+  password        String
+  job             String
+  created_at      DateTime  @default(now())
+  status          String
+  photo           String
+  role_id         String
+  role            Role      @relation(fields: [role_id], references: [role_id])
+  salary          String
+  skills          String[]
+  last_opened     DateTime?
+  reports    Report[]  @relation("reports_sent")
+  reports_received Report[]  @relation("receiver")
+  years           Year[]
+  absences        Absence[] 
+  conversations    Conversation[]
+  messages_sent   Message[]      
+  projects       Project[]
+  tasks        Task[] 
+  Comments      Comment[]
+  reportReplies   ReportReply[]
+  departmentHead    Department?     @relation("DepartmentHead")
+}
+
+model DepartedEmployee {
+  employee_id    String   @id
+  department_id  String
+  last_name      String
+  first_name     String
+  phone          String
+  birthday       DateTime
+  gender         String
+  cin            String
+  email          String
+  password       String
+  job            String
+  created_at     DateTime
+  photo          String
+  role_id        String
+  marital_status String
+  skills         String[]
+  salary         String
+  date_left      DateTime @default(now())
+  reason         String
+}
+
+// Absence table
+model Absence {
+  absence_id    String    @id @default(uuid())
+  date          DateTime
+  justificated  Boolean
+  employee_id   String
+  employee      Employee  @relation(fields: [employee_id], references: [employee_id], onDelete: Cascade)
+}
+
+// Conversation table
+model Conversation {
+  conversation_id  String        @id @default(uuid())
+  name             String?
+  participants     Employee[]
+  messages         Message[]
+}
+
+// Message table
+model Message {
+  message_id    String    @id @default(uuid())
+  conversation_id String
+  conversation Conversation @relation(fields: [conversation_id], references: [conversation_id], onDelete: Cascade)
+  employee_id   String
+  sender        Employee  @relation(fields: [employee_id], references: [employee_id], onDelete: Cascade)
+  content       String
+  sent_at       DateTime  @default(now())
+  seen          Boolean   @default(false)
+}
+
+//Project table 
+model Project {
+  project_id    String   @id @default(uuid())
+  title         String
+  description   String
+  start         DateTime
+  end           DateTime
+  revenue       String
+  manager       Employee @relation(fields: [manager_id], references: [employee_id])
+  manager_id    String
+  client        String
+  delivered     Boolean
+  tasks        Task[] 
+}
+
+//Task table
+model Task {
+  task_id         String       @id @default(uuid())
+  project         Project      @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
+  project_id      String
+  employee        Employee?     @relation(fields: [employee_id], references: [employee_id], onDelete: SetNull)
+  employee_id     String?
+  title           String
+  description     String
+  start           DateTime
+  end             DateTime
+  points          String
+  status          String
+  manager_approved Boolean
+  done_date       DateTime?
+  comments        Comment[]
+  subtasks        Subtask[]
+}
+
+//Comment table 
+model Comment {
+  comment_id    String    @id @default(uuid()) @db.Uuid
+  content       String
+  created_at    DateTime  @default(now())
+  task          Task      @relation(fields: [task_id], references: [task_id])
+  task_id       String
+  commentator   Employee  @relation(fields: [commentator_id], references: [employee_id])
+  commentator_id   String
+}
+
+//Subtask table 
+model Subtask {
+  subtask_id String @id @default(uuid()) 
+  name       String
+  done       Boolean @default(false)
+  task_id    String
+  task       Task    @relation(fields: [task_id], references: [task_id])
+}
+
+//Offer table
+model Offer {
+  offer_id     String     @id @default(uuid())
+  title        String
+  description  String
+  summary      String[]
   requirements String[]
-  posts        Posts[]
+  experience   String
+  pay          String
+  job_type     String
+  workdays     String
+  urgent       Boolean
+  posts        Post[]
 }
 
-model Candidates {
-  candidate_id String  @id @default(uuid())
+//Candidate table
+model Candidate {
+  candidate_id String     @id @default(uuid())
+  first_name   String
+  last_name    String
+  email        String
+  phone        String
   cv           String
-  accuracy     Int
-  posts        Posts[]
+  posts        Post[]
 }
 
-model Posts {
-  offer        Offers     @relation(fields: [offer_id], references: [offer_id])
+//Post table
+model Post {
+  offer        Offer      @relation(fields: [offer_id], references: [offer_id])
   offer_id     String
-  candidate    Candidates @relation(fields: [candidate_id], references: [candidate_id])
+  candidate    Candidate  @relation(fields: [candidate_id], references: [candidate_id])
   candidate_id String
   created_at   DateTime
-
-  @@id([offer_id, candidate_id])
+  accuracy     Int
+  @@unique([offer_id, candidate_id])
 }
 
-model Leaves {
-  leave_id String    @id @default(uuid())
-  user     Employees @relation(fields: [user_id], references: [user_id])
-  user_id  String
-  start    DateTime
-  end      DateTime
-}
-
-model Projects {
-  project_id  String   @id @default(uuid())
-  title       String
-  description String
-  starting    DateTime
-  ending      DateTime
-  tasks       Tasks[]
-}
-
-model Tasks {
-  task_id     String    @id @default(uuid())
-  project     Projects  @relation(fields: [project_id], references: [project_id])
-  project_id  String
-  user        Employees @relation(fields: [user_id], references: [user_id])
-  user_id     String
-  title       String
-  description String
-  starting    DateTime
-  ending      DateTime
-  points      Int
-}
-model Notes{
-  id_note String @id @default(uuid())
-  Description String
-}

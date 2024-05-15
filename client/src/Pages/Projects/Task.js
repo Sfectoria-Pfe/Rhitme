@@ -1,12 +1,10 @@
-import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { useSelector } from "react-redux";
 import "./Projects.css";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { useDrag } from "react-dnd";
 import { showTaskDetailsWindow } from "../../State/WindowsStates";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ItemTypes = {
   TASK: "Task",
@@ -20,6 +18,9 @@ function Task({ task, index }) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
+  const detailsWindow = useSelector(
+    (state) => state.windows.taskDetails.status
+  );
 
   const dispatch = useDispatch();
 
@@ -82,7 +83,7 @@ function Task({ task, index }) {
           <div>{formatDate(task?.end)} </div>
         </div>
         <div className="task-dealine-state">
-          {!task?.employee_done &&
+          {!task?.status === "done" &&
             (isOverdue ? (
               <div>{daysLeftText}</div>
             ) : (
@@ -99,21 +100,26 @@ function Task({ task, index }) {
       </div>
       <div className="d-flex justify-content-center">
         <ProgressBar
-          now={task?.subtasks.filter((item) => item.done).length}
+          now={task?.subtasks?.filter((item) => item.done).length}
           style={{
             height: "10px",
             width: "90%",
             backgroundClip: "rgb(162, 162, 162)",
             border: "solid 1px #070f2b57",
           }}
-          max={task?.subtasks.length}
+          max={task?.subtasks?.length}
         />
       </div>
       <div className="d-flex justify-content-between px-3 text-muted">
-        <img className="task-emp-photo" src={employee?.photo} />
+        <img
+          className="task-emp-photo"
+          src={
+            employees.find((emp) => emp.employee_id === task?.employee_id).photo
+          }
+        />
         <div className="task-comments d-flex align-items-center">
           <TfiCommentAlt />
-          <div>{task?.comments.length}</div>
+          <div>{task?.comments ? task?.comments.length : "0"}</div>
         </div>
       </div>
     </div>

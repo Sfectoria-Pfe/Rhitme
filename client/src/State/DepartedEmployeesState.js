@@ -5,7 +5,7 @@ export const fetchDepartedEmployees = createAsyncThunk(
   "departedemployees/fetchEmployees",
   async () => {
     const response = await axios.get(
-      "http://localhost:3000/departedEmployees.json"
+      "http://localhost:3001/departedEmployees.json"
     );
     return response.data;
   }

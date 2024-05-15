@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Recruitment.css";
 import { useParams } from "react-router-dom";
 import { fetchOfferById } from "../../State/OffersSlice";
@@ -8,16 +8,16 @@ import { IoIosAdd } from "react-icons/io";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import EmployeeChange from "../EmployeeInfos/EmployeeInfosPages/EmployeeChange";
-import { fetchCandidates } from "../../State/CandidateState";
+import { updateOffer } from "../../State/OffersSlice";
+import { MdDelete } from "react-icons/md";
+import { deleteOffer } from "../../State/OffersSlice";
 
 function Candidates() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const offer = useSelector((state) => state.offer.offer);
   const [editableOffer, setEditableOffer] = useState(null);
-  const status = useSelector((state) => state.offer.offerStatus);
-  const candidates = useSelector((state) => state.candidate.candidates);
-  const candidateStatus = useSelector((state) => state.candidate.status);
+  const status = useSelector((state) => state.offer.fetchByIdStatus);
   const [addSkill, setAddSkill] = useState(false);
   const [newSkill, setNewSkill] = useState("");
   const [sortBy, setSortBy] = useState("accuracy");
@@ -28,16 +28,10 @@ function Candidates() {
   };
 
   useEffect(() => {
-    if (status === "idle" || offer?.id != id) {
+    if (status === "idle" || offer?.offer_id != id) {
       dispatch(fetchOfferById(id));
     }
   }, [status, dispatch, id]);
-
-  useEffect(() => {
-    if (candidateStatus === "idle" || offer?.id != id) {
-      dispatch(fetchCandidates(id));
-    }
-  }, [offer, candidateStatus, dispatch, id]);
 
   useEffect(() => {
     if (status === "succeeded") {
@@ -46,10 +40,10 @@ function Candidates() {
   }, [status, offer]);
 
   const handleDeleteSkill = (index) => {
-    const newSkills = editableOffer.skills.filter((_, i) => i !== index);
+    const newSkills = editableOffer.requirements.filter((_, i) => i !== index);
     setEditableOffer((prevOffer) => ({
       ...prevOffer,
-      skills: newSkills,
+      requirements: newSkills,
     }));
     setSave(true);
   };
@@ -71,18 +65,20 @@ function Candidates() {
   };
 
   useEffect(() => {
-    if (candidateStatus === "succeeded") {
-      const sortedCandidates = [...candidates].sort((a, b) => {
+    if (offer?.offer_id == id) {
+      const sortedCandidates = [...offer.posts].sort((a, b) => {
         if (sortBy === "accuracy") {
           return b.accuracy - a.accuracy;
         } else if (sortBy === "date") {
-          return new Date(a.posted_at) - new Date(b.posted_at);
+          return new Date(a.created_at) - new Date(b.created_at);
         }
         return 0;
       });
       setSortedCandidates(sortedCandidates);
     }
-  }, [candidateStatus, candidates, sortBy]);
+  }, [offer, sortBy]);
+
+  console.log(editableOffer);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -97,10 +93,28 @@ function Candidates() {
     return `${date.toLocaleDateString("en-US", options)} `;
   };
 
+  const onSave = () => {
+    const dto = {
+      title: editableOffer.title,
+      description: editableOffer.description,
+      summary: editableOffer.summary,
+      requirements: editableOffer.requirements,
+      experience: editableOffer.experience,
+      pay: editableOffer.pay,
+      job_type: editableOffer.job_type,
+      workdays: editableOffer.workdays,
+      urgent: editableOffer.urgent,
+    };
+
+    dispatch(updateOffer({ offerId: editableOffer.offer_id, offerData: dto }));
+    setSave(false);
+  };
+
+  console.log(sortedCandidates);
   return (
     <div className="r-container d-flex flex-column mt-4 align-items-center mb-4 pb-5 justify-content-center">
-      <EmployeeChange save={save} onCancel={onCancel} />
-      {status === "loading" || candidateStatus === "loading" ? (
+      <EmployeeChange save={save} onCancel={onCancel} onSave={onSave} />
+      {status === "loading" ? (
         <div className="spinner-container">
           <div className="spinner">
             <div className="spinner">
@@ -116,18 +130,36 @@ function Candidates() {
         </div>
       ) : (
         <>
-          <div className="c-offer-part d-flex flex-column">
-            <div className="c-off-title">{editableOffer?.title}</div>
-            <div className="c-off-content container d-flex flex-column">
+          <div className="c-offer-part d-flex flex-column ">
+            <div className="c-off-title d-flex justify-content-between">
+              {editableOffer?.title}
+              <div>
+                <button
+                  className="del-offer-btn ps-3"
+                  style={{
+                    width: "115px",
+                    fontSize: "70%",
+                  }}
+                  onClick={() => {
+                    dispatch(deleteOffer(editableOffer.offer_id));
+                    window.history.back();
+                  }}
+                >
+                  Delete
+                  <MdDelete className="icon " />
+                </button>
+              </div>
+            </div>
+            <div className="c-off-content container d-flex flex-column ">
               <div className="row d-flex justify-content-around">
-                <div className="c-off-section d-flex flex-column col-xl-5 col-7 p-3">
+                <div className="c-off-section d-flex flex-column col-xl-5 col-7 p-3 ">
                   <div className="c-off-section-title">Profile needed</div>
                   <div className="c-off-section-content d-flex flex-column">
-                    <div className="c-off-subsection d-flex flex-column">
+                    <div className="c-off-subsection d-flex flex-column ">
                       <div className="c-off-subsection-title">Skills</div>
                       <div className="c-off-subsection-content container mx-0 ">
                         <div className="row d-flex j-skills ">
-                          {editableOffer?.skills.map((item, index) => (
+                          {editableOffer?.requirements.map((item, index) => (
                             <div
                               key={index}
                               className="j-skill col-3 d-flex  align-items-center unselectable"
@@ -165,12 +197,16 @@ function Candidates() {
                                 onClick={() => {
                                   setEditableOffer((prevOffer) => ({
                                     ...prevOffer,
-                                    skills: [...prevOffer.skills, newSkill],
+                                    requirements: [
+                                      ...prevOffer.requirements,
+                                      newSkill,
+                                    ],
                                   }));
                                   setNewSkill("");
+                                  setSave(true);
                                 }}
                               >
-                                Add skill
+                                Add
                               </button>
                             </div>
                           </div>
@@ -265,54 +301,62 @@ function Candidates() {
                   <option value="date">Date</option>
                 </select>
               </div>
-              {sortedCandidates?.map((item, index) => (
-                <div className="container c-candidate " key={index}>
-                  <div className="row d-flex align-items-center justify-content-center justify-content-xl-between ">
-                    <div
-                      className="col-2 d-flex align-items-center justify-content-center my-xl-0 my-1"
-                      style={{ height: "100px", width: "100px" }}
-                    >
-                      <CircularProgressbar
-                        value={item.accuracy}
-                        text={`${item.accuracy}%`}
-                        strokeWidth="10"
-                        styles={{
-                          text: {
-                            fontWeight: "500",
-                          },
-                        }}
-                      />
-                    </div>
-                    <div className="col-12 my-xl-2 my-1 col-xl-2 text-center c-candidate-info ">
-                      {item.firstname + " " + item.lastname}
-                    </div>
-                    <div className="col my-xl-4 my-1 col-xl-2 text-center c-candidate-info ">
-                      {item.email}
-                    </div>
-                    <div className="col-12 my-xl-2 my-1 col-xl-2 text-xl-end text-center c-candidate-info ">
-                      {item.phonenumber}
-                    </div>
-                    <div className="col-12 my-xl-1 my-1 col-xl-2 c-candidate-date text-center ">
-                      {formatDate(item.posted_at)}
-                    </div>
-                    <div className="col-12 col-xl-1  text-center">
-                      <button className="cta">
-                        <a
-                          href={item.cv}
-                          target="_blank"
-                          className="c-candidate-cv"
-                        >
-                          Open CV
-                        </a>
-                        <svg width="15px" height="10px" viewBox="0 0 13 10">
-                          <path d="M1,5 L11,5"></path>
-                          <polyline points="8 1 12 5 8 9"></polyline>
-                        </svg>
-                      </button>
+              {sortedCandidates.length === 0 ? (
+                <div className="c-no-candidate text-center my-4">
+                  No candidates have applied for this position.
+                </div>
+              ) : (
+                sortedCandidates?.map((item, index) => (
+                  <div className="container c-candidate " key={index}>
+                    <div className="row d-flex align-items-center justify-content-center justify-content-xl-between ">
+                      <div
+                        className="col-2 d-flex align-items-center justify-content-center my-xl-0 my-1"
+                        style={{ height: "100px", width: "100px" }}
+                      >
+                        <CircularProgressbar
+                          value={60}
+                          text={`60%`}
+                          strokeWidth="10"
+                          styles={{
+                            text: {
+                              fontWeight: "500",
+                            },
+                          }}
+                        />
+                      </div>
+                      <div className="col-12 my-xl-2 my-1 col-xl-2 text-center c-candidate-info ">
+                        {item.candidate.first_name +
+                          " " +
+                          item.candidate.last_name}
+                      </div>
+                      <div className="col my-xl-4 my-1 col-xl-2 text-center c-candidate-info ">
+                        {item.candidate.email}
+                      </div>
+                      <div className="col-12 my-xl-2 my-1 col-xl-2 text-xl-end text-center c-candidate-info ">
+                        {item.candidate.phone}
+                      </div>
+                      <div className="col-12 my-xl-1 my-1 col-xl-2 c-candidate-date text-center ">
+                        {formatDate(item.created_at)}
+                      </div>
+                      <div className="col-12 col-xl-1  text-center">
+                        <button className="cta">
+                          <a
+                            href={item.candidate.cv}
+                            target="_blank"
+                            className="c-candidate-cv"
+                          >
+                            Open CV
+                          </a>
+                          <svg width="15px" height="10px" viewBox="0 0 13 10">
+                            <path d="M1,5 L11,5"></path>
+                            <polyline points="8 1 12 5 8 9"></polyline>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </>
