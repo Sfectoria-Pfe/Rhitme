@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "DepartedEmployee" ALTER COLUMN "date_left" SET DEFAULT CURRENT_TIMESTAMP;

@@ -220,7 +220,6 @@ export class EmployeeService {
 
   async deleteEmployee(id: string): Promise<Employee> {
     try {
-      // Find the employee
       const employee = await this.prisma.employee.findUnique({
         where: { employee_id: id },
       });
@@ -229,7 +228,29 @@ export class EmployeeService {
         throw new Error('Employee not found');
       }
 
-      // Delete the employee
+      await this.prisma.departedEmployee.create({
+        data: {
+          employee_id: employee.employee_id,
+          department_id: employee.department_id,
+          last_name: employee.last_name,
+          first_name: employee.first_name,
+          phone: employee.phone,
+          birthday: employee.birthday,
+          gender: employee.gender,
+          cin: employee.cin,
+          email: employee.email,
+          password: employee.password,
+          job: employee.job,
+          created_at: employee.created_at,
+          photo: employee.photo,
+          role_id: employee.role_id,
+          marital_status: employee.marital_status,
+          skills: employee.skills,
+          salary: employee.salary,
+          reason: 'hakkeka',
+        },
+      });
+
       return await this.prisma.employee.delete({
         where: { employee_id: employee.employee_id },
       });

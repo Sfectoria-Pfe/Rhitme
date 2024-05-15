@@ -35,14 +35,9 @@
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-<<<<<<< HEAD
     "cloudinary": "^2.1.0",
     "dotenv": "^16.4.5",
     "graphql-upload": "^16.0.2",
-=======
-    "cloudinary": "^2.0.3",
-    "dotenv": "^16.4.5",
->>>>>>> 6e5e5d6c5535e4f0974e60124c2366f1791e40dd
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.11.3",
